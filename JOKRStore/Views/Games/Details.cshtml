@@ -1,0 +1,41 @@
+﻿@model JOKRStore.ViewModels.GameViewModel
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/css/site.css">
+
+    <title>Game store</title>
+</head>
+
+<body>
+    <table style="width:100%">
+        <tr>
+            <td>
+                <img src="~/1_Far_Cry_pc.jpg" alt="@Model.GameName" width="200">
+            </td>
+            <td>
+                <h1>@Model.GameName</h1>
+                Release date: @Model.Release</br>
+                Price: @Model.Price</br>
+                Rate: @Model.Rate</br>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @foreach (var c in Model.Comments)
+                {
+
+                }
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

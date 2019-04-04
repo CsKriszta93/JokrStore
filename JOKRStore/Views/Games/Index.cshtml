@@ -1,0 +1,61 @@
+﻿@model IEnumerable<JOKRStore.ViewModels.GameViewModel>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/css/site.css">
+
+    <title>Game store</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg">
+                <h1>Game list</h1>
+
+                <div class="flex-container">
+                    @foreach (var game in Model)
+                    {
+                        <a asp-controller="Home" asp-action="GameView" asp-route-id="@game.Id">
+                            <div class="card">
+                                <div class="poster">
+                                    <img src="1_Far_Cry_pc.jpg">
+                                </div>
+                                <div class="details">
+                                    <h2>@game.GameName<br><span>by Ubisoft</span></h2>
+                                    <div class="tags">
+                                        <span class="adventure">Adventure</span>
+                                        <span class="first-person">First person</span>
+                                    </div>
+                                    <div class="info">
+                                        <p>@game.Description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    @*<script src="Scripts/jquery-3.3.1.js"></script>
+        <script src="Scripts/bootstrap.js"></script>*@
+
+</body>
+</html>
