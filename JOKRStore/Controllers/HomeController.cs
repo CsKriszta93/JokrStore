@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using JOKRStore.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using JOKRStore.Models;
+using System.Diagnostics;
 
-namespace JOKRStore.Controllers
+namespace JOKRStore.Web.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace JOKRStore.ViewModels
+namespace JOKRStore.Web.ViewModels
 {
     public class CommentViewModel
     {
+        public Guid Commenter { get; set; }
+        public DateTime CommentDate { get; set; }
+        public string Contain { get; set; }
     }
 }

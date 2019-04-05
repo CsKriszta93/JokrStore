@@ -21,7 +21,7 @@ namespace BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<GameDto>> GetGames()
+        public async Task<IEnumerable<GameDto>> GetGamesAsync()
         {
             var games = await dbContext
                 .Games
@@ -31,17 +31,22 @@ namespace BLL.Services
             return games;
         }
 
-        public async Task<GameDto> GetGame(Guid id)
+        public async Task<GameDto> GetGameByIdAsync(Guid id)
         {
             var game = await dbContext.Games
                 .Include(x => x.Comments)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<GameDto>(game);
+        }
 
-            //var game = await mapper.Map<Task<GameDto>>(dbContext.Games.FirstOrDefaultAsync(x => x.Id == id));
-            //game.Comments = await dbContext.Comments.Where(x => x.GameId == game.Id).ToListAsync();
-            //return game;
+        public async Task DeleteAsync(Guid id)
+        {
+            var gameToDelete = await dbContext.Games
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            dbContext.Games.Remove(gameToDelete);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

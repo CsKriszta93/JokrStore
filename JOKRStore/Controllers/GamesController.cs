@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using BLL.ServiceInterfaces;
+using JOKRStore.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using BLL.ServiceInterfaces;
-using JOKRStore.ViewModels;
-using Microsoft.AspNetCore.Mvc;
 
-namespace JOKRStore.Controllers
+namespace JOKRStore.Web.Controllers
 {
     public class GamesController : Controller
     {

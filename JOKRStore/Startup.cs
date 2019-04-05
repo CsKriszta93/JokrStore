@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BLL.Mapper;
+using BLL.Mappers;
 using BLL.ServiceInterfaces;
 using BLL.Services;
 using JOKRStore.DAL;
-using JOKRStore.Mappers;
+using JOKRStore.Web.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JOKRStore
+namespace JOKRStore.Web
 {
     public class Startup
     {
@@ -77,7 +77,7 @@ namespace JOKRStore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Games}/{action=Index}/{id?}");
             });
         }
     }
