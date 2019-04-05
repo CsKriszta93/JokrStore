@@ -1,6 +1,6 @@
 using System;
 
-namespace JOKRStore.Models
+namespace JOKRStore.Web.Models
 {
     public class ErrorViewModel
     {

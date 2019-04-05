@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace JOKRStore.Data.Migrations
+namespace JOKRStore.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]

@@ -2,7 +2,7 @@
 using BLL.DTO;
 using Model;
 
-namespace BLL.Mapper
+namespace BLL.Mappers
 {
     public class GameMappingProfile : Profile
     {

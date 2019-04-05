@@ -1,4 +1,4 @@
-﻿@model JOKRStore.ViewModels.GameViewModel
+﻿@model JOKRStore.Web.ViewModels.GameViewModel
 
 <!doctype html>
 <html lang="en">
@@ -25,14 +25,14 @@
                 Release date: @Model.Release</br>
                 Price: @Model.Price</br>
                 Rate: @Model.Rate</br>
-
             </td>
         </tr>
         <tr>
             <td>
-                @foreach (var c in Model.Comments)
+                @foreach (var comment in Model.Comments)
                 {
-
+                    <h3>@comment.CommentDate</h3>
+                    <h3>@comment.Contain</h3>
                 }
             </td>
         </tr>

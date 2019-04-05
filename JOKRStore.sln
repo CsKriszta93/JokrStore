@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKRStore", "JOKRStore\JOKRStore.csproj", "{B2EF0B47-A52C-4C76-95AE-145DDA7C9537}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKRStore.Web", "JOKRStore\JOKRStore.Web.csproj", "{B2EF0B47-A52C-4C76-95AE-145DDA7C9537}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5461F209-34FD-49DD-9EAA-4ABD08E12CB1}"
 EndProject

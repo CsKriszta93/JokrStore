@@ -7,7 +7,8 @@ namespace BLL.ServiceInterfaces
 {
     public interface IGameService
     {
-        Task<IEnumerable<GameDto>> GetGames();
-        Task<GameDto> GetGame(Guid id);
+        Task<IEnumerable<GameDto>> GetGamesAsync();
+        Task<GameDto> GetGameByIdAsync(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }
