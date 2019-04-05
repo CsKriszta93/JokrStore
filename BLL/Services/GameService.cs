@@ -4,6 +4,7 @@ using BLL.DTO;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace BLL.Services
             var gameToDelete = await dbContext.Games
                 .SingleOrDefaultAsync(x => x.Id == id);
 
-            dbContext.Games.Remove(gameToDelete);
+            dbContext.Games.Remove(mapper.Map<Game>(gameToDelete));
             await dbContext.SaveChangesAsync();
         }
     }
