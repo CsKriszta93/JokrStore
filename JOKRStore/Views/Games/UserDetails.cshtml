@@ -1,0 +1,26 @@
+﻿@model JOKRStore.Web.ViewModels.UserViewModel
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="~/css/site.css">
+
+        <title>Game store</title>
+    </head>
+
+    <body>
+        <h2>User profile</h2>
+
+        <h1>@Model.UserName</h1>
+        <p>Register date: @Model.Registration</p>
+        <p>Last Login : @Model.LastLogin</p>
+        <p>Computer configuration: </p>
+    </body>
+</html>
+

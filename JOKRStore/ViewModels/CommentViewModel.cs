@@ -7,5 +7,7 @@ namespace JOKRStore.Web.ViewModels
         public Guid Commenter { get; set; }
         public DateTime CommentDate { get; set; }
         public string Contain { get; set; }
+
+        public UserViewModel user;
     }
 }

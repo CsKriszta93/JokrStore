@@ -34,5 +34,13 @@ namespace JOKRStore.Web.Controllers
 
             return View(game);
         }
+
+        public async Task<IActionResult> UserDetails(Guid id)
+        {
+            var userDto = await gameService.GetUserByIdAsync(id);
+            var user = mapper.Map<UserViewModel>(userDto);
+
+            return View(user);
+        }
     }
 }

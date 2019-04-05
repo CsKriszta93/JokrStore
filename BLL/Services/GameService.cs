@@ -35,7 +35,7 @@ namespace BLL.Services
         public async Task<GameDto> GetGameByIdAsync(Guid id)
         {
             var game = await dbContext.Games
-                .Include(x => x.Comments)
+                .Include(x => x.Comments).ThenInclude(x => x.user)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<GameDto>(game);
@@ -48,6 +48,14 @@ namespace BLL.Services
 
             dbContext.Games.Remove(mapper.Map<Game>(gameToDelete));
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<UserDto> GetUserByIdAsync(Guid id)
+        {
+            var user = await dbContext.StoreUsers
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return mapper.Map<UserDto>(user);
         }
     }
 }

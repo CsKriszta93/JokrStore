@@ -30,10 +30,13 @@
         <tr>
             <td>
                 @foreach (var comment in Model.Comments)
-                {
-                    <h3>@comment.CommentDate</h3>
-                    <h3>@comment.Contain</h3>
-                }
+                 {
+                    <a asp-controller="Games" asp-action="UserDetails" asp-route-id="@comment.Commenter">
+                        <h3>@comment.user.UserName</h3>
+                    </a>
+                        <p>@comment.CommentDate</p>
+                        <p>@comment.Contain</p>
+                 }
             </td>
         </tr>
     </table>

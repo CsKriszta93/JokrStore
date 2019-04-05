@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Model
+namespace JOKRStore.Web.ViewModels
 {
-    public class User
+    public class UserViewModel
     {
         public Guid Id { get; set; }
         public string UserName { get; set; }
@@ -21,6 +17,6 @@ namespace Model
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
-        public Guid? ConfigId { get; set; }
+        public Guid ConfigId { get; set; }
     }
 }
