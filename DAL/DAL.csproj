@@ -221,15 +221,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Include="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs">
-      <DependentUpon>00000000000000_CreateIdentitySchema.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\20190405073607_InitMigration.cs" />
-    <Compile Include="Data\Migrations\20190405073607_InitMigration.designer.cs">
-      <DependentUpon>20190405073607_InitMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Include="Migrations\20190419163809_InitMigration.cs" />
+    <Compile Include="Migrations\20190419163809_InitMigration.designer.cs">
+      <DependentUpon>20190419163809_InitMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

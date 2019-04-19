@@ -14,6 +14,13 @@ namespace Model
         //public string Password { get; set; }
         //public string Email { get; set; }
         //public string Facebook { get; set; }
+
+        public User()
+            :base()
+        {
+            Id = Guid.NewGuid();
+        }
+
         public DateTime Registration { get; set; }
         public string BankAccount { get; set; }
         public bool IsAdmin { get; set; }

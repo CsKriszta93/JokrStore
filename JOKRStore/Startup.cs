@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Model;
 using System;
 
 namespace JOKRStore.Web
@@ -39,7 +40,7 @@ namespace JOKRStore.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGameService, GameService>();
-            services.AddDefaultIdentity<Model.User>()
+            services.AddIdentity<User, IdentityRole<Guid>>()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
