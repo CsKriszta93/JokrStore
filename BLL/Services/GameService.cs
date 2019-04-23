@@ -52,7 +52,7 @@ namespace BLL.Services
 
         public async Task<UserDto> GetUserByIdAsync(Guid id)
         {
-            var user = await dbContext.StoreUsers
+            var user = await dbContext.Users
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<UserDto>(user);

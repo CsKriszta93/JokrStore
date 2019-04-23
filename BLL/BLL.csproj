@@ -82,6 +82,9 @@
     <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Identity.EntityFrameworkCore.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Identity.UI">
+      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.identity.ui\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Identity.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
     </Reference>
@@ -220,6 +223,7 @@
     <Compile Include="Mappers\GameMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\IGameService.cs" />
+    <Compile Include="Services\EmailService\EmailSender.cs" />
     <Compile Include="Services\GameService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -236,5 +240,6 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

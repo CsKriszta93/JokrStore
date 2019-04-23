@@ -221,11 +221,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
-    <Compile Include="Migrations\20190419163809_InitMigration.cs" />
-    <Compile Include="Migrations\20190419163809_InitMigration.designer.cs">
-      <DependentUpon>20190419163809_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20190419182259_mig.cs" />
+    <Compile Include="Migrations\20190419182259_mig.designer.cs">
+      <DependentUpon>20190419182259_mig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +237,9 @@
       <Project>{66A71588-941B-4A36-A959-C562971391E3}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
