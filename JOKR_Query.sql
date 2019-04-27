@@ -1,4 +1,20 @@
-﻿INSERT INTO Games (Id, GameName, [Description], Rate, Price, Release, DownloadLink, DemoLink, NumOfDownloads, MinSysReqId, RecSysReqId) VALUES
+﻿DROP TABLE Games
+CREATE TABLE Games
+(id uniqueidentifier DEFAULT NEWID(),
+GameName varchar(50) not null,
+Developer varchar(50) not null,
+CoverArt varchar(50),
+[Description] varchar(MAX),
+Rate float,
+Price decimal not null,
+Release DateTime,
+DownloadLink varchar(50),
+DemoLink varchar(50),
+NumOfDownloads int not null,
+MinSysReqId uniqueidentifier,
+RecSysReqId uniqueidentifier)
+
+INSERT INTO Games (Id, GameName, [Description], Rate, Price, Release, DownloadLink, DemoLink, NumOfDownloads, MinSysReqId, RecSysReqId) VALUES
 ('7A477BCF-43AF-437A-875F-7E4C5E5096D4', 'Far Cry', 'Welcome to Hope County, Montana, home to a fanatical doomsday cult known as Eden’s Gate. Stand up to cult leader Joseph Seed & his siblings, the Heralds, to spark the fires of resistance & liberate the besieged community.',
 3.5, 8000, '2004-06-01', 'far_fry.exe', NULL, 0, NULL, NULL),
 (NEWID(), 'Crysis', 'Welcome to the spiritual sequel of Far Cry.', 4.5, 8000, '2007-11-01', 'crysis.exe', NULL, 0, NULL, NULL),

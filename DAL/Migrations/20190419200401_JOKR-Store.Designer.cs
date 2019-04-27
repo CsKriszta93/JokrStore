@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190419163809_InitMigration")]
-    partial class InitMigration
+    [Migration("20190419200401_JOKR-Store")]
+    partial class JOKRStore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
