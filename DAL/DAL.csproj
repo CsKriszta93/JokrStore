@@ -221,9 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Migrations\20190419200401_JOKR-Store.cs" />
-    <Compile Include="Migrations\20190419200401_JOKR-Store.designer.cs">
-      <DependentUpon>20190419200401_JOKR-Store.cs</DependentUpon>
+    <Compile Include="Migrations\20190427204944_Initial.cs" />
+    <Compile Include="Migrations\20190427204944_Initial.designer.cs">
+      <DependentUpon>20190427204944_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
