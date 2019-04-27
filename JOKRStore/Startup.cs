@@ -2,12 +2,14 @@
 using BLL.Mappers;
 using BLL.ServiceInterfaces;
 using BLL.Services;
+using BLL.Services.EmailService;
 using JOKRStore.DAL;
 using JOKRStore.Web.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -40,7 +42,11 @@ namespace JOKRStore.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGameService, GameService>();
-            services.AddIdentity<User, IdentityRole<Guid>>()
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddIdentity<User, IdentityRole<Guid>>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = false;
+            })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

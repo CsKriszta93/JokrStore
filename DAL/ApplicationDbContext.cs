@@ -14,7 +14,6 @@ namespace JOKRStore.DAL
         }
 
         public DbSet<Game> Games { get; set; }
-        //public DbSet<User> StoreUsers { get; set; }
         public DbSet<Comment> Comments { get; set; }
     }
 }
