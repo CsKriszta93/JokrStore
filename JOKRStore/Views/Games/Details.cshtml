@@ -1,5 +1,5 @@
 ﻿@model JOKRStore.Web.ViewModels.GameViewModel
-@comment JOKRStore.Web.ViewModels.CommentViewModel
+
 
 <!doctype html>
 <html lang="en">
@@ -32,11 +32,7 @@
             <td>
                 @foreach (var comment in Model.Comments)
                 {
-                    <a asp-controller="Games" asp-action="UserDetails" asp-route-id="@comment.Commenter">
-                        <h3>@comment.user.UserName</h3>
-                    </a>
-                    <p>@comment.CommentDate</p>
-                    <p>@comment.Contain</p>
+                    @Html.EditorForModel()
                 }
             </td>
         </tr>

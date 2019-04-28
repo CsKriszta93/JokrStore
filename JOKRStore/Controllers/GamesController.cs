@@ -32,21 +32,8 @@ namespace JOKRStore.Web.Controllers
         {
             var gameDto = await gameService.GetGameByIdAsync(id);
             var game = mapper.Map<GameViewModel>(gameDto);
-            ViewData["Game"] = game;
 
             return View(game);
-        }
-
-        [HttpPost]
-        public IActionResult PostComment(string new_comment_str)
-        {
-            _currentUserGuid = _httpContextAccessor.HttpContext.User.Claims.FindFirst(UserClaimsKey.Sub);
-
-            CommentViewModel new_comment = new CommentViewModel
-            {
-                Commenter = User.Claims.Where(c => c.Value)
-            }
-            return RedirectToAction("Detalils");
         }
 
         public async Task<IActionResult> UserDetails(Guid id)

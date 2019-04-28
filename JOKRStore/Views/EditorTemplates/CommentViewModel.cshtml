@@ -1,0 +1,23 @@
+﻿@model CommentViewModel
+
+<div class="row">
+    <div class="col-sm-5 form-group">
+        @Html.LabelFor(model => model.CommenterName)
+        @Html.TextBoxFor(model => model.CommenterName, new { @class="form-control" })
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-5 form-group">
+        @Html.TextAreaFor(model => model.Contain, new { @class="form-control" })
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-5 form-group">
+        @Html.TextBoxFor(model => model.CommentDate, new { @value=DateTime.Now , @class="form-control" })
+    </div>
+</div>
+
+@Html.HiddenFor(model => model.CommenterId)
+@Html.AntiForgeryToken()

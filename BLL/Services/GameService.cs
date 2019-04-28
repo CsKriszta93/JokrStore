@@ -35,7 +35,7 @@ namespace BLL.Services
         public async Task<GameDto> GetGameByIdAsync(Guid id)
         {
             var game = await dbContext.Games
-                .Include(x => x.Comments).ThenInclude(x => x.user)
+                .Include(x => x.Comments).ThenInclude(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<GameDto>(game);

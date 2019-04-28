@@ -42,6 +42,7 @@ namespace JOKRStore.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGameService, GameService>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<User, IdentityRole<Guid>>(config =>
             {
@@ -54,6 +55,8 @@ namespace JOKRStore.Web
             {
                 mc.AddProfile(new GameMappingProfile());
                 mc.AddProfile(new GameViewMappingProfile());
+                mc.AddProfile(new CommentViewModelMappingProfile());
+                mc.AddProfile(new CommentMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

@@ -19,6 +19,6 @@ namespace Model
         public Game Game { get; set; }
 
         [ForeignKey("Commenter")]
-        public User user { get; set; }
+        public User User { get; set; }
     }
 }
