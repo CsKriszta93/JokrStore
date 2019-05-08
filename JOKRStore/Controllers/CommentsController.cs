@@ -23,19 +23,19 @@ namespace JOKRStore.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostComment(CommentViewModel comment)
+        public async Task<IActionResult> PostComment(string Contain)
         {
             var commenterId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
             if (!ModelState.IsValid)
             {
-                return View(comment);
+                return View(Contain);
             }
 
             var newComment = new CommentViewModel
             {
                 CommenterId = Guid.Parse(commenterId),
-                Contain = comment.Contain,
+                Contain = Contain,
                 CommentDate = DateTime.Now                
             };
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));

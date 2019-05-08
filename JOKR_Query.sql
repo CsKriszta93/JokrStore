@@ -14,11 +14,11 @@ NumOfDownloads int not null,
 MinSysReqId uniqueidentifier,
 RecSysReqId uniqueidentifier)
 
-INSERT INTO Games (Id, GameName, [Description], Rate, Price, Release, DownloadLink, DemoLink, NumOfDownloads, MinSysReqId, RecSysReqId) VALUES
-('7A477BCF-43AF-437A-875F-7E4C5E5096D4', 'Far Cry', 'Welcome to Hope County, Montana, home to a fanatical doomsday cult known as Eden’s Gate. Stand up to cult leader Joseph Seed & his siblings, the Heralds, to spark the fires of resistance & liberate the besieged community.',
+INSERT INTO Games (Id, GameName, Developer, CoverArt, [Description], Rate, Price, Release, DownloadLink, DemoLink, NumOfDownloads, MinSysReqId, RecSysReqId) VALUES
+(NEWID(), 'Far Cry', 'Ubisoft', 'images/far_cry.jpg', 'Welcome to Hope County, Montana, home to a fanatical doomsday cult known as Eden’s Gate. Stand up to cult leader Joseph Seed & his siblings, the Heralds, to spark the fires of resistance & liberate the besieged community.',
 3.5, 8000, '2004-06-01', 'far_fry.exe', NULL, 0, NULL, NULL),
-(NEWID(), 'Crysis', 'Welcome to the spiritual sequel of Far Cry.', 4.5, 8000, '2007-11-01', 'crysis.exe', NULL, 0, NULL, NULL),
-(NEWID(), 'Far Cry 2', 'Welcome to in Africa.', 4.0, 8000, '2008-11-01', 'far_cry2.exe', NULL, 0, NULL, NULL)
+(NEWID(), 'Crysis', 'Crytek', 'images/crysis.jpg', 'Welcome to the spiritual sequel of Far Cry.', 4.5, 8000, '2007-11-01', 'crysis.exe', NULL, 0, NULL, NULL),
+(NEWID(), 'Far Cry 2', 'Ubisoft', 'images/far_cry_2.jpg', 'Welcome to in Africa.', 4.0, 8000, '2008-11-01', 'far_cry2.exe', NULL, 0, NULL, NULL)
 
 SELECT *
 FROM Games
