@@ -32,8 +32,8 @@
             <td>
                 @foreach (var comment in Model.Comments)
                 {
-                <h1>comment.CommenterName</h1>
-                <b>comment.Contain</b>
+                    <h1>comment.CommenterName</h1>
+                    <b>comment.Contain</b>
                 }
             </td>
         </tr>
@@ -41,18 +41,20 @@
             <td>
                 @{CommentViewModel new_comment = new CommentViewModel(); }
                 @*<form asp-action="Index" asp-controller="Game">
-            <label asp-for=@new_comment.Contain></label>
-            <input asp-for=@new_comment.Contain id="CommentArea" placeholder="Comment here here" />
-            <input type="submit" />
-        </form>*@
+                        <label asp-for=@new_comment.Contain></label>
+                        <input asp-for=@new_comment.Contain id="CommentArea" placeholder="Comment here here" />
+                        <input type="submit" />
+                    </form>*@
                 <input type="text" id="CommentArea" placeholder="Contain" />
                 <button id="submit">Submit</button>
             </td>
         </tr>
     </table>
 </body>
+</html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $("#submit").click(function (e) {
@@ -61,10 +63,11 @@
             else {
                 $.ajax({
                     type: "POST",
-                    url: "/Comments/PostComment",
-                    contentType: "application/json; charset=utf-8",
-                    data: '{"Contain":"' + $("#CommentArea").val() + '"}',
-                    dataType: "html",
+                    url: @Url.Action("PostComment, Comment"),
+                    contentType: "application/json",
+                    data: {
+                        'contain': $("#CommentArea").val()
+                    },
                     success: function (result, status, xhr) {
                         $("#dataDiv").html(result);
                     },
@@ -78,4 +81,3 @@
     });
 </script>
 
-</html>

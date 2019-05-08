@@ -23,7 +23,7 @@ namespace JOKRStore.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostComment(string Contain)
+        public async Task<IActionResult> PostComment(string contain)
         {
             var commenterId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
