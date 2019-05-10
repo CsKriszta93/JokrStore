@@ -1,5 +1,29 @@
 ﻿@model JOKRStore.Web.ViewModels.GameViewModel
 
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<script type="text/javascript" t>
+    $(document).ready(function () {
+        alert("Clicked")
+        $("#submit").click(function () {
+            $.ajax({
+                type: "POST",
+                url: @Url.Action("PostComment, Comment"),
+                data: {
+                    'contain': JSON.stringify($("#CommentArea").val())
+                },
+                success: function (result, status, xhr) {
+                    $("#dataDiv").html(result);
+                },
+                error: function (xhr, status, error) {
+                    $("#dataDiv").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+                }
+            });
+        return false;
+        });
+    });
+</script>
 
 <!doctype html>
 <html lang="en">
@@ -39,8 +63,8 @@
         </tr>
         <tr>
             <td>
-                @{CommentViewModel new_comment = new CommentViewModel(); }
-                @*<form asp-action="Index" asp-controller="Game">
+                @* @{CommentViewModel new_comment = new CommentViewModel(); }
+                    <form asp-action="Index" asp-controller="Game">
                         <label asp-for=@new_comment.Contain></label>
                         <input asp-for=@new_comment.Contain id="CommentArea" placeholder="Comment here here" />
                         <input type="submit" />
@@ -52,32 +76,4 @@
     </table>
 </body>
 </html>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $("#submit").click(function (e) {
-            if ($("#CommentArea").val() == "")
-                alert("Area cannot be empty");
-            else {
-                $.ajax({
-                    type: "POST",
-                    url: @Url.Action("PostComment, Comment"),
-                    contentType: "application/json",
-                    data: {
-                        'contain': $("#CommentArea").val()
-                    },
-                    success: function (result, status, xhr) {
-                        $("#dataDiv").html(result);
-                    },
-                    error: function (xhr, status, error) {
-                        $("#dataDiv").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
-                    }
-                });
-            }
-            return false;
-        });
-    });
-</script>
 
