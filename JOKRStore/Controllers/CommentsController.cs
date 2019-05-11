@@ -29,13 +29,13 @@ namespace JOKRStore.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View(Contain);
+                return View(contain);
             }
 
             var newComment = new CommentViewModel
             {
                 CommenterId = Guid.Parse(commenterId),
-                Contain = Contain,
+                Contain = contain,
                 CommentDate = DateTime.Now                
             };
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));
