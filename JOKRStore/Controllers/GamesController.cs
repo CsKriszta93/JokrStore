@@ -28,6 +28,7 @@ namespace JOKRStore.Web.Controllers
             return View(games);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
             var gameDto = await gameService.GetGameByIdAsync(id);
