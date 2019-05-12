@@ -13,7 +13,6 @@ namespace JOKRStore.Web.Mappers
         public CommentViewModelMappingProfile()
         {
             CreateMap<CommentDto, CommentViewModel>()
-               .ForMember(b => b.CommentId, opt => opt.MapFrom(c => c.CommentId))
                .ForMember(b => b.CommenterId, opt => opt.MapFrom(c => c.CommenterId))
                .ForMember(b => b.Contain, opt => opt.MapFrom(c => c.Contain))
                .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate))

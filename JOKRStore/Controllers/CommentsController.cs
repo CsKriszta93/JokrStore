@@ -23,34 +23,24 @@ namespace JOKRStore.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostComment(string contain, string GameId)
-        {
-            try
+        public async Task<IActionResult> PostComment(string contain, string gameId)
+        { 
+            var commenterId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+
+            if (!ModelState.IsValid)
             {
-                var commenterId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-
-                if (!ModelState.IsValid)
-                {
-                    return View(contain);
-                }
-
-                var newComment = new CommentViewModel
-                {
-                    CommentId = Guid.NewGuid(),
-                    CommenterId = Guid.Parse(commenterId),
-                    Contain = contain,
-                    CommentDate = DateTime.Now,
-                    GameId = Guid.Parse(GameId)
-                };
-
-                System.Diagnostics.Debug.WriteLine(newComment.CommentId.ToString() + " " + newComment.CommenterId.ToString() + " " + newComment.Contain + " " + newComment.CommentDate.ToString() + newComment.GameId.ToString());
-
-                await commentService.AddComment(mapper.Map<CommentDto>(newComment));
-            } catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Error during save comment: " + e.ToString());
+                return View(contain);
             }
-            
+
+            var newComment = new CommentViewModel
+            {
+                CommenterId = Guid.Parse(commenterId),
+                Contain = contain,
+                CommentDate = DateTime.Now,
+                GameId = Guid.Parse(gameId)
+            };
+
+            await commentService.AddComment(mapper.Map<CommentDto>(newComment));
 
             return Ok();
             //return RedirectToAction("Detalils");

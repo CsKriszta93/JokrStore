@@ -27,20 +27,10 @@
         </tr>
         <tr>
             <td>
-                @* @{CommentViewModel new_comment = new CommentViewModel(); }
-                    <form asp-action="Index" asp-controller="Game">
-                        <label asp-for=@new_comment.Contain></label>
-                        <input asp-for=@new_comment.Contain id="CommentArea" placeholder="Comment here here" />
-                        <input type="submit" />
-                    </form>*@
                 <form id="commentForm">
                     <input type="text" id="CommentArea" name="contain" placeholder="Contain" />
+                    <input type="hidden" id="GameId" name="gameId"  value=@Model.Id />
                     <button id="submit">Submit</button>
-                    @{
-                        Guid GameId = Model.Id;
-                        <input type="text" id="GameId" value=@GameId />
-                    }
-
                     @Html.AntiForgeryToken()
                 </form>
             </td>
@@ -59,7 +49,7 @@
             data: {
                 __RequestVerificationToken: token, 
                 'contain': contain,
-                'GameId': GameId
+                'gameId': GameId
             },
             success: function (data) {
                 console.log(data);
