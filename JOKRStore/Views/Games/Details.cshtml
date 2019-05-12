@@ -3,43 +3,7 @@
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<script type="text/javascript" t>
-    $(document).ready(function () {
-        alert("Clicked")
-        $("#submit").click(function () {
-            $.ajax({
-                type: "POST",
-                url: @Url.Action("PostComment, Comment"),
-                data: {
-                    'contain': JSON.stringify($("#CommentArea").val())
-                },
-                success: function (result, status, xhr) {
-                    $("#dataDiv").html(result);
-                },
-                error: function (xhr, status, error) {
-                    $("#dataDiv").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
-                }
-            });
-        return false;
-        });
-    });
-</script>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="~/css/site.css">
-
-    <title>Game store</title>
-</head>
-
-<body>
+<h1>Game Store</h1>
     <table style="width:100%">
         <tr>
             <td>
@@ -69,11 +33,25 @@
                         <input asp-for=@new_comment.Contain id="CommentArea" placeholder="Comment here here" />
                         <input type="submit" />
                     </form>*@
-                <input type="text" id="CommentArea" placeholder="Contain" />
+                <input type="text" id="CommentArea" name="contain" placeholder="Contain" />
                 <button id="submit">Submit</button>
             </td>
         </tr>
     </table>
-</body>
-</html>
 
+
+<script type="text/javascript">
+    $("#submit").click(function () {
+        var contain = JSON.stringify($("#CommentArea").val());
+        $.ajax({
+            type: "POST",
+            url: '/Comments/PostComment',
+            data: {
+                'contain': contain
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
