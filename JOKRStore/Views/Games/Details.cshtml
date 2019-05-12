@@ -33,20 +33,25 @@
                         <input asp-for=@new_comment.Contain id="CommentArea" placeholder="Comment here here" />
                         <input type="submit" />
                     </form>*@
-                <input type="text" id="CommentArea" name="contain" placeholder="Contain" />
-                <button id="submit">Submit</button>
+                <form id="commentForm">
+                    <input type="text" id="CommentArea" name="contain" placeholder="Contain" />
+                    <button id="submit">Submit</button>
+                    @Html.AntiForgeryToken()
+                </form>
             </td>
         </tr>
     </table>
 
-
 <script type="text/javascript">
     $("#submit").click(function () {
-        var contain = JSON.stringify($("#CommentArea").val());
+        var form = $('#commentForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+        var contain = $("#CommentArea").val();
         $.ajax({
             type: "POST",
             url: '/Comments/PostComment',
             data: {
+                __RequestVerificationToken: token, 
                 'contain': contain
             },
             success: function (data) {
