@@ -5,6 +5,8 @@ namespace JOKRStore.Web.ViewModels
 {
     public class CommentViewModel
     {
+        public Guid CommentId { get; set; }
+
         public Guid CommenterId { get; set; }
 
         [DisplayName("Name")]
@@ -15,5 +17,7 @@ namespace JOKRStore.Web.ViewModels
         public DateTime CommentDate { get; set; }
 
         public UserViewModel User { get; set; } 
+
+        public Guid GameId { get; set; }
     }
 }

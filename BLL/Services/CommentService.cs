@@ -24,7 +24,7 @@ namespace BLL.Services
             if (commentDto != null)
             {
                 var comment = mapper.Map<Comment>(commentDto);
-                dbContext.Add(comment);
+                dbContext.Comments.Add(comment);
                 await dbContext.SaveChangesAsync();
             }
 

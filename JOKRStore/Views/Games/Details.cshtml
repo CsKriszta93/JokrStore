@@ -36,6 +36,11 @@
                 <form id="commentForm">
                     <input type="text" id="CommentArea" name="contain" placeholder="Contain" />
                     <button id="submit">Submit</button>
+                    @{
+                        Guid GameId = Model.Id;
+                        <input type="text" id="GameId" value=@GameId />
+                    }
+
                     @Html.AntiForgeryToken()
                 </form>
             </td>
@@ -47,12 +52,14 @@
         var form = $('#commentForm');
         var token = $('input[name="__RequestVerificationToken"]', form).val();
         var contain = $("#CommentArea").val();
+        var GameId = $("#GameId").val();
         $.ajax({
             type: "POST",
             url: '/Comments/PostComment',
             data: {
                 __RequestVerificationToken: token, 
-                'contain': contain
+                'contain': contain,
+                'GameId': GameId
             },
             success: function (data) {
                 console.log(data);

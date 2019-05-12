@@ -8,7 +8,7 @@ namespace BLL.DTO
 {
     public class CommentDto
     {
-        //public Guid CommentId { get; set; }
+        public Guid CommentId { get; set; }
         public Guid CommenterId { get; set; }
         public DateTime CommentDate { get; set; }
         public string Contain { get; set; }
