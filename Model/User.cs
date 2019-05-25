@@ -30,5 +30,7 @@ namespace Model
         /// idegen kulcs a Configuraton táblához
         /// </summary>
         public Guid? ConfigId { get; set; }
+
+        public List<Comment> comments { get; set; }
     }
 }

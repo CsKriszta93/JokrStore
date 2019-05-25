@@ -10,15 +10,15 @@ namespace Model
     public class Comment
     {
         public Guid CommentId { get; set; }
-        [ForeignKey("StoreUsers")]
-        public Guid Commenter { get; set; }
         public DateTime CommentDate { get; set; }
         public string Contain { get; set; }
 
         public Guid GameId { get; set; }
         public Game Game { get; set; }
 
-        [ForeignKey("Commenter")]
+        //[ForeignKey("StoreUsers")]
+        public Guid Commenter { get; set; }
+        //[ForeignKey("Commenter")]
         public User User { get; set; }
     }
 }

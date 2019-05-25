@@ -20,6 +20,6 @@ namespace Model
         public Guid? MinSysReqId { get; set; }
         public Guid? RecSysReqId { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

@@ -24,9 +24,8 @@ namespace JOKRStore.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostComment(string contain, string gameId)
-        { 
+        {
             var commenterId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
-
             if (!ModelState.IsValid)
             {
                 return View(contain);
@@ -39,6 +38,8 @@ namespace JOKRStore.Web.Controllers
                 CommentDate = DateTime.Now,
                 GameId = Guid.Parse(gameId)
             };
+
+            System.Diagnostics.Debug.WriteLine("Game Id: " + newComment.GameId.ToString());
 
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));
 

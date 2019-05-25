@@ -16,7 +16,7 @@ namespace JOKRStore.Web.ViewModels
 
         public DateTime CommentDate { get; set; }
 
-        public UserViewModel User { get; set; } 
+        //public UserViewModel User { get; set; } 
 
         public Guid GameId { get; set; }
     }

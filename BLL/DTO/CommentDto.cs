@@ -11,5 +11,7 @@ namespace BLL.DTO
         public string Contain { get; set; }
 
         public Guid GameId { get; set; }
+
+        //public UserDto User { get; set; }
     }
 }
