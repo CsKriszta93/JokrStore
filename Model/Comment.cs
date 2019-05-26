@@ -9,6 +9,11 @@ namespace Model
 {
     public class Comment
     {
+        public Comment()
+        {
+            CommentId = new Guid();
+        }
+
         public Guid CommentId { get; set; }
         public DateTime CommentDate { get; set; }
         public string Contain { get; set; }
@@ -16,9 +21,7 @@ namespace Model
         public Guid GameId { get; set; }
         public Game Game { get; set; }
 
-        //[ForeignKey("StoreUsers")]
-        public Guid Commenter { get; set; }
-        //[ForeignKey("Commenter")]
+        public Guid UserId { get; set; }
         public User User { get; set; }
     }
 }

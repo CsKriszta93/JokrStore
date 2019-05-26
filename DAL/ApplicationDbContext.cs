@@ -13,7 +13,7 @@ namespace JOKRStore.DAL
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -30,7 +30,7 @@ namespace JOKRStore.DAL
                 .HasConstraintName("ForeignKey_Comment_User");
 
             
-        }
+        }*/
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Comment> Comments { get; set; }

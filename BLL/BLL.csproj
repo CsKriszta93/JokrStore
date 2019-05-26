@@ -222,6 +222,7 @@
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Mappers\CommentMappingProfile.cs" />
     <Compile Include="Mappers\GameMappingProfile.cs" />
+    <Compile Include="Mappers\UserMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\ICommentService.cs" />
     <Compile Include="ServiceInterfaces\IGameService.cs" />

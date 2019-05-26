@@ -25,7 +25,7 @@ namespace JOKRStore.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostComment(string contain, string gameId)
         {
-            var commenterId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+            var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
             if (!ModelState.IsValid)
             {
                 return View(contain);
@@ -33,7 +33,7 @@ namespace JOKRStore.Web.Controllers
 
             var newComment = new CommentViewModel
             {
-                CommenterId = Guid.Parse(commenterId),
+                UserId = Guid.Parse(UserId),
                 Contain = contain,
                 CommentDate = DateTime.Now,
                 GameId = Guid.Parse(gameId)

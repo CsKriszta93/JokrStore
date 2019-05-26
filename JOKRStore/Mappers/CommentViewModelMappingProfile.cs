@@ -13,10 +13,9 @@ namespace JOKRStore.Web.Mappers
         public CommentViewModelMappingProfile()
         {
             CreateMap<CommentDto, CommentViewModel>()
-               .ForMember(b => b.CommenterId, opt => opt.MapFrom(c => c.CommenterId))
+               .ForMember(b => b.UserId, opt => opt.MapFrom(c => c.UserId))
                .ForMember(b => b.Contain, opt => opt.MapFrom(c => c.Contain))
                .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate))
-               //.ForMember(b => b.User, opt => opt.MapFrom(c => c.User))
                .ForMember(b => b.GameId, opt => opt.MapFrom(c => c.GameId))
                .ReverseMap();
         }

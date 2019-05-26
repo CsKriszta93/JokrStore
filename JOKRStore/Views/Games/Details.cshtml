@@ -20,8 +20,8 @@
             <td>
                 @foreach (var comment in Model.Comments)
                 {
-                    <h1>comment.CommenterName</h1>
-                    <b>comment.Contain</b>
+                    <h1>@comment.User.UserName</h1>
+                    <b>@comment.Contain</b>
                 }
             </td>
         </tr>

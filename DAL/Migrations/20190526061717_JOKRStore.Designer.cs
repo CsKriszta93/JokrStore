@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190427204944_Initial")]
-    partial class Initial
+    [Migration("20190526061717_JOKRStore")]
+    partial class JOKRStore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -135,17 +135,17 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("CommentDate");
 
-                    b.Property<Guid>("Commenter");
-
                     b.Property<string>("Contain");
 
                     b.Property<Guid>("GameId");
 
+                    b.Property<Guid>("UserId");
+
                     b.HasKey("CommentId");
 
-                    b.HasIndex("Commenter");
-
                     b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -292,14 +292,14 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.Comment", b =>
                 {
-                    b.HasOne("Model.User", "user")
-                        .WithMany()
-                        .HasForeignKey("Commenter")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Model.Game", "Game")
                         .WithMany("Comments")
                         .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Model.User", "User")
+                        .WithMany("comments")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
