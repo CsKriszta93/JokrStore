@@ -3,40 +3,56 @@
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<h1>Game Store</h1>
-    <table style="width:100%">
-        <tr>
-            <td>
-                <img src="~/1_Far_Cry_pc.jpg" alt="@Model.GameName" width="200">
-            </td>
-            <td>
-                <h1>@Model.GameName</h1>
+<div class="container-fluid">
+    <h1>@Model.GameName</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="@Model.CoverArt" alt="@Model.GameName" width="200">
+            </div>
+
+            <div class="col-sm-6">
                 Release date: @Model.Release</br>
                 Price: @Model.Price</br>
                 Rate: @Model.Rate</br>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @foreach (var comment in Model.Comments)
-                {
-                    <h1>@comment.User.UserName</h1>
-                    <b>@comment.Contain</b>
-                }
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </div>
+        </div>
+    </div><br>
+
+          <div class="container-fluid title_frame">
+              <div class="row titlet_header">
+                  <div class="col-sm">Comments</div>
+              </div>
+              <div class="row">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="container-fluid comment_frame">
+                            <div class="row comment_header">
+                                <div class="col-sm-9">@comment.User.UserName</div>
+                                <div class="col-sm-3 coment_date">@comment.CommentDate</div>
+                            </div>
+                            <div class="row comment_body">
+                                <div class="col-sm">@comment.Contain</div>
+                            </div>
+                        </div><br>
+
+                    }
+              </div>
+          </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
                 <form id="commentForm">
-                    <input type="text" id="CommentArea" name="contain" placeholder="Contain" />
-                    <input type="hidden" id="GameId" name="gameId"  value=@Model.Id />
+                    <textarea cols="100" id="CommentArea" name="contain" placeholder="Contain" /></textarea>
+                    <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
                     <button id="submit">Submit</button>
                     @Html.AntiForgeryToken()
                 </form>
-            </td>
-        </tr>
-    </table>
-
+            </div>
+        </div>
+    </div><br>
+</div>
 <script type="text/javascript">
     $("#submit").click(function () {
         var form = $('#commentForm');
@@ -47,7 +63,7 @@
             type: "POST",
             url: '/Comments/PostComment',
             data: {
-                __RequestVerificationToken: token, 
+                __RequestVerificationToken: token,
                 'contain': contain,
                 'gameId': GameId
             },

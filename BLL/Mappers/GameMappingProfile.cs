@@ -16,7 +16,9 @@ namespace BLL.Mappers
                 .ForMember(m => m.NumOfDownloads, opt => opt.MapFrom(d => d.NumOfDownloads))
                 .ForMember(m => m.Price, opt => opt.MapFrom(d => d.Price))
                 .ForMember(m => m.Rate, opt => opt.MapFrom(d => d.Rate))
-                .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release));
+                .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release))
+                .ForMember(m => m.CoverArt, opt => opt.MapFrom(d => d.CoverArt))
+                .ForMember(m => m.Developer, opt => opt.MapFrom(d => d.Developer));
         }        
     }
 }
