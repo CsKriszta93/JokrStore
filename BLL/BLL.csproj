@@ -226,9 +226,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\ICommentService.cs" />
     <Compile Include="ServiceInterfaces\IGameService.cs" />
+    <Compile Include="ServiceInterfaces\IUserService.cs" />
     <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\EmailService\EmailSender.cs" />
     <Compile Include="Services\GameService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

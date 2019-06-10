@@ -28,7 +28,7 @@
                     {
                         <div class="container-fluid comment_frame">
                             <div class="row comment_header">
-                                <div class="col-sm-9">@comment.User.UserName</div>
+                                <a asp-controller="Users" asp-action="UserDetails" asp-route-id="@comment.UserId"><div class="col-sm-9">@comment.User.UserName</div></a>
                                 <div class="col-sm-3 coment_date">@comment.CommentDate</div>
                             </div>
                             <div class="row comment_body">

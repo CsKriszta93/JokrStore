@@ -4,7 +4,6 @@ using JOKRStore.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace JOKRStore.Web.Controllers
@@ -37,12 +36,5 @@ namespace JOKRStore.Web.Controllers
             return View(game);
         }
 
-        public async Task<IActionResult> UserDetails(Guid id)
-        {
-            var userDto = await gameService.GetUserByIdAsync(id);
-            var user = mapper.Map<UserViewModel>(userDto);
-
-            return View(user);
-        }
     }
 }

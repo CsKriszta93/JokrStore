@@ -44,6 +44,7 @@ namespace JOKRStore.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<User, IdentityRole<Guid>>(config =>
             {

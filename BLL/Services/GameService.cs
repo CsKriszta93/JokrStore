@@ -4,10 +4,10 @@ using BLL.DTO;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Model;
 
 namespace BLL.Services
 {
@@ -41,21 +41,13 @@ namespace BLL.Services
             return mapper.Map<GameDto>(game);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteGameAsync(Guid id)
         {
             var gameToDelete = await dbContext.Games
                 .SingleOrDefaultAsync(x => x.Id == id);
 
             dbContext.Games.Remove(mapper.Map<Game>(gameToDelete));
             await dbContext.SaveChangesAsync();
-        }
-
-        public async Task<UserDto> GetUserByIdAsync(Guid id)
-        {
-            var user = await dbContext.Users
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return mapper.Map<UserDto>(user);
         }
     }
 }
