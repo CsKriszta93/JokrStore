@@ -17,13 +17,29 @@
                 Rate: @Model.Rate</br>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a class="button button-green" asp-controller="Games" asp-action="Download_demo" asp-route-id="@Model.Id">Download demo</a>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a class="button button-blue" asp-controller="Games" asp-action="Buy" asp-route-id="@Model.Id">Buy</a>
+            </div>
+        </div>
     </div><br>
 
-          <div class="container-fluid title_frame">
-              <div class="row titlet_header">
-                  <div class="col-sm">Comments</div>
-              </div>
-              <div class="row">
+            <div class="container-fluid title_frame">
+                <div class="row titlet_header">
+                    <div class="col-sm">Comments</div>
+                </div>
+                <div class="row">
                     @foreach (var comment in Model.Comments)
                     {
                         <div class="container-fluid comment_frame">
@@ -37,30 +53,30 @@
                         </div><br>
 
                     }
-              </div>
-          </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <form id="commentForm">
-                    <textarea cols="100" id="CommentArea" name="contain" placeholder="Contain" /></textarea>
-                    <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
-                    <button id="submit">Submit</button>
-                    @Html.AntiForgeryToken()
-                </form>
+                </div>
             </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <form id="commentForm">
+                            <textarea cols="100" id="CommentArea" name="contain" placeholder="Contain" /></textarea>
+                            <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
+                            <button id="submit">Submit</button>
+                            @Html.AntiForgeryToken()
+                        </form>
+                    </div>
+                </div>
+            </div><br>
         </div>
-    </div><br>
-</div>
 <script type="text/javascript">
     $("#submit").click(function () {
         var form = $('#commentForm');
         var token = $('input[name="__RequestVerificationToken"]', form).val();
-        var contain = $("#CommentArea").val();
-        var GameId = $("#GameId").val();
+        var contain = $('#CommentArea').val();
+        var GameId = $('#GameId').val();
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: '/Comments/PostComment',
             data: {
                 __RequestVerificationToken: token,
