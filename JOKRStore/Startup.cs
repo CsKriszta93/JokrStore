@@ -79,6 +79,7 @@ namespace JOKRStore.Web
             services.AddSingleton(mapper);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSession();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -107,6 +108,7 @@ namespace JOKRStore.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

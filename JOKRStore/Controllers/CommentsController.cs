@@ -43,7 +43,7 @@ namespace JOKRStore.Web.Controllers
 
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));
 
-            return Ok();
+            return RedirectToAction("Games", "Details", gameId);
             //return RedirectToAction("Detalils");
         }
     }

@@ -8,7 +8,9 @@ namespace JOKRStore.Web.Mappers
     {
         public GameViewMappingProfile() 
         {
-            CreateMap<GameViewModel, GameDto>().ForMember(m => m.DemoLink, opt => opt.MapFrom(d => d.DemoLink))
+            CreateMap<GameViewModel, GameDto>()
+                .ForMember(m => m.Id, opt => opt.MapFrom(d => d.Id))
+                .ForMember(m => m.DemoLink, opt => opt.MapFrom(d => d.DemoLink))
                 .ForMember(m => m.Description, opt => opt.MapFrom(d => d.Description))
                 .ForMember(m => m.DownloadLink, opt => opt.MapFrom(d => d.DownloadLink))
                 .ForMember(m => m.GameName, opt => opt.MapFrom(d => d.GameName))
