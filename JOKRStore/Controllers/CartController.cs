@@ -8,17 +8,20 @@ using Microsoft.AspNetCore.Http;
 using JOKRStore.Web.Helpers;
 using BLL.ServiceInterfaces;
 using AutoMapper;
+using System.Security.Claims;
 
 namespace JOKRStore.Web.Controllers
 {
     public class CartController : Controller
     {
         private readonly IGameService gameService;
+        private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public CartController(IGameService gameService, IMapper mapper)
+        public CartController(IGameService gameService, IUserService userService, IMapper mapper)
         {
             this.gameService = gameService;
+            this.userService = userService;
             this.mapper = mapper;
         }
 
@@ -30,27 +33,23 @@ namespace JOKRStore.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Buy(Guid Id)
+        public async Task<IActionResult> AddToCart(Guid Id)
         {
             List<GameViewModel> cart;
             if (SessionHelper.GetObjectFromJson<List<GameViewModel>>(HttpContext.Session, "cart") == null)
             {
                 cart = new List<GameViewModel>();
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-                System.Diagnostics.Debug.Print("Cart list created!\n");
             } 
             else
                 cart = SessionHelper.GetObjectFromJson<List<GameViewModel>>(HttpContext.Session, "cart");
 
             if (isExist(cart, Id) == -1)
             {
-                System.Diagnostics.Debug.Print("Buying game id: " + Id.ToString());
                 var gameDto = await gameService.GetGameByIdAsync(Id);
                 var game = mapper.Map<GameViewModel>(gameDto);
-                System.Diagnostics.Debug.Print(game.Id.ToString() + " " + game.GameName + " " + game.Price.ToString());
                 cart.Add(game);
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-                System.Diagnostics.Debug.Print("Game added to the cart!\n");
             }
 
             ViewBag.cart = cart;
@@ -59,7 +58,18 @@ namespace JOKRStore.Web.Controllers
             return View("../Games/Cart");
         }
 
-        public IActionResult Remove(Guid id)
+        public async Task<IActionResult> Buy()
+        {
+            List<GameViewModel> cart = SessionHelper.GetObjectFromJson<List<GameViewModel>>(HttpContext.Session, "cart");
+            var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+
+            foreach (var c in cart)
+                await userService.AddGameToUser(Guid.Parse(UserId), c.Id);
+
+            return View("../Games/Index");
+        }
+
+        public async Task<IActionResult> Remove(Guid id)
         {
             List<GameViewModel> cart = SessionHelper.GetObjectFromJson<List<GameViewModel>>(HttpContext.Session, "cart");
             int index = isExist(cart, id);

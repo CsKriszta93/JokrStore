@@ -29,5 +29,11 @@ namespace BLL.Services
 
             return mapper.Map<UserDto>(user);
         }
+
+        public async Task AddGameToUser(Guid UserId, Guid GameId)
+        {
+            dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

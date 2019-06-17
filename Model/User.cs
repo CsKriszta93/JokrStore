@@ -32,5 +32,6 @@ namespace Model
         public Guid? ConfigId { get; set; }
 
         public List<Comment> comments { get; set; }
+        public List<Game> Games { get; set; }
     }
 }
