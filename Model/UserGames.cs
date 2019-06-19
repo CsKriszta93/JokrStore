@@ -8,12 +8,26 @@ namespace Model
 {
     public class UserGames
     {
+        public UserGames()
+        {
+            this.Id = new Guid();
+            this.UserId = Guid.Empty;
+            this.GameId = Guid.Empty;
+        }
+
         public UserGames(Guid UserId, Guid GameId)
         {
+            this.Id = new Guid();
             this.UserId = UserId;
             this.GameId = GameId;
         }
-        Guid UserId { get; set; }
-        Guid GameId { get; set; }
+
+        public Guid Id { get; set; }
+
+        public Guid UserId { get; set; }
+        public User User { get; set; }
+
+        public Guid GameId { get; set; }
+        public Game Game { get; set; }
     }
 }

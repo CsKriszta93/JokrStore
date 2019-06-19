@@ -21,6 +21,6 @@ namespace Model
         public Guid? RecSysReqId { get; set; }
 
         public List<Comment> Comments { get; set; }
-        public List<User> Users { get; set; }
+        public List<UserGames> UserGames { get; set; }
     }
 }
