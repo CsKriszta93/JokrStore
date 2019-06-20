@@ -64,7 +64,7 @@ namespace JOKRStore.Web.Controllers
             var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
 
             foreach (var c in cart)
-                await userService.AddGameToUser(Guid.Parse(UserId), c.Id);
+                await gameService.AddGameToUser(Guid.Parse(UserId), c.Id);
 
             return RedirectToAction("Index", "GamesController");
         }

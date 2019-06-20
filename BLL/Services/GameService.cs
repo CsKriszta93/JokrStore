@@ -5,6 +5,7 @@ using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Model;
@@ -48,6 +49,18 @@ namespace BLL.Services
 
             dbContext.Games.Remove(mapper.Map<Game>(gameToDelete));
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task AddGameToUser(Guid UserId, Guid GameId)
+        {
+            dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<GameDto>> GetUserGames(Guid UserId)
+        {
+            var usergames = await dbContext.UserGames.Include(x => x.Game).Where(x => x.UserId == UserId);
+            var gamedto = await mapper.Map<GameDto>(usergames.game);
         }
     }
 }

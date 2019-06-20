@@ -10,6 +10,5 @@ namespace BLL.ServiceInterfaces
     public interface IUserService
     {
         Task<UserDto> GetUserByIdAsync(Guid id);
-        Task AddGameToUser(Guid UserId, Guid GameId);
     }
 }

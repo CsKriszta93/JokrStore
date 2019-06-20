@@ -36,5 +36,10 @@ namespace JOKRStore.Web.Controllers
             return View(game);
         }
 
+        public async Task<IActionResult> UserGameList()
+        {
+
+        }
+
     }
 }

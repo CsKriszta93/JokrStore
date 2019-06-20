@@ -10,5 +10,6 @@ namespace BLL.ServiceInterfaces
         Task<IEnumerable<GameDto>> GetGamesAsync();
         Task<GameDto> GetGameByIdAsync(Guid id);
         Task DeleteGameAsync(Guid id);
+        Task AddGameToUser(Guid UserId, Guid GameId);
     }
 }
