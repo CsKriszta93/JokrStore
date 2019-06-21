@@ -59,8 +59,8 @@ namespace BLL.Services
 
         public async Task<IEnumerable<GameDto>> GetUserGames(Guid UserId)
         {
-            var usergames = await dbContext.UserGames.Include(x => x.Game).Where(x => x.UserId == UserId);
-            var gamedto = await mapper.Map<GameDto>(usergames.game);
+            var usergames = await dbContext.UserGames.Include(x => x.Game).Where(x => x.UserId == UserId).ToListAsync<UserGames>();
+            return  mapper.Map<IEnumerable<GameDto>>(usergames.Select(x => x.Game));
         }
     }
 }

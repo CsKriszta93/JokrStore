@@ -66,7 +66,7 @@ namespace JOKRStore.Web.Controllers
             foreach (var c in cart)
                 await gameService.AddGameToUser(Guid.Parse(UserId), c.Id);
 
-            return RedirectToAction("Index", "GamesController");
+            return RedirectToAction("Index", "Games");
         }
 
         public async Task<IActionResult> Remove(Guid id)
