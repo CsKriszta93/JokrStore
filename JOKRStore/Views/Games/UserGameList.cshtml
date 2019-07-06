@@ -9,9 +9,9 @@
 <div class="container mosaic">
     @foreach (var game in Model)
     {
-    <div>
-        <p><a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"><img src="@game.CoverArt"></a></p><br>
-        <p><a class="button button-green" asp-controller="Games" asp-action="Download" asp-route-id="game.Id">Download</a></p>
+    <div class="mosaic-frame">
+        <p><a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"><img class="mosaic-tile" src="@game.CoverArt"></a></p><br>
+        <p align="center"><a class="button button-green" asp-controller="Games" asp-action="Download" asp-route-id="game.Id">Download</a></p>
     </div>      
     }
 

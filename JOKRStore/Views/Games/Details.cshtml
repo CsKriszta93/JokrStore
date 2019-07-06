@@ -2,70 +2,119 @@
 
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<div class="container-fluid">
-    <div class="row">
-        <h1>@Model.GameName</h1>
-        <div class="row">
-            <div class="col-sm-6">
-                <img src="@Model.CoverArt" alt="@Model.GameName" width="200">
+<h1>@Model.GameName</h1>
+<table>
+    <tr>
+        <td>
+            <div class="text_box box-width-240">
+                <p align="center"><img src="../@Model.CoverArt" alt="@Model.GameName"></p>
+                <p><b>Release date: </b>@Model.Release</p>
+                <p><b>Rate: </b>@Model.Rate</p>
+                <p><b>Developer: </b>@Model.Developer</p>
+                <p align="center"><a class="button button-green" asp-controller="Games" asp-action="Download_demo" asp-route-id="@Model.Id">Download demo</a></p>
+                <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
+                <p align="center">@Model.Price</p>
             </div>
+            <p class="header-big">Descreption</p>
+            <p>@Model.Description</p>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="header-big">Galery:</p>
+            <div class="text_box w3-row-padding">
+                <div class="w3-container w3-third">
+                    <img src="~/images/Crysis.jpg" style="width:100px;cursor:pointer"
+                         onclick="showDiv(0)" class="w3-hover-opacity">
+                </div>
+                <div class="w3-container w3-third">
+                    <img src="~/images/crysis_2.jpg" style="width:100px;cursor:pointer"
+                         onclick="showDiv(1)" class="w3-hover-opacity">
+                </div>
+                <div class="w3-container w3-third">
+                    <img src="~/images/dukenukem3d.jpg" style="width:100px;cursor:pointer"
+                         onclick="showDiv(2)" class="w3-hover-opacity">
+                </div>
+            </div>
+            <div id="modal01" class="w3-modal"> 
+                <div class="w3-modal-content w3-animate-zoom">
+                    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright" onclick="Close()">&times;</span>
+                    <img class="slide-image" src="~/images/Crysis.jpg" style="height:500px; height:500px">
+                    <img class="slide-image" src="~/images/crysis_2.jpg" style="height:500px">
+                    <img class="slide-image" src="~/images/dukenukem3d.jpg" style="height:500px">
+                </div>
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="row  header-big">
+                <div class="col-sm">Comments</div>
+            </div>
+            <div class="title_frame">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="container-fluid comment_frame">
+                        <div class="row comment_header">
+                            <a asp-controller="Users" asp-action="UserDetails" asp-route-id="@comment.UserId"><div class="col-sm-9">@comment.User.UserName</div></a>
+                            <div class="col-sm-3 coment_date">@comment.CommentDate</div>
+                        </div>
+                        <div class="row comment_body">
+                            <div class="col-sm">@comment.Contain</div>
+                        </div>
+                    </div><br>
 
-            <div class="col-sm-6">
-                Release date: @Model.Release</br>
-                Price: @Model.Price</br>
-                Rate: @Model.Rate</br>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <p>@Model.Description</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <a class="button button-green" asp-controller="Games" asp-action="Download_demo" asp-route-id="@Model.Id">Download demo</a>
-            </div>
+                }
 
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a>
-            </div>
-        </div>
-
-        <div class="row title_frame titlet_header">
-            <div class="col-sm">Comments</div>
-        </div>
-        <div class="row">
-            @foreach (var comment in Model.Comments)
-            {
-                <div class="container-fluid comment_frame">
-                    <div class="row comment_header">
-                        <a asp-controller="Users" asp-action="UserDetails" asp-route-id="@comment.UserId"><div class="col-sm-9">@comment.User.UserName</div></a>
-                        <div class="col-sm-3 coment_date">@comment.CommentDate</div>
+                <div class="row">
+                    <div class="col">
+                        <form id="commentForm">
+                            <textarea cols="100" id="CommentArea" name="contain" placeholder="Contain" /></textarea>
+                            <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
+                            <button id="submit">Submit</button>
+                            @Html.AntiForgeryToken()
+                        </form>
                     </div>
-                    <div class="row comment_body">
-                        <div class="col-sm">@comment.Contain</div>
-                    </div>
-                </div><br>
-
-            }
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <form id="commentForm">
-                    <textarea cols="100" id="CommentArea" name="contain" placeholder="Contain" /></textarea>
-                    <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
-                    <button id="submit">Submit</button>
-                    @Html.AntiForgeryToken()
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-        
-</div>
+        </td>
+    </tr>
+</table>
+    
+
+
+<script>
+    var slideIndex = 0;
+    var i;
+    var x = document.getElementsByClassName("slide-image");
+
+    function plusDivs(n) {
+        slideIndex += n;
+        if (slideIndex >= x.length) { slideIndex = 0 }
+        if (slideIndex < 0) { slideIndex = x.length-1 }
+        showDiv(slideIndex);
+       
+    }
+
+    function showDiv(n) {
+        document.getElementById("modal01").style.display = "block";
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex = n;
+        x[slideIndex].style.display = "block";
+    }
+
+    function Close() {
+        document.getElementById("modal01").style.display = "none";
+    }
+</script>
+
 <script type="text/javascript">
     $("#submit").click(function () {
         var form = $('#commentForm');

@@ -152,7 +152,8 @@ body {
 .title_frame {
     background: #282729;
     color: white;
-    border: 1px solid white;
+    border: 1px solid #56dbdb;
+    padding: 5px;
     margin: 5px;
 }
 
@@ -164,7 +165,6 @@ body {
 
 .comment_frame {
     background: #282729;
-    border: 1px solid #454545;
     margin: 5px;
 }
 
@@ -174,10 +174,6 @@ body {
 
 .coment_date {
     text-align : right;
-}
-
-h1 {
-    text-align: center;
 }
 
 body {
@@ -218,4 +214,36 @@ textarea {
 
 .button-gray {
     background-color: #9d9d9d; /* Gray */
+}
+
+.mosaic-frame {
+    margin : 20px;
+    
+}
+
+.mosaic-tile {
+    max-width: 200px;
+    height: auto;
+}
+
+.mosaic-button {
+    text-align : center;
+}
+
+.text_box {
+    padding: 10px;
+    background: #454545;
+    border: 2px solid #56dbdb;
+    margin: 20px;
+    float: left;
+}
+
+.box-width-240 {
+    width: 240px;
+}
+
+.header-big {
+    font-size: 28px;
+    color: #56dbdb;
+    text-decoration: underline;
 }
