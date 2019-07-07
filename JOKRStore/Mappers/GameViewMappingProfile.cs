@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTO;
 using JOKRStore.Web.ViewModels;
+using System;
 
 namespace JOKRStore.Web.Mappers
 {
@@ -17,10 +18,11 @@ namespace JOKRStore.Web.Mappers
                 .ForMember(m => m.NumOfDownloads, opt => opt.MapFrom(d => d.NumOfDownloads))
                 .ForMember(m => m.Price, opt => opt.MapFrom(d => d.Price))
                 .ForMember(m => m.Rate, opt => opt.MapFrom(d => d.Rate))
-                .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release))
+                .ForMember(m => m.Release, opt => opt.MapFrom(d => DateTime.ParseExact(d.Release, "yyyy.MM.dd.", System.Globalization.CultureInfo.InvariantCulture)))
                 .ForMember(m => m.CoverArt, opt => opt.MapFrom(d => d.CoverArt))
                 .ForMember(m => m.Developer, opt => opt.MapFrom(d => d.Developer))
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release.ToString("yyyy.MM.dd.")));
         }
     }
 }

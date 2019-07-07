@@ -9,7 +9,7 @@ namespace JOKRStore.Web.ViewModels
 
         public string Contain { get; set; }
 
-        public DateTime CommentDate { get; set; }
+        public string CommentDate { get; set; }
 
         public Guid GameId { get; set; }
 

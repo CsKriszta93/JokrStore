@@ -26,7 +26,7 @@ namespace JOKRStore.Web.ViewModels
         public decimal Price { get; set; }
 
         [DisplayName("Released")]
-        public DateTime Release { get; set; }
+        public string Release { get; set; }
 
         [DisplayName("Download here")]
         public string DownloadLink { get; set; }
