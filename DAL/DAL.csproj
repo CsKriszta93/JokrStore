@@ -229,6 +229,10 @@
     <Compile Include="Migrations\20190619174258_AddUserGame.designer.cs">
       <DependentUpon>20190619174258_AddUserGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190708185639_medias.cs" />
+    <Compile Include="Migrations\20190708185639_medias.designer.cs">
+      <DependentUpon>20190708185639_medias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

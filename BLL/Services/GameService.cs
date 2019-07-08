@@ -37,6 +37,7 @@ namespace BLL.Services
         {
             var game = await dbContext.Games
                 .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x => x.Medias)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<GameDto>(game);

@@ -9,7 +9,7 @@
     <tr>
         <td>
             <div class="text_box box-width-240">
-                <p align="center"><img src="../@Model.CoverArt" alt="@Model.GameName"></p>
+                <p align="center"><img src="~/images/@Model.GameName/CoverArt.jpg" alt="@Model.GameName"></p>
                 <p><b>Release date: </b>@Model.Release</p>
                 <p><b>Rate: </b>@Model.Rate</p>
                 <p><b>Developer: </b>@Model.Developer</p>
@@ -26,25 +26,28 @@
         <td>
             <p class="header-big">Galery:</p>
             <div class="text_box w3-row-padding">
-                <div class="w3-container w3-third">
-                    <img src="~/images/Crysis.jpg" style="width:100px;cursor:pointer"
-                         onclick="showDiv(0)" class="w3-hover-opacity">
-                </div>
-                <div class="w3-container w3-third">
-                    <img src="~/images/crysis_2.jpg" style="width:100px;cursor:pointer"
-                         onclick="showDiv(1)" class="w3-hover-opacity">
-                </div>
-                <div class="w3-container w3-third">
-                    <img src="~/images/dukenukem3d.jpg" style="width:100px;cursor:pointer"
-                         onclick="showDiv(2)" class="w3-hover-opacity">
-                </div>
+                @{
+                        int i = 0;
+                        foreach (var m in Model.Medias)
+                        {
+                        <div class="w3-container w3-third">
+                            <img src="~/images/@Model.GameName/@m.contain" style="width:100px;cursor:pointer"
+                                 onclick="showDiv(@i)" class="w3-hover-opacity">
+                        </div>
+
+                        i++;
+                    }
+                }
+
             </div>
             <div id="modal01" class="w3-modal"> 
                 <div class="w3-modal-content w3-animate-zoom">
                     <span class="w3-button w3-hover-red w3-xlarge w3-display-topright" onclick="Close()">&times;</span>
-                    <img class="slide-image" src="~/images/Crysis.jpg" style="height:500px; height:500px">
-                    <img class="slide-image" src="~/images/crysis_2.jpg" style="height:500px">
-                    <img class="slide-image" src="~/images/dukenukem3d.jpg" style="height:500px">
+                    @foreach (var m in Model.Medias)
+                    {
+                    <img class="slide-image" src="~/images/@Model.GameName/@m.contain" style="height:500px; height:500px">
+                    }
+                    
                 </div>
                 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                 <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>

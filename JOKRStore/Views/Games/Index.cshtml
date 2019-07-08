@@ -18,7 +18,7 @@
             <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
                 <div class="card">
                     <div class="poster">
-                        <img src="@game.CoverArt">
+                        <img src="~/images/@game.GameName/CoverArt.jpg">
                     </div>
                     <div class="details">
                         <h2>@game.GameName<br><span>@game.Developer</span></h2>

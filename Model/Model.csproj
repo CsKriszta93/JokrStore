@@ -216,6 +216,7 @@
   <ItemGroup>
     <Compile Include="Comment.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Media.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserGames.cs" />

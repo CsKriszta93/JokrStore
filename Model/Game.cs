@@ -22,5 +22,6 @@ namespace Model
 
         public List<Comment> Comments { get; set; }
         public List<UserGames> UserGames { get; set; }
+        public List<Media> Medias { get; set; }
     }
 }

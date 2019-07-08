@@ -38,5 +38,7 @@ namespace JOKRStore.Web.ViewModels
         public int NumOfDownloads { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
+        public IEnumerable<MediaViewModel> Medias { get; set; }
+
     }
 }
