@@ -239,11 +239,15 @@ textarea {
 }
 
 .box-width-240 {
-    width: 240px;
+    width: 260px;
 }
 
 .header-big {
     font-size: 28px;
     color: #56dbdb;
     text-decoration: underline;
+}
+
+img {
+    margin: 5px;
 }

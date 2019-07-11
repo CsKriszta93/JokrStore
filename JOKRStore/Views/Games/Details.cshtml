@@ -26,18 +26,23 @@
         <td>
             <p class="header-big">Galery:</p>
             <div class="text_box w3-row-padding">
-                @{
-                        int i = 0;
-                        foreach (var m in Model.Medias)
-                        {
-                        <div class="w3-container w3-third">
-                            <img src="~/images/@Model.GameName/@m.contain" style="width:100px;cursor:pointer"
-                                 onclick="showDiv(@i)" class="w3-hover-opacity">
-                        </div>
-
-                        i++;
-                    }
-                }
+                <table>
+                    <tr>
+                        @{
+                            int i = 0;
+                            foreach (var m in Model.Medias)
+                            {
+                                <td>
+                                    <img src="~/images/@Model.GameName/@m.contain" style="width:100px;cursor:pointer"
+                                         onclick="showDiv(@i)" class="w3-hover-opacity">
+                                </td>
+                                i++;
+                                
+                            }
+                        }
+                    </tr>
+                </table>
+                
 
             </div>
             <div id="modal01" class="w3-modal"> 
@@ -56,10 +61,10 @@
     </tr>
     <tr>
         <td>
-            <div class="row  header-big">
-                <div class="col-sm">Comments</div>
-            </div>
             <div class="title_frame">
+                <div class="titlet_header">
+                    Comments
+                </div>
                 @foreach (var comment in Model.Comments)
                 {
                     <div class="container-fluid comment_frame">
