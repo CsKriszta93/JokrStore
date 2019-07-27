@@ -1,0 +1,18 @@
+@model IEnumerable<JOKRStore.Web.ViewModels.GameViewModel>
+@{
+    ViewData["Title"] = "MyGames";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MyGames</h2>
+
+<div class="container mosaic">
+    @foreach (var game in Model)
+    {
+    <div class="mosaic-frame">
+        <p><a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"><img class="mosaic-tile" src="~/images/@game.GameName/CoverArt.jpg"></a></p><br>
+        <p align="center"><a class="button button-green" asp-controller="Games" asp-action="Download" asp-route-id="game.Id">Download</a></p>
+    </div>      
+    }
+
+</div>

@@ -35,7 +35,7 @@ namespace JOKRStore.Web.Controllers
             {
                 UserId = Guid.Parse(UserId),
                 Contain = contain,
-                CommentDate = DateTime.Now,
+                CommentDate = DateTime.Now.ToString("yyyy.MM.dd. hh:mm"),
                 GameId = Guid.Parse(gameId)
             };
 
@@ -43,7 +43,7 @@ namespace JOKRStore.Web.Controllers
 
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));
 
-            return Ok();
+            return RedirectToAction("Games", "Details", gameId);
             //return RedirectToAction("Detalils");
         }
     }

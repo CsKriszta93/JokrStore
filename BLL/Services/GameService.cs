@@ -4,10 +4,11 @@ using BLL.DTO;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
-using Model;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Model;
 
 namespace BLL.Services
 {
@@ -36,12 +37,13 @@ namespace BLL.Services
         {
             var game = await dbContext.Games
                 .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x => x.Medias)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<GameDto>(game);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteGameAsync(Guid id)
         {
             var gameToDelete = await dbContext.Games
                 .SingleOrDefaultAsync(x => x.Id == id);
@@ -50,13 +52,16 @@ namespace BLL.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<UserDto> GetUserByIdAsync(Guid id)
+        public async Task AddGameToUser(Guid UserId, Guid GameId)
         {
-            var user = await dbContext.Users
-                .FirstOrDefaultAsync(x => x.Id == id);
+            dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
+            await dbContext.SaveChangesAsync();
+        }
 
-            return mapper.Map<UserDto>(user);
+        public async Task<IEnumerable<GameDto>> GetUserGames(Guid UserId)
+        {
+            var usergames = await dbContext.UserGames.Include(x => x.Game).Where(x => x.UserId == UserId).ToListAsync<UserGames>();
+            return  mapper.Map<IEnumerable<GameDto>>(usergames.Select(x => x.Game));
         }
     }
 }
-

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +33,6 @@ namespace Model
         public Guid? ConfigId { get; set; }
 
         public List<Comment> comments { get; set; }
+        public List<UserGames> UserGames { get; set; }
     }
 }

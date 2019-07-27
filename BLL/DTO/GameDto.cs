@@ -24,5 +24,6 @@ namespace BLL.DTO
         public Guid? RecSysReqId { get; set; }
 
         public ICollection<CommentDto> Comments { get; set; }
+        public ICollection<MediaDto> Medias { get; set; }
     }
 }

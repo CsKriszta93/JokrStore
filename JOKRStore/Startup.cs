@@ -44,6 +44,7 @@ namespace JOKRStore.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<User, IdentityRole<Guid>>(config =>
             {
@@ -78,6 +79,7 @@ namespace JOKRStore.Web
             services.AddSingleton(mapper);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSession();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -106,6 +108,7 @@ namespace JOKRStore.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

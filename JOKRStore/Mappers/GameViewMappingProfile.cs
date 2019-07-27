@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTO;
 using JOKRStore.Web.ViewModels;
+using System;
 
 namespace JOKRStore.Web.Mappers
 {
@@ -8,15 +9,20 @@ namespace JOKRStore.Web.Mappers
     {
         public GameViewMappingProfile() 
         {
-            CreateMap<GameViewModel, GameDto>().ForMember(m => m.DemoLink, opt => opt.MapFrom(d => d.DemoLink))
+            CreateMap<GameViewModel, GameDto>()
+                .ForMember(m => m.Id, opt => opt.MapFrom(d => d.Id))
+                .ForMember(m => m.DemoLink, opt => opt.MapFrom(d => d.DemoLink))
                 .ForMember(m => m.Description, opt => opt.MapFrom(d => d.Description))
                 .ForMember(m => m.DownloadLink, opt => opt.MapFrom(d => d.DownloadLink))
                 .ForMember(m => m.GameName, opt => opt.MapFrom(d => d.GameName))
                 .ForMember(m => m.NumOfDownloads, opt => opt.MapFrom(d => d.NumOfDownloads))
                 .ForMember(m => m.Price, opt => opt.MapFrom(d => d.Price))
                 .ForMember(m => m.Rate, opt => opt.MapFrom(d => d.Rate))
-                .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release))
-                .ReverseMap();
+                .ForMember(m => m.Release, opt => opt.MapFrom(d => DateTime.ParseExact(d.Release, "yyyy.MM.dd.", System.Globalization.CultureInfo.InvariantCulture)))
+                .ForMember(m => m.CoverArt, opt => opt.MapFrom(d => d.CoverArt))
+                .ForMember(m => m.Developer, opt => opt.MapFrom(d => d.Developer))
+                .ReverseMap()
+                .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release.ToString("yyyy.MM.dd.")));
         }
     }
 }

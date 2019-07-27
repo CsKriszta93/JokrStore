@@ -15,9 +15,10 @@ namespace JOKRStore.Web.Mappers
             CreateMap<CommentDto, CommentViewModel>()
                .ForMember(b => b.UserId, opt => opt.MapFrom(c => c.UserId))
                .ForMember(b => b.Contain, opt => opt.MapFrom(c => c.Contain))
-               .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate))
+               .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate.ToString("yyyy.MM.dd. hh:mm")))
                .ForMember(b => b.GameId, opt => opt.MapFrom(c => c.GameId))
-               .ReverseMap();
+               .ReverseMap()
+               .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => DateTime.ParseExact(c.CommentDate, "yyyy.MM.dd. hh:mm", System.Globalization.CultureInfo.InvariantCulture)));
         }
     }
 }
