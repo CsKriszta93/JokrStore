@@ -38,3 +38,11 @@ INSERT INTO Comments (CommentId, Commenter, GameId, CommentDate, Contain) VALUES
 
 SELECT *
 FROM Comments
+
+INSERT INTO MEDIA VALUES
+(NEWID(), 'afcb149d-7899-473c-8213-13de068675ab', 0, '1.jpg'),
+(NEWID(), 'afcb149d-7899-473c-8213-13de068675ab', 0, '2.jpg'),
+(NEWID(), 'afcb149d-7899-473c-8213-13de068675ab', 0, '3.jpg'),
+(NEWID(), 'afcb149d-7899-473c-8213-13de068675ab', 0, '4.jpg'),
+(NEWID(), 'afcb149d-7899-473c-8213-13de068675ab', 0, '5.jpg'),
+(NEWID(), 'afcb149d-7899-473c-8213-13de068675ab', 0, '6.jpg')

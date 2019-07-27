@@ -1,4 +1,4 @@
-﻿@model JOKRStore.Web.ViewModels.UserViewModel
+@model JOKRStore.Web.ViewModels.UserViewModel
 
 <!doctype html>
 <html lang="en">
@@ -23,4 +23,3 @@
         <p>Computer configuration: </p>
     </body>
 </html>
-
