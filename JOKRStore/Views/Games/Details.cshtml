@@ -15,7 +15,7 @@
                 <p><b>Developer: </b>@Model.Developer</p>
                 <p align="center"><a class="button button-green" asp-controller="Games" asp-action="Download_demo" asp-route-id="@Model.Id">Download demo</a></p>
                 <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
-                <p align="center">@Model.Price</p>
+                <p align="center">@Model.Price Ft</p>
             </div>
             <p class="header-big">Descreption</p>
             <p>@Model.Description</p>
@@ -47,12 +47,13 @@
             </div>
             <div id="modal01" class="w3-modal"> 
                 <div class="w3-modal-content w3-animate-zoom">
-                    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright" onclick="Close()">&times;</span>
-                    @foreach (var m in Model.Medias)
-                    {
-                    <img class="slide-image" src="~/images/@Model.GameName/@m.contain" style="height:500px; height:500px">
-                    }
-                    
+                    <div class="w3-container">
+                        <span class="w3-button w3-hover-red w3-xlarge w3-display-topright" onclick="Close()">&times;</span>
+                        @foreach (var m in Model.Medias)
+                        {
+                        <img class="slide-image" src="~/images/@Model.GameName/@m.contain" style="height:500px; height:500px">
+                        }
+                    </div> 
                 </div>
                 <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                 <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>

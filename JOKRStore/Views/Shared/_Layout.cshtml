@@ -19,6 +19,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-inverse navbar-fixed-top">
@@ -41,7 +42,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Topic">Topics</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Games" asp-action="UserGameList">My games</a></li>
+                    <partial name="_AccountPartial" />
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
