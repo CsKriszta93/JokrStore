@@ -19,7 +19,7 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+            /*modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -124,9 +124,31 @@ namespace DAL.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });*/
+
+            modelBuilder.Entity("Model.CPU", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("architect");
+
+                    b.Property<long>("cache");
+
+                    b.Property<long>("cores");
+
+                    b.Property<long>("freqency");
+
+                    b.Property<string>("name");
+
+                    b.Property<DateTime>("release");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CPU");
                 });
 
-            modelBuilder.Entity("Model.Comment", b =>
+            /*modelBuilder.Entity("Model.Comment", b =>
                 {
                     b.Property<Guid>("CommentId")
                         .ValueGeneratedOnAdd();
@@ -146,9 +168,49 @@ namespace DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });*/
+
+            modelBuilder.Entity("Model.GPU", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("architect");
+
+                    b.Property<long>("bandwidth");
+
+                    b.Property<long>("buswidth");
+
+                    b.Property<long>("core_frequency");
+
+                    b.Property<float>("directx");
+
+                    b.Property<long>("memory_freqency");
+
+                    b.Property<long>("memory_size");
+
+                    b.Property<string>("name");
+
+                    b.Property<float>("opengl");
+
+                    b.Property<long>("pixel_fillrate");
+
+                    b.Property<DateTime>("release");
+
+                    b.Property<float>("shader_model");
+
+                    b.Property<long>("shaders");
+
+                    b.Property<long>("texture_fillrate");
+
+                    b.Property<float>("vulkan");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GPU");
                 });
 
-            modelBuilder.Entity("Model.Game", b =>
+            /*/modelBuilder.Entity("Model.Game", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -177,7 +239,13 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("Release");
 
+                    b.Property<string>("SysReqNotes");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MinSysReqId");
+
+                    b.HasIndex("RecSysReqId");
 
                     b.ToTable("Games");
                 });
@@ -198,9 +266,101 @@ namespace DAL.Migrations
                     b.HasIndex("GameId");
 
                     b.ToTable("Media");
+                });*/
+
+            modelBuilder.Entity("Model.OS", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("group");
+
+                    b.Property<int>("major_ver");
+
+                    b.Property<int>("minor_ver");
+
+                    b.Property<string>("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OS");
                 });
 
-            modelBuilder.Entity("Model.User", b =>
+            modelBuilder.Entity("Model.SysReq", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float>("directx");
+
+                    b.Property<float>("opengl");
+
+                    b.Property<long>("ram");
+
+                    b.Property<long>("storage");
+
+                    b.Property<float>("vulkan");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SysReq");
+                });
+
+            modelBuilder.Entity("Model.SysReqCPU", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("CPUId");
+
+                    b.Property<Guid>("SysReqId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CPUId");
+
+                    b.HasIndex("SysReqId");
+
+                    b.ToTable("SysReqCPU");
+                });
+
+            modelBuilder.Entity("Model.SysReqGPU", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("GPUId");
+
+                    b.Property<Guid>("SysReqId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GPUId");
+
+                    b.HasIndex("SysReqId");
+
+                    b.ToTable("SysReqGPU");
+                });
+
+            modelBuilder.Entity("Model.SysReqOS", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("OSId");
+
+                    b.Property<Guid>("SysReqId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OSId");
+
+                    b.HasIndex("SysReqId");
+
+                    b.ToTable("SysReqOS");
+                });
+
+            /*modelBuilder.Entity("Model.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -337,15 +497,65 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Model.Game", b =>
+                {
+                    b.HasOne("Model.SysReq", "MinSysReq")
+                        .WithMany()
+                        .HasForeignKey("MinSysReqId");
+
+                    b.HasOne("Model.SysReq", "RecSysReq")
+                        .WithMany()
+                        .HasForeignKey("RecSysReqId");
+                });
+
             modelBuilder.Entity("Model.Media", b =>
                 {
                     b.HasOne("Model.Game", "game")
                         .WithMany("Medias")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });*/
+
+            modelBuilder.Entity("Model.SysReqCPU", b =>
+                {
+                    b.HasOne("Model.CPU", "CPU")
+                        .WithMany()
+                        .HasForeignKey("CPUId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Model.SysReq", "SysReq")
+                        .WithMany("SysReqCPUs")
+                        .HasForeignKey("SysReqId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Model.UserGames", b =>
+            modelBuilder.Entity("Model.SysReqGPU", b =>
+                {
+                    b.HasOne("Model.GPU", "GPU")
+                        .WithMany()
+                        .HasForeignKey("GPUId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Model.SysReq", "SysReq")
+                        .WithMany("SysReqGPUs")
+                        .HasForeignKey("SysReqId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Model.SysReqOS", b =>
+                {
+                    b.HasOne("Model.OS", "OS")
+                        .WithMany()
+                        .HasForeignKey("OSId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Model.SysReq", "SysReq")
+                        .WithMany("SysReqOSes")
+                        .HasForeignKey("SysReqId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            /*modelBuilder.Entity("Model.UserGames", b =>
                 {
                     b.HasOne("Model.Game", "Game")
                         .WithMany("UserGames")
@@ -356,7 +566,7 @@ namespace DAL.Migrations
                         .WithMany("UserGames")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
+                });*/
 #pragma warning restore 612, 618
         }
     }

@@ -1,8 +1,12 @@
 ﻿@model JOKRStore.Web.ViewModels.GameViewModel
 
+@using Microsoft.AspNetCore.Identity
+
+@inject Microsoft.AspNetCore.Identity.SignInManager<Model.User> SignInManager
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="~/css/modal.css">
+<link rel="stylesheet" href="~/css/details.css">
 
 <h1>@Model.GameName</h1>
 <table>
@@ -17,15 +21,262 @@
                 <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
                 <p align="center">@Model.Price Ft</p>
             </div>
+
+            
             <p class="header-big">Descreption</p>
-            <p>@Model.Description</p>
+            <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Description))</p>
+            
+            <div class="container">
+                <div class="row row-no-gutters">
+                    <div class="col-sm-9">
+                        <p class="header-big">System requirements</p>
+                        <div class="container">
+                            <div class="row">
+                                @if (Model.MinSysReq != null) {
+                                    <div class="col-sm-4">
+                                        <p><b><i>Minimum system requirements:</i></b><p>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>CPU:</b> </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    
+                                                        @foreach (var CPU in Model.MinSysReq.SysReqCPUs)
+                                                        {
+                                                            if (@CPU.CPU.freqency > 999)
+                                                            {
+                                                                <li>@CPU.CPU.name @(CPU.CPU.freqency/1000.0) Ghz</li>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li>@CPU.CPU.name (@CPU.CPU.freqency) Mhz)</li>
+                                                            }
+
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="row">
+                                                <div class="col-sm-1"> 
+                                                    <p><b>RAM:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @{
+                                                        if (Model.MinSysReq.ram > 1023)
+                                                        {
+                                                            <div>@(Model.MinSysReq.ram / 1024) GB</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div>@Model.MinSysReq.ram MB</div>
+                                                        }
+                                                    }
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>GPU:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    
+                                                    @foreach (var GPU in Model.MinSysReq.SysReqGPUs)
+                                                        {
+                                                            <li>@GPU.GPU.name</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>OS:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    
+                                                        @foreach (var OS in Model.MinSysReq.SysReqOSes)
+                                                        {
+                                                            <li>@OS.OS.name or newer</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            @if (@Model.MinSysReq.directx > 0 || @Model.MinSysReq.opengl > 0 || @Model.MinSysReq.vulkan > 0)
+                                            {<div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>Graphics API:</b></p> 
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    @if (@Model.MinSysReq.directx > 0)
+                                                        {<li>DirectX @Model.MinSysReq.directx</li>}
+                                                    @if (@Model.MinSysReq.opengl > 0)
+                                                        {<li>OpenGL @Model.MinSysReq.opengl</li>}   
+                                                    @if (@Model.MinSysReq.vulkan > 0)
+                                                        {<li>Vulkan @Model.MinSysReq.vulkan</li>}    
+                                                    </ul>
+                                                </div>
+                                            </div>}
+
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>Storage:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @{
+                                                        if (@Model.MinSysReq.storage > 1023)
+                                                        {
+                                                            <div>@(Model.MinSysReq.storage / 1024.0) GB</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div>@Model.MinSysReq.storage MB</div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                                @if (Model.RecSysReq != null) {
+                                    <div class="col-sm-4">
+                                        <p><b><i>Recommented system requirements:</i></b><p>
+                                        <div class="container">
+                                            @if (Model.RecSysReq.SysReqCPUs.Count > 0)
+                                            {<div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>CPU:</b> </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    
+                                                        @foreach (var CPU in Model.RecSysReq.SysReqCPUs)
+                                                        {
+                                                            if (@CPU.CPU.freqency > 999)
+                                                            {
+                                                                <li>@CPU.CPU.name @(CPU.CPU.freqency/1000.0) Ghz</li>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li>@CPU.CPU.name (@CPU.CPU.freqency) Mhz)</li>
+                                                            }
+
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>}
+                                        
+                                            <div class="row">
+                                                <div class="col-sm-1"> 
+                                                    <p><b>RAM:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @{
+                                                        if (Model.RecSysReq.ram > 1023)
+                                                        {
+                                                            <div>@(Model.RecSysReq.ram / 1024) GB</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div>@Model.RecSysReq.ram MB</div>
+                                                        }
+                                                    }
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>GPU:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    
+                                                    @foreach (var GPU in Model.RecSysReq.SysReqGPUs)
+                                                        {
+                                                            <li>@GPU.GPU.name</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            @if (Model.RecSysReq.SysReqOSes.Count > 0)
+                                            {<div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>OS:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    
+                                                        @foreach (var OS in Model.RecSysReq.SysReqOSes)
+                                                        {
+                                                            <li>@OS.OS.name or newer</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>}
+
+                                            @if (@Model.RecSysReq.directx > 0 || @Model.RecSysReq.opengl > 0 || @Model.RecSysReq.vulkan > 0)
+                                            {<div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>Graphics API:</b></p> 
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <ul>
+                                                    @if (@Model.RecSysReq.directx > 0)
+                                                        {<li>DirectX @Model.RecSysReq.directx</li>}
+                                                    @if (@Model.RecSysReq.opengl > 0)
+                                                        {<li>OpenGL @Model.RecSysReq.opengl</li>}   
+                                                    @if (@Model.RecSysReq.vulkan > 0)
+                                                        {<li>Vulkan @Model.RecSysReq.vulkan</li>}    
+                                                    </ul>
+                                                </div>
+                                            </div>}
+
+                                            @if (Model.RecSysReq.storage > 0)
+                                            {<div class="row">
+                                                <div class="col-sm-1">
+                                                    <p><b>Storage:</b></p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @{
+                                                        if (@Model.RecSysReq.storage > 1023)
+                                                        {
+                                                            <div>@(Model.RecSysReq.storage / 1024.0) GB</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div>@Model.RecSysReq.storage MB</div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>}
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
         </td>
     </tr>
     <tr>
         <td>
             <p class="header-big">Galery:</p>
-            <div class="text_box w3-row-padding">
+            <div class="text_box">
                 <table>
                     <tr>
                         @{
@@ -46,17 +297,15 @@
 
             </div>
             <div id="modal01" class="w3-modal"> 
-                <div class="w3-modal-content w3-animate-zoom">
-                    <div class="w3-container">
-                        <span class="w3-button w3-hover-red w3-xlarge w3-display-topright" onclick="Close()">&times;</span>
-                        @foreach (var m in Model.Medias)
-                        {
-                        <img class="slide-image" src="~/images/@Model.GameName/@m.contain" style="height:500px; height:500px">
-                        }
-                    </div> 
+                <span class="w3-close" onclick="Close()">&times;</span>
+                <div class="w3-modal-content"> 
+                    @foreach (var m in Model.Medias)
+                    {
+                    <img class="slide-image" src="~/images/@Model.GameName/@m.contain" style="max-width:800px; max-height:500px">
+                    }
                 </div>
-                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                <a class="w3-display-left" onclick="plusDivs(-1)" onkeypress="plusDivs_key(event, -1)">&#10094;</a>
+                <a class="w3-display-right" onclick="plusDivs(1)">&#10095;</a>
             </div>
         </td>
     </tr>
@@ -77,20 +326,32 @@
                             <div class="col-sm">@comment.Contain</div>
                         </div>
                     </div><br>
-
                 }
-
+            </div><br>
+            
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col">
                         <form id="commentForm">
-                            <textarea cols="100" id="CommentArea" name="contain" placeholder="Contain" /></textarea>
-                            <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
-                            <button id="submit">Submit</button>
-                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <label for="comment">Add new comment:</label>
+                                    <textarea class="form-control" rows="3" id="CommentArea" name="contain" placeholder="Contain"></textarea>
+                                    <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
+                                    <button id="submit">Submit</button>
+                                    @Html.AntiForgeryToken()
+                                }else
+                                {
+                                    <label for="comment">You must log in to write comments.</label>
+                                }
+                                
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
+            
         </td>
     </tr>
 </table>
@@ -119,6 +380,14 @@
     function Close() {
         document.getElementById("modal01").style.display = "none";
     }
+
+    function plusDivs_key(e, n){
+    var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode == '13') {
+            plusDivs(1);
+        }
+    }
+
 </script>
 
 <script type="text/javascript">

@@ -39,6 +39,11 @@ namespace JOKRStore.Web.ViewModels
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
         public IEnumerable<MediaViewModel> Medias { get; set; }
+        public Guid MinSysReqId { get; set; }
+        public Guid RecSysReqId { get; set; }
+        public SysReqViewModel MinSysReq { get; set; }
+        public SysReqViewModel RecSysReq { get; set; }
+        public string SysReqNotes { get; set; }
 
     }
 }

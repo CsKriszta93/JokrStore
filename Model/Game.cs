@@ -18,7 +18,10 @@ namespace Model
         public int NumOfDownloads { get; set; }
 
         public Guid? MinSysReqId { get; set; }
+        public SysReq MinSysReq { get; set; }
         public Guid? RecSysReqId { get; set; }
+        public SysReq RecSysReq { get; set; }
+        public string SysReqNotes { get; set; }
 
         public List<Comment> Comments { get; set; }
         public List<UserGames> UserGames { get; set; }

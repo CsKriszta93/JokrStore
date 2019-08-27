@@ -21,7 +21,10 @@ namespace BLL.DTO
         public int NumOfDownloads { get; set; }
 
         public Guid? MinSysReqId { get; set; }
+        public SysReqDto MinSysReq { get; set; }
         public Guid? RecSysReqId { get; set; }
+        public SysReqDto RecSysReq { get; set; }
+        public string SysReqNotes { get; set; }
 
         public ICollection<CommentDto> Comments { get; set; }
         public ICollection<MediaDto> Medias { get; set; }

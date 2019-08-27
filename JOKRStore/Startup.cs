@@ -73,6 +73,8 @@ namespace JOKRStore.Web
                 mc.AddProfile(new CommentMappingProfile());
                 mc.AddProfile(new UserMappingProfile());
                 mc.AddProfile(new UserViewMappingProfile());
+                mc.AddProfile(new SysReqMappingProfile());
+                mc.AddProfile(new SysReqViewMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

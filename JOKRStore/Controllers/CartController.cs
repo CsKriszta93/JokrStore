@@ -75,7 +75,7 @@ namespace JOKRStore.Web.Controllers
             int index = isExist(cart, id);
             cart.RemoveAt(index);
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Games");
         }
 
         private int isExist(List<GameViewModel> cart, Guid id)

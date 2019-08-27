@@ -21,6 +21,9 @@ namespace JOKRStore.Web.Mappers
                 .ForMember(m => m.Release, opt => opt.MapFrom(d => DateTime.ParseExact(d.Release, "yyyy.MM.dd.", System.Globalization.CultureInfo.InvariantCulture)))
                 .ForMember(m => m.CoverArt, opt => opt.MapFrom(d => d.CoverArt))
                 .ForMember(m => m.Developer, opt => opt.MapFrom(d => d.Developer))
+                .ForMember(m => m.MinSysReqId, opt => opt.MapFrom(d => d.MinSysReqId))
+                .ForMember(m => m.RecSysReqId, opt => opt.MapFrom(d => d.RecSysReqId))
+                .ForMember(m => m.SysReqNotes, opt => opt.MapFrom(d => d.SysReqNotes))
                 .ReverseMap()
                 .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release.ToString("yyyy.MM.dd.")));
         }

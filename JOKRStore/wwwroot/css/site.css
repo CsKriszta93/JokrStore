@@ -5,6 +5,11 @@ body {
     padding-bottom: 20px;
 }
 
+ul {
+    list-style-position: inside;
+    padding: 1px;
+  }
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -36,144 +41,10 @@ body {
     }
 }
 
-.card {
-    position: relative;
-    width: 200px;
-    height: 300px;
-    background: #000;
-    overflow: hidden;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    margin: 15px;
-}
-
-.card .poster:before {
-    content: '';
-    position: absolute;
-    bottom: -115;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, #000 15%, transparent);
-    transition: 0.5s;
-    z-index: 1;
-}
-
-.card:hover .poster:before {
-    bottom: 0;
-}
-
-.card .poster {
-    position: relative;
-    overflow: hidden;
-}
-
-.card .poster img {
-    width: 100%;
-    transition: 0.5s;
-}
-
-.card:hover .poster img {
-    filter: blur(3px);
-    transform: translateY(-50px);
-}
-
-.details {
-    position: absolute;
-    padding: 20px;
-    width: 100%;
-    height: 68%;
-    bottom: -182;
-    left: 0;
-    box-sizing: border-box;
-    transition: 0.5s;
-    z-index: 2;
-}
-
-.card:hover .details {
-    bottom: 0;
-}
-
-.details h2 {
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 10px;
-    font-size: 25px;
-}
-
-.details h2 span {
-    font-size: 14px;
-    color: #dc2430;
-}
-
-.tags {
-    position: relative;
-    margin-top: 5px;
-}
-
-.tags span {
-    padding: 2px 5px;
-    margin-right: 2px;
-    color: #fff;
-    display: inline-block;
-    background: transparent;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 5px 5px;
-    border: 2px solid transparent;
-    border-image: linear-gradient(90deg, #7b4397,#dc2430);
-    border-image-slice: 1;
-}
-
-.info {
-    color: #fff;
-}
-
-.info p {
-    margin: 15px 0 10px;
-    line-height: 21px;
-    font-weight: 200;
-}
-
 .mosaic {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.titlet_header {
-    font-size: 20px;
-    background: #56dbdb;
-    color: white;
-    padding : 5px;
-    font-weight : bold;
-}
-
-.title_frame {
-    background: #282729;
-    color: white;
-    border: 1px solid #56dbdb;
-    padding: 5px;
-    margin: 5px;
-}
-
-.comment_header {
-    background: #403E41;
-    padding: 5px;
-    font-weight: bold;
-}
-
-.comment_frame {
-    background: #282729;
-    margin: 5px;
-}
-
-.comment_body {
-    padding: 20px;
-}
-
-.coment_date {
-    text-align : right;
 }
 
 body {
@@ -228,30 +99,4 @@ textarea {
 
 .mosaic-button {
     text-align : center;
-}
-
-.text_box {
-    padding: 10px;
-    background: #454545;
-    border: 2px solid #56dbdb;
-    margin: 20px;
-    float: left;
-}
-
-.box-width-240 {
-    width: 260px;
-}
-
-.header-big {
-    font-size: 28px;
-    color: #56dbdb;
-    text-decoration: underline;
-}
-
-img {
-    margin: 5px;
-}
-
-.cover_art {
-    height : 260px;
 }

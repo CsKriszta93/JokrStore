@@ -38,6 +38,12 @@ namespace BLL.Services
             var game = await dbContext.Games
                 .Include(x => x.Comments).ThenInclude(x => x.User)
                 .Include(x => x.Medias)
+                .Include(x => x.MinSysReq).ThenInclude(x => x.SysReqCPUs).ThenInclude(x => x.CPU)
+                .Include(x => x.MinSysReq).ThenInclude(x => x.SysReqGPUs).ThenInclude(x => x.GPU)
+                .Include(x => x.MinSysReq).ThenInclude(x => x.SysReqOSes).ThenInclude(x => x.OS)
+                .Include(x => x.RecSysReq).ThenInclude(x => x.SysReqCPUs).ThenInclude(x => x.CPU)
+                .Include(x => x.RecSysReq).ThenInclude(x => x.SysReqGPUs).ThenInclude(x => x.GPU)
+                .Include(x => x.RecSysReq).ThenInclude(x => x.SysReqOSes).ThenInclude(x => x.OS)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<GameDto>(game);
