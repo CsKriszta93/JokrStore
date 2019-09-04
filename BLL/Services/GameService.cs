@@ -26,7 +26,7 @@ namespace BLL.Services
         public async Task<IEnumerable<GameDto>> GetGamesAsync()
         {
             var games = await dbContext
-                .Games
+                .Games.OrderBy(x => x.GameName)
                 .ProjectTo<GameDto>(mapper.ConfigurationProvider)
                 .ToListAsync();
 
@@ -68,6 +68,14 @@ namespace BLL.Services
         {
             var usergames = await dbContext.UserGames.Include(x => x.Game).Where(x => x.UserId == UserId).ToListAsync<UserGames>();
             return  mapper.Map<IEnumerable<GameDto>>(usergames.Select(x => x.Game));
+        }
+
+        public bool IsOwnedGame(Guid UserId, Guid GameId)
+        {
+            if (dbContext.UserGames.Where( x => x.UserId == UserId && x.GameId == GameId).Count() == 0)
+                return false;
+            else
+                return true;
         }
     }
 }

@@ -18,7 +18,16 @@
                 <p><b>Rate: </b>@Model.Rate</p>
                 <p><b>Developer: </b>@Model.Developer</p>
                 <p align="center"><a class="button button-green" asp-controller="Games" asp-action="Download_demo" asp-route-id="@Model.Id">Download demo</a></p>
-                <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
+
+                @if (Model.owned)
+                {
+                    <p align="center"><a class="button button-green" asp-controller="Games" asp-action="Download" asp-route-id="@Model.Id">Download</a></p>
+                }
+                else
+                {
+                    <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
+                }
+                
                 <p align="center">@Model.Price Ft</p>
             </div>
 

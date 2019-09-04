@@ -11,7 +11,7 @@
 .card .poster:before {
     content: '';
     position: absolute;
-    bottom: -115;
+    bottom: -350px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -36,7 +36,7 @@
 
 .card:hover .poster img {
     filter: blur(3px);
-    transform: translateY(-50px);
+    transform: translateY(-75px);
 }
 
 .details {

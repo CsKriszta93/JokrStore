@@ -23,6 +23,16 @@ namespace JOKRStore.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var gameDtos = await gameService.GetGamesAsync();
+            GameIndexViewModel games = new GameIndexViewModel();
+            games.new_release = gameDtos.OrderBy(x => x.Release).Take(6).Select(x => mapper.Map<GameViewModel>(x));
+            games.popular = gameDtos.OrderBy(x => x.Release).Take(6).Select(x => mapper.Map<GameViewModel>(x));
+
+            return View(games);
+        }
+
+        public async Task<IActionResult> Games()
+        {
+            var gameDtos = await gameService.GetGamesAsync();
             var games = gameDtos.Select(x => mapper.Map<GameViewModel>(x));
 
             return View(games);
@@ -34,7 +44,35 @@ namespace JOKRStore.Web.Controllers
             var gameDto = await gameService.GetGameByIdAsync(id);
             var game = mapper.Map<GameViewModel>(gameDto);
 
+            try {
+                var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+                game.owned = gameService.IsOwnedGame(Guid.Parse(UserId), id);
+            }
+            catch (Exception e)
+            {
+                 game.owned = false;
+            }
+            
             return View(game);
+        }
+
+        public async Task<ActionResult> Download(Guid Id)
+        {
+            try {
+                var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+                if (gameService.IsOwnedGame(Guid.Parse(UserId), Id))
+                {
+                    var gameDto = await gameService.GetGameByIdAsync(Id);
+                    return File(gameDto.DownloadLink, System.Net.Mime.MediaTypeNames.Application.Octet, gameDto.GameName + ".exe");
+                }
+            }
+            catch (Exception e)
+            {
+                return Content("Access denied");
+            }
+
+            return Content("Access denied");
+            
         }
 
         public async Task<IActionResult> UserGameList()

@@ -12,5 +12,6 @@ namespace BLL.ServiceInterfaces
         Task DeleteGameAsync(Guid id);
         Task AddGameToUser(Guid UserId, Guid GameId);
         Task<IEnumerable<GameDto>> GetUserGames(Guid UserId);
+        bool IsOwnedGame(Guid UserId, Guid GameId);
     }
 }

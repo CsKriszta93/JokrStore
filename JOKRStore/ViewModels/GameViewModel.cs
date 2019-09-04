@@ -44,6 +44,6 @@ namespace JOKRStore.Web.ViewModels
         public SysReqViewModel MinSysReq { get; set; }
         public SysReqViewModel RecSysReq { get; set; }
         public string SysReqNotes { get; set; }
-
+        public bool owned { get; set; }
     }
 }
