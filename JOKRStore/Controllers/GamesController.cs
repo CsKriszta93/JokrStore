@@ -56,19 +56,31 @@ namespace JOKRStore.Web.Controllers
             return View(game);
         }
 
+        public async Task<ActionResult> Download_demo(Guid Id)
+        {
+            try {
+                var gameDto = await gameService.GetGameByIdAsync(Id);
+                return File(gameDto.DemoLink, System.Net.Mime.MediaTypeNames.Application.Octet, gameDto.GameName + "(Demo).exe");
+            }
+            catch (Exception e) {
+                return Content("An error occoured: " + e.Message);
+            }
+        }
+
         public async Task<ActionResult> Download(Guid Id)
         {
             try {
+                var gameDto = await gameService.GetGameByIdAsync(Id);
+                if (gameDto.Price == 0)
+                    return File(gameDto.DownloadLink, System.Net.Mime.MediaTypeNames.Application.Octet, gameDto.GameName + ".exe");
+  
                 var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
                 if (gameService.IsOwnedGame(Guid.Parse(UserId), Id))
-                {
-                    var gameDto = await gameService.GetGameByIdAsync(Id);
                     return File(gameDto.DownloadLink, System.Net.Mime.MediaTypeNames.Application.Octet, gameDto.GameName + ".exe");
-                }
             }
             catch (Exception e)
             {
-                return Content("Access denied");
+                return Content("An error occoured: " + e.Message +  " Access denied.");
             }
 
             return Content("Access denied");
