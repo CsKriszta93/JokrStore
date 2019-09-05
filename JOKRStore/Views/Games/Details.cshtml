@@ -30,7 +30,15 @@
                 }
                 else
                 {
-                    <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <p align="center"><a class="button button-blue" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Buy</a></p>
+                    }
+                    else
+                    {
+                        <p align="center"><a class="button button-blue" asp-area="Identity" asp-page="/Account/Login">Buy</a></p>
+                    }
+                    
                 }
                 
                 @if (Model.Price == 0)
@@ -321,10 +329,18 @@
             <div id="modal01" class="w3-modal"> 
                 <span class="w3-close" onclick="Close()">&times;</span>
                 <div class="w3-modal-content"> 
+                @if (Model.Medias.Count() == 0)
+                {
+                    <p style="text-align: center">There aren't pictures or videos for this game.</p>
+                }
+                else
+                {
                     @foreach (var m in Model.Medias)
                     {
                     <img class="slide-image" src="~/images/@Model.GameName/@m.contain" style="max-width:800px; max-height:500px">
                     }
+                }
+                    
                 </div>
                 <a class="w3-display-left" onclick="plusDivs(-1)" onkeypress="plusDivs_key(event, -1)">&#10094;</a>
                 <a class="w3-display-right" onclick="plusDivs(1)">&#10095;</a>
@@ -337,18 +353,27 @@
                 <div class="titlet_header">
                     Comments
                 </div>
-                @foreach (var comment in Model.Comments)
+
+                @if (Model.Comments.Count() == 0)
                 {
-                    <div class="container-fluid comment_frame">
-                        <div class="row comment_header">
-                            <a asp-controller="Users" asp-action="UserDetails" asp-route-id="@comment.UserId"><div class="col-sm-9">@comment.User.UserName</div></a>
-                            <div class="col-sm-3 coment_date">@comment.CommentDate</div>
-                        </div>
-                        <div class="row comment_body">
-                            <div class="col-sm">@comment.Contain</div>
-                        </div>
-                    </div><br>
+                    <p style="text-align: center; margin: 10px"><b>There aren't comments yet at this game.</b></p>
                 }
+                else
+                {
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="container-fluid comment_frame">
+                            <div class="row comment_header">
+                                <a asp-controller="Users" asp-action="UserDetails" asp-route-id="@comment.UserId"><div class="col-sm-9">@comment.User.UserName</div></a>
+                                <div class="col-sm-3 coment_date">@comment.CommentDate</div>
+                            </div>
+                            <div class="row comment_body">
+                                <div class="col-sm">@comment.Contain</div>
+                            </div>
+                        </div><br>
+                    }
+                }
+                
             </div><br>
             
             <div class="container-fluid">

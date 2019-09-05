@@ -1,9 +1,9 @@
 .flip-box {
     background-color: transparent;
-    width: 150px;
-    height: 220px;
+    width: 100px;
+    height: 150px;
     perspective: 1000px;
-    margin: 15px;
+    margin: 10px;
   }
   
   .flip-box-inner {
@@ -16,9 +16,9 @@
   }
 
   .flip-image {
-    width: 150px;
-    max-width: 150px;
-    max-height: 220px;
+    width: 100px;
+    max-width: 100px;
+    max-height: 200px;
   }
   
   .flip-box:hover .flip-box-inner {

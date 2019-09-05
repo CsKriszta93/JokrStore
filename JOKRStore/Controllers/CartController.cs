@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JOKRStore.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using JOKRStore.Web.Helpers;
 using BLL.ServiceInterfaces;
 using AutoMapper;
@@ -35,6 +36,9 @@ namespace JOKRStore.Web.Controllers
 
         public async Task<IActionResult> AddToCart(Guid Id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return View("../Areas/Identity/Pages/Account/Login");
+
             List<GameViewModel> cart;
             if (SessionHelper.GetObjectFromJson<List<GameViewModel>>(HttpContext.Session, "cart") == null)
             {
