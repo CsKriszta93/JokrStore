@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JOKRStore.Web.ViewModels
 {
@@ -16,6 +17,8 @@ namespace JOKRStore.Web.ViewModels
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
+        public List<UserGamesViewModel> UserGames { get; set; }
         public Guid ConfigId { get; set; }
+        public ConfigViewModel Config { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace BLL.DTO
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
+        public List<UserGamesDto> UserGames { get; set; }
         public Guid ConfigId { get; set; }
+        public ConfigDto Config { get; set; }
     }
 }

@@ -12,7 +12,8 @@ namespace JOKRStore.Web.Mappers
                  .ForMember(m => m.UserName, opt => opt.MapFrom(d => d.UserName))
                  .ForMember(m => m.Registration, opt => opt.MapFrom(d => d.Registration))
                  .ForMember(m => m.LastLogin, opt => opt.MapFrom(d => d.LastLogin))
-                 .ForMember(m => m.IsAdmin, opt => opt.MapFrom(d => d.IsAdmin));
+                 .ForMember(m => m.IsAdmin, opt => opt.MapFrom(d => d.IsAdmin))
+                 .ForMember(m => m.ConfigId, opt => opt.MapFrom(d => d.Config));
         }
     }
 }
