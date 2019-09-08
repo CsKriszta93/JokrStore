@@ -45,6 +45,7 @@ namespace JOKRStore.Web
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IForumService, ForumService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<User, IdentityRole<Guid>>(config =>
             {
@@ -75,6 +76,8 @@ namespace JOKRStore.Web
                 mc.AddProfile(new UserViewMappingProfile());
                 mc.AddProfile(new SysReqMappingProfile());
                 mc.AddProfile(new SysReqViewMappingProfile());
+                mc.AddProfile(new ForumMappingProfile());
+                mc.AddProfile(new ForumViewModelMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
