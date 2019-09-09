@@ -1,0 +1,9 @@
+@model JOKRStore.Web.ViewModels.ForumTopicViewModel
+
+<form action="NewTopic" method="post">
+    <label for="title">Topic title</label><br>
+    <input type="text" id="title" placeholder="Topic title here" /><br>
+    <textarea id="content"></textarea>
+    <input type="label" id="categoryId" value=@Model.ForumCategoryId>
+    <input type="submit" />
+</form>

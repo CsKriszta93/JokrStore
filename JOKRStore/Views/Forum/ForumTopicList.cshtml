@@ -1,0 +1,20 @@
+@model JOKRStore.Web.ViewModels.ForumCategoryViewModel
+
+<link rel="stylesheet" type="text/css" href="~/css/list.css">
+<link rel="stylesheet" type="text/css" href="~/css/button.css">
+
+<a asp-controller="Forum" asp-action="NewTopicForm" asp-route-id="@Model.Id" class="button">New topic</a>
+<div style="margin: 50px">
+    @if (Model != null && Model.topics.Count() > 0)
+    {
+        @foreach (var c in Model.topics)
+        {
+            <a asp-controller="Forum" asp-action="ForumTopic" asp-route-id="@c.Id" class="list-item-dark"><img src="~/images/page.png" style="width: 30px; height: 30px; margin-right: 5px"> @c.title</a>
+        }
+    }
+    else
+    {
+        <p>There are not yet topics in this category</p>
+    }
+    
+</div>
