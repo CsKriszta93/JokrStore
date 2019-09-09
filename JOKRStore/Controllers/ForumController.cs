@@ -42,21 +42,16 @@ namespace JOKRStore.Web.Controllers
 
         public async Task<ActionResult> NewTopicForm(Guid Id)
         {
-            ForumTopicViewModel new_model = new ForumTopicViewModel
-            {
-                ForumCategoryId = Id
-            };
-
-            return View("NewForum", new_model);
+            return View("NewForum", Id);
         }
 
         [HttpPost]
-        public async Task<ActionResult> NewTopic(ForumTopicViewModel new_model)
+        public async Task<ActionResult> NewTopic(string categoryId, string title, string content)
         {
             var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
-            await forumService.AddNewTopicAsync(Guid.Parse(UserId), new_model.ForumCategoryId, new_model.title, new_model.content);
+            await forumService.AddNewTopicAsync(Guid.Parse(UserId), Guid.Parse(categoryId), title, content);
 
-            return RedirectToAction("ForumTopicList", new_model.ForumCategoryId);
+            return RedirectToAction("ForumTopicList", Guid.Parse(categoryId));
             //return Content(CategoryId);
         }
     }
