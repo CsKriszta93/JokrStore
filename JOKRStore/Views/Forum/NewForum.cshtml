@@ -1,9 +1,17 @@
 @model Guid
 
-<form action="NewTopic" method="post">
-    <label for="title">Topic title</label><br>
-    <input type="text" id="title" placeholder="Topic title here" /><br>
-    <textarea id="content"></textarea>
-    <input type="hidden" id="categoryId" value=@Model>
-    <input type="submit" />
+<link rel="stylesheet" type="text/css" href="~/css/button.css">
+
+<h1> New topic</h1>
+<form asp-action="NewTopic" asp-controller="Forum" method="post" style="margin: 10px">
+    <div class="form-group">
+        <label for="title">Topic title:</label><br>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Topic title here" />
+    </div>
+    <div class="form-group">
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" class="form-control" rows="5"></textarea>
+    </div>
+    <input type="hidden" id="categoryId" name="categoryId" value=@Model>
+    <button type="submit" class="button button-cian">Submit</button>
 </form>

@@ -28,13 +28,15 @@ namespace JOKRStore.Web.Controllers
             return View(mapper.Map<IEnumerable<ForumCategoryViewModel>>(categories));
         }
 
+        [HttpGet]
         public async Task<ActionResult> ForumTopicList(Guid Id)
         {
+            System.Diagnostics.Debug.WriteLine("ForumCategoryList category's id: " + Id.ToString());
             var category = await forumService.GetForumCategoryByIdAsync(Id);
             return View(mapper.Map<ForumCategoryViewModel>(category));
         }
 
-        public async Task<ActionResult> ForumTopic(Guid Id)
+        public async Task<ActionResult> ForumTopicContent(Guid Id)
         {
             var topic = await forumService.GetForumTopicByIdAsync(Id);
             return View(mapper.Map<ForumTopicViewModel>(topic));
@@ -51,7 +53,7 @@ namespace JOKRStore.Web.Controllers
             var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
             await forumService.AddNewTopicAsync(Guid.Parse(UserId), Guid.Parse(categoryId), title, content);
 
-            return RedirectToAction("ForumTopicList", Guid.Parse(categoryId));
+            return RedirectToAction("ForumTopicList", "Forum", new {Id = categoryId });
             //return Content(CategoryId);
         }
     }

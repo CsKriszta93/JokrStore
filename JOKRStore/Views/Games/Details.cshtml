@@ -386,9 +386,9 @@
                                 @if (SignInManager.IsSignedIn(User))
                                 {
                                     <label for="comment">Add new comment:</label>
-                                    <textarea class="form-control" rows="3" id="CommentArea" name="contain" placeholder="Contain"></textarea>
+                                    <textarea class="form-control" rows="3" id="CommentArea" name="contain" placeholder="Write your comment here" class="form-control"></textarea>
                                     <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
-                                    <button id="submit">Submit</button>
+                                    <button id="submit" class="button button-cian">Submit</button>
                                     @Html.AntiForgeryToken()
                                 }else
                                 {
@@ -451,7 +451,9 @@
             data: {
                 __RequestVerificationToken: token,
                 'contain': contain,
-                'gameId': GameId
+                'gameId': GameId,
+                'topicId': '',
+                'commentType' : '0'
             },
             success: function (data) {
                 console.log(data);

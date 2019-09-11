@@ -41,7 +41,8 @@ namespace BLL.Services
         {
             var topic = await dbContext.ForumTopics
             .Include(x => x.User)
-            .Include(x => x.Comments)
+            .Include(x => x.Comments).ThenInclude(x => x.User)
+            .Include(x => x.ForumCategory)
             .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<ForumTopicDto>(topic);

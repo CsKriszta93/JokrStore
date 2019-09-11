@@ -13,6 +13,7 @@ namespace BLL.Mappers
                 .ForMember(b => b.Contain, opt => opt.MapFrom(c => c.Contain))
                 .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate))
                 .ForMember(b => b.GameId, opt => opt.MapFrom(c => c.GameId))
+                .ForMember(b => b.ForumTopicId, opt => opt.MapFrom(c => c.ForumTopicId))
                 .ReverseMap();
         }
     }
