@@ -4,14 +4,16 @@ using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190915175346_ConfigEdit2_mig")]
+    partial class ConfigEdit2_mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,8 +190,6 @@ namespace DAL.Migrations
                     b.Property<Guid>("OSId");
 
                     b.Property<int>("RAM");
-
-                    b.Property<Guid>("UserId");
 
                     b.Property<string>("others");
 
@@ -444,8 +444,6 @@ namespace DAL.Migrations
 
                     b.Property<Guid?>("ConfigId");
 
-                    b.Property<Guid?>("ConfigId1");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -482,7 +480,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConfigId1");
+                    b.HasIndex("ConfigId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -667,7 +665,7 @@ namespace DAL.Migrations
                 {
                     b.HasOne("Model.Config", "Config")
                         .WithMany()
-                        .HasForeignKey("ConfigId1");
+                        .HasForeignKey("ConfigId");
                 });
 
             modelBuilder.Entity("Model.UserGames", b =>

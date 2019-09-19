@@ -46,6 +46,7 @@ namespace JOKRStore.Web
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IHardwareService, HardwareService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<User, IdentityRole<Guid>>(config =>
             {

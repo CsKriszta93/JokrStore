@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="~/css/details.css">
 <link rel="stylesheet" href="~/css/flip.css">
+<link rel="stylesheet" type="text/css" href="~/css/button.css">
 
 <!doctype html>
 <html lang="en">
@@ -24,6 +25,13 @@
             <p><b>Register date:</b> @Model.Registration</p>
             <p><b>Last Login:</b> @Model.LastLogin</p>
         </div>
+
+        @if (Model.isMyUser)
+        {
+            <p>
+                <a asp-controller="Users" asp-action="EditUserConfig" class="button button-cian" style="margin: 20px;">Edit config</a>
+            </p>
+        }
 
         @if (Model.Config != null)
         {

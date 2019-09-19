@@ -3,6 +3,8 @@ using System;
 namespace Model {
     public class Config {
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
         public Guid CPUId { get; set; }
         public CPU CPU { get; set; }
         public int RAM { get; set; }

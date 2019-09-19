@@ -11,6 +11,7 @@ namespace BLL.DTO
         /*public string Password { get; set; }
         public string Email { get; set; }
         public string Facebook { get; set; }*/
+        public Guid Id { get; set; }
         public DateTime Registration { get; set; }
         public string BankAccount { get; set; }
         public bool IsAdmin { get; set; }
@@ -20,7 +21,6 @@ namespace BLL.DTO
         /// idegen kulcs a Configuraton táblához
         /// </summary>
         public List<UserGamesDto> UserGames { get; set; }
-        public Guid ConfigId { get; set; }
         public ConfigDto Config { get; set; }
     }
 }

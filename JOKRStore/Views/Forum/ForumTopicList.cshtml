@@ -1,5 +1,9 @@
 @model JOKRStore.Web.ViewModels.ForumCategoryViewModel
 
+@using Microsoft.AspNetCore.Identity
+
+@inject Microsoft.AspNetCore.Identity.SignInManager<Model.User> SignInManager
+
 <link rel="stylesheet" type="text/css" href="~/css/list.css">
 <link rel="stylesheet" type="text/css" href="~/css/button.css">
 
@@ -8,9 +12,12 @@
         <div class="col-xs-6">
             <h4>@Model.name</h4>
         </div>
-        <div class="col-xs-6">
-            <a asp-controller="Forum" asp-action="NewTopicForm" asp-route-id="@Model.Id" class="button button-cian" style="margin: 20px; position: absolute; right: 100px;">New topic</a>
-        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="col-xs-6">
+                <a asp-controller="Forum" asp-action="NewTopicForm" asp-route-id="@Model.Id" class="button button-cian" style="margin: 20px; position: absolute; right: 100px;">New topic</a>
+            </div>
+        }
     </div>
 </div>
 

@@ -1,13 +1,14 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject Microsoft.AspNetCore.Identity.SignInManager<Model.User> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<Model.User> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">My account<span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a asp-area="" asp-controller="Games" asp-action="UserGameList">My games</a></li>
-            <li><a href="#" class="w3-bar-item w3-button">Link 2</a></li>
+            <li><a asp-area="" asp-controller="Users" asp-action="UserDetails" asp-route-id="@UserManager.GetUserId(User)" >My profile</a></li>
             <li><a href="#" class="w3-bar-item w3-button">Link 3</a></li>
         </ul>
     </li>

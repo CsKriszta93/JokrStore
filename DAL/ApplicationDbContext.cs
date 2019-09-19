@@ -33,5 +33,9 @@ namespace JOKRStore.DAL
         public DbSet<UserGames> UserGames { get; set; }
         public DbSet<ForumCategory> ForumCategories { get; set; }
         public DbSet<ForumTopic> ForumTopics { get; set; }
+        public DbSet<Config> Configs { get; set; }
+        public DbSet<CPU> CPUs { get; set; }
+        public DbSet<GPU> GPUs { get; set; }
+        public DbSet<OS> OSes { get; set; }
     }
 }

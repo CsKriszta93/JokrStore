@@ -3,6 +3,8 @@ using System;
 namespace JOKRStore.Web.ViewModels {
     public class ConfigViewModel {
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public UserViewModel User { get; set; }
         public Guid CPUId { get; set; }
         public CPUViewModel CPU { get; set; }
         public int RAM { get; set; }

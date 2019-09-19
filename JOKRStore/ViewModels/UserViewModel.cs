@@ -5,6 +5,7 @@ namespace JOKRStore.Web.ViewModels
 {
     public class UserViewModel
     {
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         /*public string Password { get; set; }
         public string Email { get; set; }
@@ -18,7 +19,7 @@ namespace JOKRStore.Web.ViewModels
         /// idegen kulcs a Configuraton táblához
         /// </summary>
         public List<UserGamesViewModel> UserGames { get; set; }
-        public Guid ConfigId { get; set; }
         public ConfigViewModel Config { get; set; }
+        public bool isMyUser { get; set; }
     }
 }

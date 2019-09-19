@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Model;
 
 
 namespace BLL.Services
@@ -32,6 +33,25 @@ namespace BLL.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<UserDto>(user);
+        }
+
+        public async Task SaveConfigAsync(Guid UserId, ConfigDto ConfigDto)
+        {
+            Config conf = await dbContext.Configs.FirstOrDefaultAsync(x => x.UserId == UserId);
+
+            if (conf == null)
+                await dbContext.Configs.AddAsync(mapper.Map<Config>(ConfigDto));
+            else
+            {
+                conf.CPUId = ConfigDto.CPUId;
+                conf.RAM = ConfigDto.RAM;
+                conf.GPUId = ConfigDto.GPUId;
+                conf.GPU_size = ConfigDto.GPU_size;
+                conf.OSId = ConfigDto.OSId;
+                conf.others = ConfigDto.others;
+            }
+            
+            await dbContext.SaveChangesAsync();
         }
     }
 }
