@@ -40,5 +40,10 @@ namespace BLL.Services
             var OSes = await dbContext.OSes.ToListAsync<OS>();
             return  mapper.Map<IEnumerable<OSDto>>(OSes);
         }
+        public async Task<IEnumerable<PropertyDto>> GetManufactDtosAsync(int type)
+        {
+            var Manufacts = await dbContext.Properties.Where(x => x.type == type).ToListAsync<Property>();
+            return mapper.Map<IEnumerable<PropertyDto>>(Manufacts);
+        }
     }
 }

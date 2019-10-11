@@ -34,5 +34,6 @@ namespace Model
 
         public List<Comment> comments { get; set; }
         public List<UserGames> UserGames { get; set; }
+        public List<Game> Games { get; set; }
     }
 }

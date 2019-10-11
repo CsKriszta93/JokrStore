@@ -26,27 +26,34 @@
             <p><b>Last Login:</b> @Model.LastLogin</p>
         </div>
 
-        @if (Model.isMyUser)
-        {
-            <p>
-                <a asp-controller="Users" asp-action="EditUserConfig" class="button button-cian" style="margin: 20px;">Edit config</a>
-            </p>
-        }
 
-        @if (Model.Config != null)
-        {
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="header-big"> Computer configuration:</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="header-big">
+                        Computer configuration:
+                        @if (Model.isMyUser)
+                        {
+                            <a asp-controller="Users" asp-action="EditUserConfig" class="button button-cian" style="margin: 20px;">Edit config</a>
+                        }
+                    </div>
+                    @if (Model.Config != null)
+                    {
+                        
                         <p><b>Processor:</b> @Model.Config.CPU.name </p>
                         <p><b>Memory:</b> @Model.Config.RAM MB </p>
                         <p><b>Video card:</b> @Model.Config.GPU.name</p>
                         <p><b>Operating system:</b> @Model.Config.OS.name</p>
-                    </div>
+                                
+                    }
+                    else
+                    {
+                        <p><b>There is not config added.</b></p>
+                    }
+
                 </div>
             </div>
-        }
+        </div>
 
         @if (Model.UserGames.Count() > 0)
         {

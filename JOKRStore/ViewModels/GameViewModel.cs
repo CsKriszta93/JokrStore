@@ -11,8 +11,9 @@ namespace JOKRStore.Web.ViewModels
         [DisplayName("Title")]
         public string GameName { get; set; }
 
-        [DisplayName("Developed By")]
-        public string Developer { get; set; }
+        [DisplayName("Published By")]
+        public Guid UserId { get; set; }
+        public UserViewModel User { get; set; }
 
         public string CoverArt { get; set; }
 
@@ -44,6 +45,8 @@ namespace JOKRStore.Web.ViewModels
         public SysReqViewModel MinSysReq { get; set; }
         public SysReqViewModel RecSysReq { get; set; }
         public string SysReqNotes { get; set; }
+        public ICollection<GamePropertyViewModel> Genres { get; set; }
         public bool owned { get; set; }
+        public bool MyDevelopment { get; set; }
     }
 }

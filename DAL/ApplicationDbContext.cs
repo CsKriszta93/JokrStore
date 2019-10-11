@@ -13,20 +13,28 @@ namespace JOKRStore.DAL
         {
         }
 
-        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              base.OnModelCreating(modelBuilder);
-             modelBuilder.Entity<Comment>()
-                 .HasOne(c => c.Game)
-                 .WithMany(g => g.Comments)
-                 .HasForeignKey(c => c.GameId)
-                 .HasConstraintName("ForeginKey_Comment_Game");
-             modelBuilder.Entity<Comment>()
-                 .HasOne(c => c.User)
-                 .WithMany(u => u.comments)
-                 .HasForeignKey(c => c.Commenter)
-                 .HasConstraintName("ForeignKey_Comment_User");
-         }*/
+
+             modelBuilder.Entity<GameProperty>()
+             .HasKey(x => new {x.GameId, x.PropertyId} );
+
+             modelBuilder.Entity<GameProperty>()
+             .HasOne(gp => gp.Game)
+             .WithMany(g => g.Genres)
+             .HasForeignKey(gp => gp.GameId);
+
+             modelBuilder.Entity<GameProperty>()
+             .HasOne(gp => gp.Property)
+             .WithMany(p => p.GameProperties)
+             .HasForeignKey(gp => gp.PropertyId);
+
+             modelBuilder.Entity<Media>()
+             .HasOne(m => m.game)
+             .WithMany(g => g.Medias)
+             .HasForeignKey(m => m.GameId);
+         }
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -37,5 +45,8 @@ namespace JOKRStore.DAL
         public DbSet<CPU> CPUs { get; set; }
         public DbSet<GPU> GPUs { get; set; }
         public DbSet<OS> OSes { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<GameProperty> GameProperties { get; set; }
+        public DbSet<Media> Medias { get; set; }
     }
 }

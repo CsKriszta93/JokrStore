@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -7,7 +8,8 @@ namespace Model
     {
         public Guid Id { get; set; }
         public string GameName { get; set; }
-        public string Developer { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
         public string CoverArt { get; set; }
         public string Description { get; set; }
         public double Rate { get; set; }
@@ -26,5 +28,8 @@ namespace Model
         public List<Comment> Comments { get; set; }
         public List<UserGames> UserGames { get; set; }
         public List<Media> Medias { get; set; }
+
+        //[ForeignKey("GameId")]
+        public List<GameProperty> Genres { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace Model
     {
         public Guid Id { get; set; }
         public string name { get; set; }
+        public int manufacturer { get; set; }
         public string architect { get; set; }
         public DateTime release { get; set; }
         public uint memory_size { get; set; }

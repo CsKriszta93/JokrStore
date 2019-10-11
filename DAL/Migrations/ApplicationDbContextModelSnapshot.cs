@@ -139,6 +139,8 @@ namespace DAL.Migrations
 
                     b.Property<long>("freqency");
 
+                    b.Property<int>("manufacturer");
+
                     b.Property<string>("name");
 
                     b.Property<DateTime>("release");
@@ -201,6 +203,9 @@ namespace DAL.Migrations
 
                     b.HasIndex("OSId");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("Configs");
                 });
 
@@ -255,6 +260,8 @@ namespace DAL.Migrations
 
                     b.Property<float>("directx");
 
+                    b.Property<int>("manufacturer");
+
                     b.Property<long>("memory_freqency");
 
                     b.Property<long>("memory_size");
@@ -291,8 +298,6 @@ namespace DAL.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Developer");
-
                     b.Property<string>("DownloadLink");
 
                     b.Property<string>("GameName");
@@ -311,13 +316,32 @@ namespace DAL.Migrations
 
                     b.Property<string>("SysReqNotes");
 
+                    b.Property<Guid>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MinSysReqId");
 
                     b.HasIndex("RecSysReqId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("Model.GameProperty", b =>
+                {
+                    b.Property<Guid>("GameId");
+
+                    b.Property<Guid>("PropertyId");
+
+                    b.Property<Guid>("Id");
+
+                    b.HasKey("GameId", "PropertyId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("GameProperties");
                 });
 
             modelBuilder.Entity("Model.Media", b =>
@@ -335,7 +359,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Media");
+                    b.ToTable("Medias");
                 });
 
             modelBuilder.Entity("Model.OS", b =>
@@ -354,6 +378,20 @@ namespace DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OSes");
+                });
+
+            modelBuilder.Entity("Model.Property", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("name");
+
+                    b.Property<int>("type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Properties");
                 });
 
             modelBuilder.Entity("Model.SysReq", b =>
@@ -442,10 +480,6 @@ namespace DAL.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<Guid?>("ConfigId");
-
-                    b.Property<Guid?>("ConfigId1");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -481,8 +515,6 @@ namespace DAL.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ConfigId1");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -590,6 +622,11 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("OSId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Model.User", "User")
+                        .WithOne("Config")
+                        .HasForeignKey("Model.Config", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Model.ForumTopic", b =>
@@ -614,6 +651,24 @@ namespace DAL.Migrations
                     b.HasOne("Model.SysReq", "RecSysReq")
                         .WithMany()
                         .HasForeignKey("RecSysReqId");
+
+                    b.HasOne("Model.User", "User")
+                        .WithMany("Games")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Model.GameProperty", b =>
+                {
+                    b.HasOne("Model.Game", "Game")
+                        .WithMany("Genres")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Model.Property", "Property")
+                        .WithMany("GameProperties")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Model.Media", b =>
@@ -661,13 +716,6 @@ namespace DAL.Migrations
                         .WithMany("SysReqOSes")
                         .HasForeignKey("SysReqId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.User", b =>
-                {
-                    b.HasOne("Model.Config", "Config")
-                        .WithMany()
-                        .HasForeignKey("ConfigId1");
                 });
 
             modelBuilder.Entity("Model.UserGames", b =>

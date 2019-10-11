@@ -45,9 +45,9 @@ namespace JOKRStore.Web.Controllers
             var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
             var userDto = await userService.GetUserByIdAsync(Guid.Parse(UserId));
             ConfigEditViewModel conf_edit = new ConfigEditViewModel();
-            conf_edit.CPUs = mapper.Map<IEnumerable<CPUViewModel>>(await hardwareService.GetCPUsAsync());
-            conf_edit.GPUs = mapper.Map<IEnumerable<GPUViewModel>>(await hardwareService.GetGPUsAsync());
-            conf_edit.OSes = mapper.Map<IEnumerable<OSViewModel>>(await hardwareService.GetOSesAsync());
+            conf_edit.CPUs = mapper.Map<IEnumerable<CPUViewModel>>((await hardwareService.GetCPUsAsync()).Where(x => x.manufacturer == 0));
+            conf_edit.GPUs = mapper.Map<IEnumerable<GPUViewModel>>((await hardwareService.GetGPUsAsync()).Where(x => x.manufacturer == 0));
+            conf_edit.OSes = mapper.Map<IEnumerable<OSViewModel>>((await hardwareService.GetOSesAsync()).Where(x => x.group == 0));
             conf_edit.Config = mapper.Map<UserViewModel>(userDto).Config;
             return View(conf_edit);
         }

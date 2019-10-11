@@ -9,7 +9,10 @@
         <ul class="dropdown-menu">
             <li><a asp-area="" asp-controller="Games" asp-action="UserGameList">My games</a></li>
             <li><a asp-area="" asp-controller="Users" asp-action="UserDetails" asp-route-id="@UserManager.GetUserId(User)" >My profile</a></li>
-            <li><a href="#" class="w3-bar-item w3-button">Link 3</a></li>
+            <li><a asp-area="" asp-controller="Users" asp-action="UserDetails">My topics</a></li>
+            <li><a asp-area="" asp-controller="Users" asp-action="UserDetails">Messages</a></li>
+            <li><a asp-area="" asp-controller="Games" asp-action="EditBase">Publish new game</a></li>
+            <li><a asp-area="" asp-controller="Games" asp-action="EdiDevGameList">Published games</a></li>
         </ul>
     </li>
 }

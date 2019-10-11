@@ -10,6 +10,7 @@ namespace BLL.ServiceInterfaces
         Task<IEnumerable<CPUDto>> GetCPUsAsync();
         Task<IEnumerable<GPUDto>> GetGPUsAsync();
         Task<IEnumerable<OSDto>> GetOSesAsync();
+        Task<IEnumerable<PropertyDto>> GetManufactDtosAsync(int type);
 
     }
 }

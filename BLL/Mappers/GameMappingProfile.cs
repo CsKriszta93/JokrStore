@@ -19,10 +19,13 @@ namespace BLL.Mappers
                 .ForMember(m => m.Rate, opt => opt.MapFrom(d => d.Rate))
                 .ForMember(m => m.Release, opt => opt.MapFrom(d => d.Release))
                 .ForMember(m => m.CoverArt, opt => opt.MapFrom(d => d.CoverArt))
-                .ForMember(m => m.Developer, opt => opt.MapFrom(d => d.Developer))
+                .ForMember(m => m.UserId, opt => opt.MapFrom(d => d.UserId))
                 .ForMember(m => m.MinSysReqId, opt => opt.MapFrom(d => d.MinSysReqId))
                 .ForMember(m => m.RecSysReqId, opt => opt.MapFrom(d => d.RecSysReqId))
-                .ForMember(m => m.SysReqNotes, opt => opt.MapFrom(d => d.SysReqNotes));
+                .ForMember(m => m.SysReqNotes, opt => opt.MapFrom(d => d.SysReqNotes))
+                .ReverseMap();
+
+            CreateMap<GameProperty, GamePropertyDto>();
         }        
     }
 }

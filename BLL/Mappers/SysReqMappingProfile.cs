@@ -27,7 +27,10 @@ namespace BLL.Mappers
                 .ReverseMap(); 
 
             CreateMap<SysReqOSDto, SysReqOS>()
-                .ReverseMap();           
+                .ReverseMap();    
+
+            CreateMap<Property, PropertyDto>()
+                .ReverseMap();       
         }
     }
 }

@@ -18,7 +18,9 @@ namespace JOKRStore.Web.ViewModels
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
+        public List<CommentViewModel> comments { get; set; }
         public List<UserGamesViewModel> UserGames { get; set; }
+        public List<GameViewModel> Games { get; set; }
         public ConfigViewModel Config { get; set; }
         public bool isMyUser { get; set; }
     }

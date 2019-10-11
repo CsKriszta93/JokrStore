@@ -18,7 +18,16 @@
                 <p align="center" ><img class="cover_art" src="~/images/@Model.GameName/CoverArt.jpg" alt="@Model.GameName"></p>
                 <p><b>Release date: </b>@Model.Release</p>
                 <p><b>Rate: </b>@Model.Rate</p>
-                <p><b>Developer: </b>@Model.Developer</p>
+                <p><b>Developer: </b>@Model.User.UserName</p>
+                <p>
+                    <b>Genres: </b>
+                    <ul>
+                    @foreach (var g in Model.Genres)
+                    {
+                        <li>@g.Property.name</li>
+                    }
+                    </ul>
+                </p>
 
                 @if (Model.DemoLink != null)
                 {
@@ -51,6 +60,11 @@
                 {
                     <p align="center">@Model.Price Ft</p>
                 }
+
+                @if (Model.MyDevelopment)
+                {
+                    <a asp-controller="Games" asp-action="EditBase" asp-route-id="@Model.Id">Edit basics</a>
+                }
                 
             </div>
 
@@ -62,6 +76,10 @@
                 <div class="row row-no-gutters">
                     <div class="col-sm-9">
                         <p class="header-big">System requirements</p>
+                        @if (Model.MyDevelopment)
+                        {
+                            <a asp-controller="Games" asp-action="EditSysreq" asp-route-id="@Model.Id">Edit system requirements</a>
+                        }
                         <div class="container">
                             <div class="row">
                                 @if (Model.MinSysReq != null) {

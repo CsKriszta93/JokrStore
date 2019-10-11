@@ -27,7 +27,13 @@ namespace JOKRStore.Web.Mappers
                 .ReverseMap(); 
 
             CreateMap<SysReqOSViewModel, SysReqOSDto>()
-                .ReverseMap();           
+                .ReverseMap();       
+
+            CreateMap<PropertyViewModel, PropertyDto>()
+                .ForMember(s => s.Id, opt => opt.MapFrom(d => d.Id))
+                .ForMember(s => s.name, opt => opt.MapFrom(d => d.name))
+                .ForMember(s => s.type, opt => opt.MapFrom(d => d.type))
+                .ReverseMap();      
         }
     }
 }
