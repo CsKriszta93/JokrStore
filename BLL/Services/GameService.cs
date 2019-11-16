@@ -153,6 +153,18 @@ namespace BLL.Services
             return dbContext.GameProperties.Where(x => x.GameId == GameId && x.PropertyId == PropertyId).Count() > 0;
         }
 
+        public async Task EditGameSysReqAsync(Guid GameId, SysReqDto MinSysReqDto, SysReqDto RecSysReqDto)
+        {
+            var Game = await dbContext.Games
+            .Include(x => x.MinSysReq)
+            .FirstOrDefaultAsync(x => x.Id == GameId);
+
+            Game.MinSysReq = mapper.Map<SysReq>(MinSysReqDto);
+            Game.RecSysReq = mapper.Map<SysReq>(RecSysReqDto);
+
+            await dbContext.SaveChangesAsync();
+        }
+
         private async Task SaveMediasAsync(Game game, List<IFormFile> Medias, List<IFormFile> CoverArt, string rootdir)
         {
             if (!System.IO.Directory.Exists(rootdir)) 

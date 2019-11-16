@@ -153,6 +153,16 @@ namespace JOKRStore.Web.Controllers
             return RedirectToAction("Details", "Games", new {Id = new_game.Id}); 
         }
 
+        public async Task<IActionResult> SaveGameSysReq(GameViewModel Game)
+        {
+            var MinSysReqDto = mapper.Map<BLL.DTO.SysReqDto>(Game.MinSysReq);
+            var RecSysReqDto = mapper.Map<BLL.DTO.SysReqDto>(Game.RecSysReq);
+
+            await gameService.EditGameSysReqAsync(Game.Id, MinSysReqDto, RecSysReqDto);
+
+            return RedirectToAction("Details", "Games", new {Id = Game.Id}); 
+        }
+
         public async Task<IActionResult> DeleteMedia(Guid Id)
             {
                 await gameService.DeleteMediaAsync(Id);

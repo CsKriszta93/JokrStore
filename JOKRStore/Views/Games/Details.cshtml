@@ -15,7 +15,7 @@
     <tr>
         <td>
             <div class="text_box box-width-240">
-                <p align="center" ><img class="cover_art" src="~/images/@Model.GameName/CoverArt.jpg" alt="@Model.GameName"></p>
+                <p align="center" ><img class="cover_art" src="~/images/Games/@Model.GameName/CoverArt.jpg" alt="@Model.GameName"></p>
                 <p><b>Release date: </b>@Model.Release</p>
                 <p><b>Rate: </b>@Model.Rate</p>
                 <p><b>Developer: </b>@Model.User.UserName</p>
@@ -70,7 +70,15 @@
 
             
             <p class="header-big">Descreption</p>
-            <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Description))</p>
+
+            @if (Model.Description != null)
+            {
+                @*<p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Description.Content))</p>*@
+            }
+            else
+            {
+                <p>There is no description for this game.</p>
+            }
             
             <div class="container">
                 <div class="row row-no-gutters">
@@ -334,7 +342,7 @@
                             foreach (var m in Model.Medias)
                             {
                                 <td>
-                                    <img src="~/images/@Model.GameName/@m.contain" style="width:100px;cursor:pointer"
+                                    <img src="~/images/Games/@Model.GameName/@m.contain" style="width:100px;cursor:pointer"
                                          onclick="showDiv(@i)" class="w3-hover-opacity">
                                 </td>
                                 i++;

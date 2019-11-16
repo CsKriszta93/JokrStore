@@ -18,7 +18,8 @@ namespace JOKRStore.Web.ViewModels
         public string CoverArt { get; set; }
 
         [DisplayName("Discription")]
-        public string Description { get; set; }
+        public Guid? DescriptionId { get; set; }
+        public DescriptionViewModel Description { get; set; } 
 
         [DisplayName("Rating")]
         public float Rate { get; set; }
@@ -37,6 +38,9 @@ namespace JOKRStore.Web.ViewModels
 
         [DisplayName("Downloaded")]
         public int NumOfDownloads { get; set; }
+        public DateTime Publish { get; set; }
+        public int State { get; set; }
+        public int ReleaseState { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
         public IEnumerable<MediaViewModel> Medias { get; set; }

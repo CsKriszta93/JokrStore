@@ -209,6 +209,20 @@ namespace DAL.Migrations
                     b.ToTable("Configs");
                 });
 
+            modelBuilder.Entity("Model.Description", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<int>("Language");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Description");
+                });
+
             modelBuilder.Entity("Model.ForumCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -296,7 +310,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("DemoLink");
 
-                    b.Property<string>("Description");
+                    b.Property<Guid?>("DescriptionId");
 
                     b.Property<string>("DownloadLink");
 
@@ -308,17 +322,25 @@ namespace DAL.Migrations
 
                     b.Property<decimal>("Price");
 
+                    b.Property<DateTime>("Publish");
+
                     b.Property<double>("Rate");
 
                     b.Property<Guid?>("RecSysReqId");
 
                     b.Property<DateTime>("Release");
 
+                    b.Property<int>("ReleaseState");
+
+                    b.Property<int>("State");
+
                     b.Property<string>("SysReqNotes");
 
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DescriptionId");
 
                     b.HasIndex("MinSysReqId");
 
@@ -644,6 +666,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.Game", b =>
                 {
+                    b.HasOne("Model.Description", "Description")
+                        .WithMany()
+                        .HasForeignKey("DescriptionId");
+
                     b.HasOne("Model.SysReq", "MinSysReq")
                         .WithMany()
                         .HasForeignKey("MinSysReqId");

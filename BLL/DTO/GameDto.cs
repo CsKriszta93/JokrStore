@@ -13,13 +13,17 @@ namespace BLL.DTO
         public Guid UserId { get; set; }
         public UserDto User { get; set; }
         public string CoverArt { get; set; }
-        public string Description { get; set; }
+        public Guid? DescriptionId { get; set; }
+        public DescriptionDto Description { get; set; } 
         public double Rate { get; set; }
         public decimal Price { get; set; }
         public DateTime Release { get; set; }
         public string DownloadLink { get; set; }
         public string DemoLink { get; set; }
         public int NumOfDownloads { get; set; }
+        public DateTime Publish { get; set; }
+        public int State { get; set; }
+        public int ReleaseState { get; set; }
 
         public Guid? MinSysReqId { get; set; }
         public SysReqDto MinSysReq { get; set; }
