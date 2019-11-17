@@ -225,6 +225,10 @@
     <Compile Include="Migrations\20190427204944_Initial.designer.cs">
       <DependentUpon>20190427204944_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190514103917_Mig.cs" />
+    <Compile Include="Migrations\20190514103917_Mig.designer.cs">
+      <DependentUpon>20190514103917_Mig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

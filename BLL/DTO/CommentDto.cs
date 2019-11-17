@@ -4,7 +4,7 @@ namespace BLL.DTO
 {
     public class CommentDto
     {
-        public Guid CommenterId { get; set; }
+        public Guid UserId { get; set; }
 
         public DateTime CommentDate { get; set; }
 

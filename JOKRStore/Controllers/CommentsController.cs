@@ -40,6 +40,8 @@ namespace JOKRStore.Web.Controllers
                 GameId = Guid.Parse(gameId)
             };
 
+            System.Diagnostics.Debug.WriteLine("valami üzenet");
+
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));
 
             return Ok();
