@@ -1,0 +1,39 @@
+@model JOKRStore.Web.ViewModels.ForumCategoryViewModel
+
+@using Microsoft.AspNetCore.Identity
+
+@inject Microsoft.AspNetCore.Identity.SignInManager<Model.User> SignInManager
+
+<link rel="stylesheet" type="text/css" href="~/css/list.css">
+<link rel="stylesheet" type="text/css" href="~/css/button.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h4>@Model.name</h4>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="col-xs-6">
+                <a asp-controller="Forum" asp-action="NewTopicForm" asp-route-id="@Model.Id" class="button button-cian" style="margin: 20px; position: absolute; right: 100px;">New topic</a>
+            </div>
+        }
+    </div>
+</div>
+
+<div style="margin: 50px">
+    @if (Model != null && Model.topics.Count() > 0)
+    {
+        @foreach (var c in Model.topics)
+        {
+            <a asp-controller="Forum" asp-action="ForumTopicContent" asp-route-id="@c.Id" style="color: white">
+                <div class="list-item-dark"><img src="~/images/page.png" style="width: 30px; height: 30px; margin-right: 5px"> @c.title</div>
+             </a>
+        }
+    }
+    else
+    {
+        <p>There are not yet topics in this category</p>
+    }
+    
+</div>

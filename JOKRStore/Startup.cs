@@ -44,6 +44,9 @@ namespace JOKRStore.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IHardwareService, HardwareService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<User, IdentityRole<Guid>>(config =>
             {
@@ -70,12 +73,19 @@ namespace JOKRStore.Web
                 mc.AddProfile(new GameViewMappingProfile());
                 mc.AddProfile(new CommentViewModelMappingProfile());
                 mc.AddProfile(new CommentMappingProfile());
+                mc.AddProfile(new UserMappingProfile());
+                mc.AddProfile(new UserViewMappingProfile());
+                mc.AddProfile(new SysReqMappingProfile());
+                mc.AddProfile(new SysReqViewMappingProfile());
+                mc.AddProfile(new ForumMappingProfile());
+                mc.AddProfile(new ForumViewModelMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSession();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -104,6 +114,7 @@ namespace JOKRStore.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

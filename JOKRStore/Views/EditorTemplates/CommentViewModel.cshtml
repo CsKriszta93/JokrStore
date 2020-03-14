@@ -2,8 +2,8 @@
 
 <div class="row">
     <div class="col-sm-5 form-group">
-        @Html.LabelFor(model => model.CommenterName)
-        @Html.TextBoxFor(model => model.CommenterName, new { @class="form-control" })
+        @Html.LabelFor(model => model.UserId)
+        @Html.TextBoxFor(model => model.UserId, new { @class="form-control" })
     </div>
 </div>
 
@@ -19,5 +19,5 @@
     </div>
 </div>
 
-@Html.HiddenFor(model => model.CommenterId)
+@Html.HiddenFor(model => model.UserId)
 @Html.AntiForgeryToken()

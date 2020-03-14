@@ -5,19 +5,16 @@ namespace JOKRStore.Web.ViewModels
 {
     public class CommentViewModel
     {
-        public Guid CommentId { get; set; }
-
-        public Guid CommenterId { get; set; }
-
-        [DisplayName("Name")]
-        public string CommenterName { get; set; }
-
         public string Contain { get; set; }
+        public string CommentDate { get; set; }
 
-        public DateTime CommentDate { get; set; }
+        public Guid? GameId { get; set; }
+        public GameViewModel Game { get; set; }
 
-        public UserViewModel User { get; set; } 
+        public Guid? ForumTopicId { get; set; }
+        public ForumTopicViewModel ForumTopic { get; set; }
 
-        public Guid GameId { get; set; }
+        public Guid UserId { get; set; }
+        public UserViewModel User { get; set; }
     }
 }

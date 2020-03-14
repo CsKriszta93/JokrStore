@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,10 @@ namespace Model
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
-        public Guid? ConfigId { get; set; }
+        public Config Config  { get; set; }
+
+        public List<Comment> comments { get; set; }
+        public List<UserGames> UserGames { get; set; }
+        public List<Game> Games { get; set; }
     }
 }

@@ -1,0 +1,96 @@
+﻿@model JOKRStore.Web.ViewModels.UserViewModel
+
+<link rel="stylesheet" href="~/css/details.css">
+<link rel="stylesheet" href="~/css/flip.css">
+<link rel="stylesheet" type="text/css" href="~/css/button.css">
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="~/css/site.css">
+
+        <title>Game store</title>
+    </head>
+
+    <body>
+        <h1>@Model.UserName</h1>
+        <hr>
+        <div class="text_box">
+            <p><b>Register date:</b> @Model.Registration</p>
+            <p><b>Last Login:</b> @Model.LastLogin</p>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="header-big">
+                        Computer configuration:
+                        @if (Model.isMyUser)
+                        {
+                            <a asp-controller="Users" asp-action="EditUserConfig" class="button button-cian" style="margin: 20px;">Edit config</a>
+                        }
+                    </div>
+                    @if (Model.Config != null)
+                    {
+                        
+                        <p><b>Processor:</b> @Model.Config.CPU.name </p>
+                        <p><b>Memory:</b> @Model.Config.RAM MB </p>
+                        <p><b>Video card:</b> @Model.Config.GPU.name</p>
+                        <p><b>Operating system:</b> @Model.Config.OS.name</p>
+                                
+                    }
+                    else
+                    {
+                        <p><b>There is not config added.</b></p>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        @if (Model.UserGames.Count() > 0)
+        {
+
+            <div class="header-big"> @Model.UserName's games</div>
+            <div class="container mosaic">  
+            @foreach (var game in Model.UserGames)
+            {
+                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Game.Id">
+                    @*<div class="card">*@
+                    <div class="flip-box">
+                    <div class="flip-box-inner">
+                        @*<div class="poster">*@
+                        <div class="flip-box-front">
+                            <img class="flip-image" src="~/images/@game.Game.GameName/CoverArt.jpg">
+                        </div>
+                        @*<div class="details">*@
+                        <div class="flip-box-back">
+                            <div class="tags">
+                                <span class="adventure">Adventure</span>
+                                <span class="first-person">First person</span>
+                            </div>
+                            <div class="info">
+                                <p>@game.Game.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <p style="font-size: 20px; color:white; text-align: center;">@game.Game.GameName</p>
+                </a>
+            }
+
+            </div>
+        }
+        
+
+    </body>
+</html>
+

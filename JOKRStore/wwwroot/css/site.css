@@ -5,6 +5,11 @@ body {
     padding-bottom: 20px;
 }
 
+ul {
+    list-style-position: inside;
+    padding: 1px;
+  }
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -34,4 +39,33 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+.mosaic {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+body {
+    background : black;
+    color : white;
+}
+
+textarea {
+    color : black;
+}
+
+.mosaic-frame {
+    margin : 20px;
+    
+}
+
+.mosaic-tile {
+    max-width: 200px;
+    height: auto;
+}
+
+.mosaic-button {
+    text-align : center;
 }

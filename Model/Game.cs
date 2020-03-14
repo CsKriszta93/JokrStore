@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -7,9 +8,9 @@ namespace Model
     {
         public Guid Id { get; set; }
         public string GameName { get; set; }
-        public string Developer { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
         public string CoverArt { get; set; }
-        public string Description { get; set; }
         public double Rate { get; set; }
         public decimal Price { get; set; }
         public DateTime Release { get; set; }
@@ -18,8 +19,20 @@ namespace Model
         public int NumOfDownloads { get; set; }
 
         public Guid? MinSysReqId { get; set; }
+        public SysReq MinSysReq { get; set; }
         public Guid? RecSysReqId { get; set; }
+        public SysReq RecSysReq { get; set; }
+        public string SysReqNotes { get; set; }
+        public DateTime Publish { get; set; }
+        public int State { get; set; } //0: unpublished, 1: published, 2: pending approval, 3: denied, 4: deleted
+        public int ReleaseState { get; set; } //0: normal, 1: early access, 2: beta
 
-        public ICollection<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
+        public List<UserGames> UserGames { get; set; }
+        public List<Media> Medias { get; set; }
+
+        //[ForeignKey("GameId")]
+        public List<GameProperty> Genres { get; set; }
+        public List<Description> Description { get; set; } 
     }
 }

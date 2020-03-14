@@ -1,0 +1,200 @@
+@model JOKRStore.Web.ViewModels.ConfigEditViewModel
+
+<link rel="stylesheet" type="text/css" href="~/css/button.css">
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<h1> Computer's configuration</h1>
+<form asp-action="SaveUserconfig" asp-controller="Users" method="post" class="form-horizontal" style="margin: 10px">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="CPUId">CPU: </label>
+        
+        <div class="col-sm-5">
+            <select id="CPUFacturer" name="CPUFacturer" class="form-control" placeholder="CPU ">
+                    <option value="0">AMD</option>
+                    <option value="1">Intel</option>
+            </select>
+        </div>
+        
+        <div class="col-sm-5">
+            <select id="CPUId" name="CPUId" class="form-control" placeholder="CPU">
+            @if (@Model.Config == null)
+            {
+                <option selected value=null>--Select a CPU--</option>
+            }
+
+            @foreach (var CPU in Model.CPUs)
+            {
+                @if (@Model.Config != null &&  CPU.Id == @Model.Config.CPUId)
+                {
+                    <option selected value=@CPU.Id>@CPU.name</option>
+                }
+                else
+                {
+                    <option value=@CPU.Id>@CPU.name</option>
+                }
+            }  
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="RAM">RAM:</label>
+        <div class="col-sm-8">
+            @if (@Model.Config != null)
+            {
+                <input type="text" id="RAM" name="RAM" class="form-control" placeholder="RAM size" value=@Model.Config.RAM>
+            }
+            else
+            {
+                <input type="text" id="RAM" name="RAM" class="form-control" placeholder="RAM size">
+            }
+            
+        </div>    
+        <div class="col-sm-2">
+            <select id="RAM_unit" name="RAM_unit" class="form-control">
+                <option value="MB">MB</option>
+                <option selected value="GB">GB</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="GPUId">Graphics card: </label>
+        <div class="col-sm-5">
+            <select id="GPUFacturer" name="GPUFacturer" class="form-control" placeholder="GPU ">
+                    <option value="0">Nvidia</option>
+                    <option value="1">AMD</option>
+                    <option value="2">Intel</option>
+                    <option value="3">S3 Graphics</option>
+            </select>
+        </div>
+
+        <div class="col-sm-5">
+            <select id="GPUId" name="GPUId" class="form-control" placeholder="GPU">
+            @if (@Model.Config == null)
+            {
+                <option selected value=null>--Select a Graphics card--</option>
+            }
+
+            @foreach (var GPU in Model.GPUs)
+            {
+                @if (@Model.Config != null && GPU.Id == @Model.Config.GPUId)
+                {
+                    <option selected value=@GPU.Id>@GPU.name</option>
+                }
+                else
+                {
+                    <option value=@GPU.Id>@GPU.name</option>
+                }
+            }  
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="OSId">Operating system: </label>
+        
+        <div class="col-sm-5">
+            <select id="OSGroup" name="OSGroup" class="form-control" placeholder="OS ">
+                    <option value="0">Windows</option>
+                    <option value="1">ReactOS</option>
+                    <option value="2">Mac OS X</option>
+                    <option value="3">Ubuntu</option>
+                    <option value="4">Debian</option>
+                    <option value="5">SUSE Linux</option>
+                    <option value="6">Linux Mint</option>
+            </select>
+        </div>
+
+        <div class="col-sm-5">
+            <select id="OSId" name="OSId" class="form-control" placeholder="OS">
+            @if (@Model.Config == null)
+            {
+                <option selected value=null>--Select an operating system--</option>
+            }
+
+            @foreach (var OS in Model.OSes)
+            {
+                @if (@Model.Config != null && OS.Id == @Model.Config.OSId)
+                {
+                    <option selected value=@OS.Id>@OS.name</option>
+                }
+                else
+                {
+                    <option value=@OS.Id>@OS.name</option>
+                }
+            }  
+            </select>
+        </div>
+    </div>
+
+    <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" id="categoryId" name="categoryId" value=@Model>
+        <button type="submit" class="button button-cian">Submit</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $("#GPUFacturer").change(function() {
+        var Facturer = $('#GPUFacturer').val();
+        $.ajax({
+            type: 'POST',
+            url: '/Hardware/SetGPUFilter',
+            data: {
+                'Facturer': Facturer,
+            },
+            success: function (data) {
+                SetFilter(data, 'GPUId');
+            }
+        });
+    });
+
+    $("#CPUFacturer").change(function() {
+        var Facturer = $('#CPUFacturer').val();
+        $.ajax({
+            type: 'POST',
+            url: '/Hardware/SetCPUFilter',
+            data: {
+                'Facturer': Facturer,
+            },
+            success: function (data) {
+                SetFilter(data, 'CPUId');
+            }
+        });
+    });
+
+    $("#OSGroup").change(function() {
+        var Group = $('#OSGroup').val();
+        $.ajax({
+            type: 'POST',
+            url: '/Hardware/SetOSFilter',
+            data: {
+                'Group': Group,
+            },
+            success: function (data) {
+                SetFilter(data, 'OSId');
+            }
+        });
+    });
+    
+    function SetFilter(data, Id)
+    {
+        var select = document.getElementById(Id);
+
+        var length = select.options.length;
+        for (i = 0; i < length; i++)
+        {
+            select.options[0] = null;
+        }
+
+        for (var i=0; i<data.length; i++)
+        {
+            var option = document.createElement("option");
+            option.innerHTML = data[i].name;
+            option.value = data[i].id;
+            select.add(option, 0);
+        }
+    }
+    
+</script>

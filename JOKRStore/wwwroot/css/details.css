@@ -1,0 +1,68 @@
+.titlet_header {
+    font-size: 15px;
+    background: #56dbdb;
+    color: white;
+    padding : 5px;
+    font-weight : bold;
+}
+
+.title_frame {
+    background: #282729;
+    color: white;
+    border: 1px solid #56dbdb;
+    margin: 5px;
+    margin-top: 20px;
+}
+
+.comment_header {
+    background: #403E41;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.comment_frame {
+    background: #282729;
+    margin: 5px;
+}
+
+.comment_body {
+    padding: 20px;
+}
+
+.coment_date {
+    text-align : right;
+}
+
+.text_box {
+    padding: 10px;
+    
+    background: #454545;
+    border: 2px solid #56dbdb;
+    margin: 10px;
+    margin-bottom: 30px;
+    float: left;
+}
+
+.box-width-240 {
+    width: 260px;
+}
+
+.box-width-max {
+    width: 100%;
+}
+
+.header-big {
+    font-size: 28px;
+    color: #56dbdb;
+    text-decoration: underline;
+}
+
+img {
+    margin: 5px;
+}
+
+.cover_art {
+    height : 260px;
+    max-width: 100%;
+    max-height: 100%;
+}

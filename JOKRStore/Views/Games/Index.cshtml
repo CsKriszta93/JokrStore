@@ -1,61 +1,48 @@
-﻿@model IEnumerable<JOKRStore.Web.ViewModels.GameViewModel>
+@model JOKRStore.Web.ViewModels.GameIndexViewModel
 
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css" href="~/css/flip.css">
+<link rel="stylesheet" href="~/css/details.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="~/css/site.css">
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12">
+<div style="width: 400px; height: 200px; padding: 5px; padding-top: 20px; position: absolute;">
+    <div class="title_frame">
+        <div class="titlet_header">New games</div>
 
-    <title>Game store</title>
-</head>
-
-<body>
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg">
-                <h1>Game list</h1>
-
-                <div class="flex-container">
-                    @foreach (var game in Model)
-                    {
-                        <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
-                            <div class="card">
-                                <div class="poster">
-                                    <img src="1_Far_Cry_pc.jpg">
-                                </div>
-                                <div class="details">
-                                    <h2>@game.GameName<br><span>by Ubisoft</span></h2>
-                                    <div class="tags">
-                                        <span class="adventure">Adventure</span>
-                                        <span class="first-person">First person</span>
-                                    </div>
-                                    <div class="info">
-                                        <p>@game.Description</p>
-                                    </div>
-                                </div>
+        <div class="mosaic"> 
+            @foreach (var game in Model.new_release)
+            {
+                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
+                    @*<div class="card">*@
+                    <div class="flip-box">
+                        <div class="flip-box-inner">
+                            @*<div class="poster">*@
+                            <div class="flip-box-front">
+                                <img class="flip-image" src="~/images/Games/@game.GameName/CoverArt.jpg">
                             </div>
-                        </a>
-                    }
-                </div>
+                            @*<div class="details">*@
+                            <div class="flip-box-back">
+                                <div class="tags">
+                                    <span class="adventure">Adventure</span>
+                                    <span class="first-person">First person</span>
+                                </div>
+                                <div class="info">
+                                    <p>@game.Description</p>
+                                </div>
+                            </div> 
+                        </div>
+                        
+                        <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">@game.GameName</p>
+                        
+                    </div>
 
-
-
-
-            </div>
+                    
+                </a>
+            }
         </div>
     </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    @*<script src="Scripts/jquery-3.3.1.js"></script>
-        <script src="Scripts/bootstrap.js"></script>*@
-
-</body>
-</html>
+</div>
+</div>
+</div>
+</div>
