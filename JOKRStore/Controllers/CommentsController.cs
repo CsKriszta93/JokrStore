@@ -23,10 +23,10 @@ namespace JOKRStore.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostComment(string contain, string gameId, string topicId, string commentType)
-        {
-            System.Diagnostics.Debug.WriteLine("***********PostComment executed:" + contain + " " + gameId + " " + topicId);
-            var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+        public async Task<IActionResult> PostComment(string contain, string gameId)
+        { 
+            var commenterId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+
             if (!ModelState.IsValid)
             {
                 return View(contain);
@@ -34,30 +34,15 @@ namespace JOKRStore.Web.Controllers
 
             var newComment = new CommentViewModel
             {
-                UserId = Guid.Parse(UserId),
+                CommenterId = Guid.Parse(commenterId),
                 Contain = contain,
-                CommentDate = DateTime.Now.ToString("yyyy.MM.dd. hh:mm")
+                CommentDate = DateTime.Now,
+                GameId = Guid.Parse(gameId)
             };
-
-            if (gameId != null)
-                newComment.GameId = Guid.Parse(gameId);
-            else
-                newComment.GameId = null;
-
-            if (topicId != null)
-                newComment.ForumTopicId = Guid.Parse(topicId);
-            else
-                newComment.ForumTopicId = null;    
-
-
-            System.Diagnostics.Debug.WriteLine("Game Id: " + newComment.GameId.ToString());
 
             await commentService.AddComment(mapper.Map<CommentDto>(newComment));
 
-            if (commentType == "1")
-                return RedirectToAction("ForumTopicContent", "Forum", new { id = topicId });
-
-            return RedirectToAction("Games", "Details", new { id = gameId });
+            return Ok();
             //return RedirectToAction("Detalils");
         }
     }

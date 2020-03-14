@@ -15,7 +15,7 @@ namespace DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -126,30 +126,6 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Model.CPU", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("architect");
-
-                    b.Property<long>("cache");
-
-                    b.Property<long>("cores");
-
-                    b.Property<long>("freqency");
-
-                    b.Property<int>("manufacturer");
-
-                    b.Property<string>("name");
-
-                    b.Property<DateTime>("release");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CPUs");
-                });
-
             modelBuilder.Entity("Model.Comment", b =>
                 {
                     b.Property<Guid>("CommentId")
@@ -157,148 +133,19 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("CommentDate");
 
+                    b.Property<Guid>("Commenter");
+
                     b.Property<string>("Contain");
 
-                    b.Property<Guid?>("ForumTopicId");
-
-                    b.Property<Guid?>("GameId");
-
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("GameId");
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("ForumTopicId");
+                    b.HasIndex("Commenter");
 
                     b.HasIndex("GameId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Model.Config", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("CPUId");
-
-                    b.Property<Guid>("GPUId");
-
-                    b.Property<int>("GPU_size");
-
-                    b.Property<Guid>("OSId");
-
-                    b.Property<int>("RAM");
-
-                    b.Property<Guid>("UserId");
-
-                    b.Property<string>("others");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CPUId");
-
-                    b.HasIndex("GPUId");
-
-                    b.HasIndex("OSId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Configs");
-                });
-
-            modelBuilder.Entity("Model.Description", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<int>("Language");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Description");
-                });
-
-            modelBuilder.Entity("Model.ForumCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ForumCategories");
-                });
-
-            modelBuilder.Entity("Model.ForumTopic", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("ForumCategoryId");
-
-                    b.Property<Guid>("UserId");
-
-                    b.Property<string>("content");
-
-                    b.Property<DateTime>("date");
-
-                    b.Property<string>("title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForumCategoryId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ForumTopics");
-                });
-
-            modelBuilder.Entity("Model.GPU", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("architect");
-
-                    b.Property<long>("bandwidth");
-
-                    b.Property<long>("buswidth");
-
-                    b.Property<long>("core_frequency");
-
-                    b.Property<float>("directx");
-
-                    b.Property<int>("manufacturer");
-
-                    b.Property<long>("memory_freqency");
-
-                    b.Property<long>("memory_size");
-
-                    b.Property<string>("name");
-
-                    b.Property<float>("opengl");
-
-                    b.Property<long>("pixel_fillrate");
-
-                    b.Property<DateTime>("release");
-
-                    b.Property<float>("shader_model");
-
-                    b.Property<long>("shaders");
-
-                    b.Property<long>("texture_fillrate");
-
-                    b.Property<float>("vulkan");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GPUs");
                 });
 
             modelBuilder.Entity("Model.Game", b =>
@@ -310,7 +157,9 @@ namespace DAL.Migrations
 
                     b.Property<string>("DemoLink");
 
-                    b.Property<Guid?>("DescriptionId");
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Developer");
 
                     b.Property<string>("DownloadLink");
 
@@ -322,172 +171,15 @@ namespace DAL.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<DateTime>("Publish");
-
                     b.Property<double>("Rate");
 
                     b.Property<Guid?>("RecSysReqId");
 
                     b.Property<DateTime>("Release");
 
-                    b.Property<int>("ReleaseState");
-
-                    b.Property<int>("State");
-
-                    b.Property<string>("SysReqNotes");
-
-                    b.Property<Guid>("UserId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DescriptionId");
-
-                    b.HasIndex("MinSysReqId");
-
-                    b.HasIndex("RecSysReqId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Games");
-                });
-
-            modelBuilder.Entity("Model.GameProperty", b =>
-                {
-                    b.Property<Guid>("GameId");
-
-                    b.Property<Guid>("PropertyId");
-
-                    b.Property<Guid>("Id");
-
-                    b.HasKey("GameId", "PropertyId");
-
-                    b.HasIndex("PropertyId");
-
-                    b.ToTable("GameProperties");
-                });
-
-            modelBuilder.Entity("Model.Media", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("GameId");
-
-                    b.Property<string>("contain");
-
-                    b.Property<int>("type");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("Medias");
-                });
-
-            modelBuilder.Entity("Model.OS", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("group");
-
-                    b.Property<int>("major_ver");
-
-                    b.Property<int>("minor_ver");
-
-                    b.Property<string>("name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OSes");
-                });
-
-            modelBuilder.Entity("Model.Property", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("name");
-
-                    b.Property<int>("type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Properties");
-                });
-
-            modelBuilder.Entity("Model.SysReq", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<float>("directx");
-
-                    b.Property<float>("opengl");
-
-                    b.Property<long>("ram");
-
-                    b.Property<long>("storage");
-
-                    b.Property<float>("vulkan");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SysReq");
-                });
-
-            modelBuilder.Entity("Model.SysReqCPU", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("CPUId");
-
-                    b.Property<Guid>("SysReqId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CPUId");
-
-                    b.HasIndex("SysReqId");
-
-                    b.ToTable("SysReqCPU");
-                });
-
-            modelBuilder.Entity("Model.SysReqGPU", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("GPUId");
-
-                    b.Property<Guid>("SysReqId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GPUId");
-
-                    b.HasIndex("SysReqId");
-
-                    b.ToTable("SysReqGPU");
-                });
-
-            modelBuilder.Entity("Model.SysReqOS", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("OSId");
-
-                    b.Property<Guid>("SysReqId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OSId");
-
-                    b.HasIndex("SysReqId");
-
-                    b.ToTable("SysReqOS");
                 });
 
             modelBuilder.Entity("Model.User", b =>
@@ -501,6 +193,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<Guid?>("ConfigId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -547,24 +241,6 @@ namespace DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Model.UserGames", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("GameId");
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserGames");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -614,146 +290,14 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.Comment", b =>
                 {
-                    b.HasOne("Model.ForumTopic", "ForumTopic")
-                        .WithMany("Comments")
-                        .HasForeignKey("ForumTopicId");
+                    b.HasOne("Model.User", "user")
+                        .WithMany()
+                        .HasForeignKey("Commenter")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Model.Game", "Game")
                         .WithMany("Comments")
-                        .HasForeignKey("GameId");
-
-                    b.HasOne("Model.User", "User")
-                        .WithMany("comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.Config", b =>
-                {
-                    b.HasOne("Model.CPU", "CPU")
-                        .WithMany()
-                        .HasForeignKey("CPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.GPU", "GPU")
-                        .WithMany()
-                        .HasForeignKey("GPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.OS", "OS")
-                        .WithMany()
-                        .HasForeignKey("OSId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.User", "User")
-                        .WithOne("Config")
-                        .HasForeignKey("Model.Config", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.ForumTopic", b =>
-                {
-                    b.HasOne("Model.ForumCategory", "ForumCategory")
-                        .WithMany("topics")
-                        .HasForeignKey("ForumCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.Game", b =>
-                {
-                    b.HasOne("Model.Description", "Description")
-                        .WithMany()
-                        .HasForeignKey("DescriptionId");
-
-                    b.HasOne("Model.SysReq", "MinSysReq")
-                        .WithMany()
-                        .HasForeignKey("MinSysReqId");
-
-                    b.HasOne("Model.SysReq", "RecSysReq")
-                        .WithMany()
-                        .HasForeignKey("RecSysReqId");
-
-                    b.HasOne("Model.User", "User")
-                        .WithMany("Games")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.GameProperty", b =>
-                {
-                    b.HasOne("Model.Game", "Game")
-                        .WithMany("Genres")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.Property", "Property")
-                        .WithMany("GameProperties")
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.Media", b =>
-                {
-                    b.HasOne("Model.Game", "game")
-                        .WithMany("Medias")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.SysReqCPU", b =>
-                {
-                    b.HasOne("Model.CPU", "CPU")
-                        .WithMany()
-                        .HasForeignKey("CPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.SysReq", "SysReq")
-                        .WithMany("SysReqCPUs")
-                        .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.SysReqGPU", b =>
-                {
-                    b.HasOne("Model.GPU", "GPU")
-                        .WithMany()
-                        .HasForeignKey("GPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.SysReq", "SysReq")
-                        .WithMany("SysReqGPUs")
-                        .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.SysReqOS", b =>
-                {
-                    b.HasOne("Model.OS", "OS")
-                        .WithMany()
-                        .HasForeignKey("OSId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.SysReq", "SysReq")
-                        .WithMany("SysReqOSes")
-                        .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Model.UserGames", b =>
-                {
-                    b.HasOne("Model.Game", "Game")
-                        .WithMany("UserGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.User", "User")
-                        .WithMany("UserGames")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
