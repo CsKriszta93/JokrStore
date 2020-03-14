@@ -30,8 +30,8 @@ namespace JOKRStore.Web.Controllers
         {
             var gameDtos = await gameService.GetGamesAsync();
             GameIndexViewModel games = new GameIndexViewModel();
-            games.new_release = gameDtos.OrderBy(x => x.Release).Take(6).Select(x => mapper.Map<GameViewModel>(x));
-            games.popular = gameDtos.OrderBy(x => x.Release).Take(6).Select(x => mapper.Map<GameViewModel>(x));
+            games.new_release = gameDtos.OrderBy(x => x.Release).Take(8).Select(x => mapper.Map<GameViewModel>(x));
+            games.popular = gameDtos.OrderBy(x => x.Release).Take(8).Select(x => mapper.Map<GameViewModel>(x));
 
             return View(games);
         }
