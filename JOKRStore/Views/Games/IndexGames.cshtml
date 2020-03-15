@@ -2,10 +2,34 @@
 <div class="col-sm-12">
 <div style="height: 200px; padding: 5px; padding-top: 20px; position: absolute;">
     <div class="title_frame">
-        <div class="titlet_header">New games</div>
+        <div class="titlet_header">New released games</div>
 
         <div class="mosaic"> 
             @foreach (var game in Model.new_release)
+            {
+                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
+                    <div class="image_container">
+                        <img src="~/images/Games/@game.GameName/CoverArt.jpg" alt="@game.GameName" class="image" >
+                        <div class="middle">
+                            <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">@game.GameName</p>
+                        </div> 
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div style="height: 200px; padding: 5px; padding-top: 20px; position: absolute;">
+    <div class="title_frame">
+        <div class="titlet_header">New testable games</div>
+
+        <div class="mosaic"> 
+            @foreach (var game in Model.new_tests)
             {
                 <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
                     <div class="image_container">
