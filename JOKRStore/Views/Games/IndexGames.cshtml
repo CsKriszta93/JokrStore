@@ -4,9 +4,10 @@
         <div class="title_frame">
             <div class="titlet_header">New released games</div>
 
-            <div class="mosaic">
+            <div class="container-fluid">
                 @foreach (var game in Model.new_release)
                 {
+                    <div class="col-sm-2">
                     <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
                         <div class="image_container">
                             <img src="~/images/Games/@game.GameName/CoverArt.jpg" alt="@game.GameName" class="image" >
@@ -15,6 +16,7 @@
                             </div> 
                         </div>
                     </a>
+                    </div>
                 }
             </div>
         </div>
@@ -26,9 +28,10 @@
         <div class="title_frame">
             <div class="titlet_header">New testable games</div>
 
-            <div class="mosaic">
+            <div class="container-fluid">
                 @foreach (var game in Model.new_tests)
                 {
+                    <div class="col-sm-2">
                     <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
                         <div class="image_container">
                             <img src="~/images/Games/@game.GameName/CoverArt.jpg" alt="@game.GameName" class="image" >
@@ -37,6 +40,7 @@
                             </div> 
                         </div>
                     </a>
+                    </div>
                 }
             </div>
         </div>

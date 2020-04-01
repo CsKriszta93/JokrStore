@@ -69,3 +69,46 @@ textarea {
 .mosaic-button {
     text-align : center;
 }
+
+label span{
+    position: relative;
+    color: white;
+    z-index: 2;
+}
+
+label span:hover{
+    filter: blur(1px);
+}
+
+.glitch_text:hover label::before,
+.glitch_text:hover label::after{
+  visibility: visible;
+}
+.glitch_text:hover label::before{
+  color: rgba(255,0,188,.8);
+  animation: glitch .3s cubic-bezier(.25,.46,.45,.94) both infinite;
+}
+.glitch_text:hover label::after{
+  color: rgba(0,255,255,.8);
+  animation: glitch .3s cubic-bezier(.25,.46,.45,.94) reverse both infinite;
+}
+@keyframes glitch {
+  0%{
+    transform: translate(0);
+  }
+  20%{
+    transform: translate(-1px, 1px);
+  }
+  40%{
+    transform: translate(-1px, -1px);
+  }
+  60%{
+    transform: translate(1px, 1px);
+  }
+  80%{
+    transform: translate(1px, -1px);
+  }
+  100%{
+    transform: translate(0);
+  }
+}
