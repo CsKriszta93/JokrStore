@@ -33,7 +33,7 @@ namespace DAL.Seed.TestSeed
 
         public static void SeedUsersWithRoles(UserManager<User> userManager)
         {
-            var roleNamesArray = Roles.Select(r => r.Name).ToArray();
+            var roleNamesArray = Roles.Select(r => r.Name);
 
             foreach (var user in Users)
             {
