@@ -15,7 +15,7 @@ namespace DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -146,25 +146,25 @@ namespace DAL.Migrations
                     b.Property<DateTime>("CommentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Commenter")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Contain")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ForumTopicId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GameId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("GameId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CommentId");
 
+                    b.HasIndex("Commenter");
+
                     b.HasIndex("ForumTopicId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -740,17 +740,19 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.Comment", b =>
                 {
-                    b.HasOne("Model.ForumTopic", "ForumTopic")
+                    b.HasOne("Model.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("Commenter")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Model.ForumTopic", null)
                         .WithMany("Comments")
                         .HasForeignKey("ForumTopicId");
 
                     b.HasOne("Model.Game", "Game")
                         .WithMany("Comments")
-                        .HasForeignKey("GameId");
-
-                    b.HasOne("Model.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
