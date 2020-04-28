@@ -20,7 +20,7 @@
     "JokrStore.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "auth",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
