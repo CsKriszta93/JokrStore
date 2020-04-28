@@ -19,6 +19,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    <link rel="stylesheet" type="text/css" href="~/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="~/css/card.css">
     
 </head>
@@ -37,12 +38,12 @@
                 </button>
             </div>
 
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Games" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Games" asp-action="Games">Games</a></li>
-                    <li><a asp-area="" asp-controller="Forum" asp-action="ForumCategoryList">Forum</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+            <div class="navbar-collapse collaps">
+                <ul class="nav nav-items">
+                    <li><a class="glitch_text" asp-area="" asp-controller="Games" asp-action="Index"><label data-content="Home"><span>Home</span></label></a></li>
+                    <li><a class="menu-item text" asp-area="" asp-controller="Games" asp-action="Games" data-text="Games">Games</a></li>
+                    <li><a class="menu-item text" asp-area="" asp-controller="Forum" asp-action="ForumCategoryList">Forum</a></li>
+                    <li><a class="menu-item text" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <partial name="_AccountPartial" />
                 </ul>
                 <partial name="_LoginPartial" />

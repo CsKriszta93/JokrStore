@@ -1,0 +1,30 @@
+﻿.tutorial-container {
+    margin-top: -80px;
+}
+
+.carousel .item {
+    height: 600px;
+}
+
+.carousel-caption {
+    bottom: 30px;
+}
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: auto;
+    min-height: 400px;
+    margin: 0px;
+}
+
+.tutorial-container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.glyphicon-chevron-right,
+.glyphicon-chevron-left {
+    font-weight: 300;
+}

@@ -3,38 +3,76 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Model;
 using System;
+using System.Linq;
 
 namespace JOKRStore.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid,
+        IdentityUserClaim<Guid>, UserRole, IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
-         {
-             base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-             modelBuilder.Entity<GameProperty>()
-             .HasKey(x => new {x.GameId, x.PropertyId} );
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
 
-             modelBuilder.Entity<GameProperty>()
-             .HasOne(gp => gp.Game)
-             .WithMany(g => g.Genres)
-             .HasForeignKey(gp => gp.GameId);
+                userRole.HasOne(ur => ur.Role)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
 
-             modelBuilder.Entity<GameProperty>()
-             .HasOne(gp => gp.Property)
-             .WithMany(p => p.GameProperties)
-             .HasForeignKey(gp => gp.PropertyId);
+                userRole.HasOne(ur => ur.User)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+            });
 
-             modelBuilder.Entity<Media>()
-             .HasOne(m => m.game)
-             .WithMany(g => g.Medias)
-             .HasForeignKey(m => m.GameId);
-         }
+            modelBuilder.Entity<GameProperty>()
+            .HasKey(x => new { x.GameId, x.PropertyId });
+
+            modelBuilder.Entity<GameProperty>()
+            .HasOne(gp => gp.Game)
+            .WithMany(g => g.Genres)
+            .HasForeignKey(gp => gp.GameId);
+
+            modelBuilder.Entity<GameProperty>()
+            .HasOne(gp => gp.Property)
+            .WithMany(p => p.GameProperties)
+            .HasForeignKey(gp => gp.PropertyId);
+
+            modelBuilder.Entity<UserGames>()
+            .HasKey(x => new { x.UserId, x.GameId });
+
+            modelBuilder.Entity<UserGames>()
+            .HasOne(ug => ug.User)
+            .WithMany(u => u.UserGames);
+
+            modelBuilder.Entity<UserGames>()
+            .HasOne(ug => ug.Game)
+            .WithMany(g => g.UserGames);
+
+            modelBuilder.Entity<Media>()
+            .HasOne(m => m.game)
+            .WithMany(g => g.Medias)
+            .HasForeignKey(m => m.GameId);
+
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+            .SelectMany(t => t.GetForeignKeys())
+            .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+            foreach (var fk in cascadeFKs)
+            {
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Comment> Comments { get; set; }

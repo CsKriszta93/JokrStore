@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKRStore.Web", "JOKRStore\JOKRStore.Web.csproj", "{B2EF0B47-A52C-4C76-95AE-145DDA7C9537}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5461F209-34FD-49DD-9EAA-4ABD08E12CB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{5461F209-34FD-49DD-9EAA-4ABD08E12CB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{66A71588-941B-4A36-A959-C562971391E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{66A71588-941B-4A36-A959-C562971391E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{1637B1F1-73E2-4171-A8B4-AEC7FA8A6717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{1637B1F1-73E2-4171-A8B4-AEC7FA8A6717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JokrStore.API", "JokrStore.API\JokrStore.API.csproj", "{DCB7E10F-7C3F-4893-97EA-B83B868D597A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1637B1F1-73E2-4171-A8B4-AEC7FA8A6717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1637B1F1-73E2-4171-A8B4-AEC7FA8A6717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1637B1F1-73E2-4171-A8B4-AEC7FA8A6717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB7E10F-7C3F-4893-97EA-B83B868D597A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB7E10F-7C3F-4893-97EA-B83B868D597A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB7E10F-7C3F-4893-97EA-B83B868D597A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB7E10F-7C3F-4893-97EA-B83B868D597A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

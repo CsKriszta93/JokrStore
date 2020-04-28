@@ -1,14 +1,12 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using BLL.DTO;
+using BLL.DTO.UserDtos;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Model;
-
+using System;
+using System.Threading.Tasks;
 
 namespace BLL.Services
 {

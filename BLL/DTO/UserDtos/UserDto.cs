@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BLL.DTO
+namespace BLL.DTO.UserDtos
 {
     public class UserDto
     {  
@@ -20,7 +17,7 @@ namespace BLL.DTO
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
-        public List<CommentDto> comments { get; set; }
+        public List<CommentDto> Comments { get; set; }
         public List<UserGamesDto> UserGames { get; set; }
         public List<GameDto> Games { get; set; }
         public ConfigDto Config { get; set; }

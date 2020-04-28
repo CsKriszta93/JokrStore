@@ -70,11 +70,11 @@ namespace BLL.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task AddGameToUser(Guid UserId, Guid GameId)
-        {
-            dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
-            await dbContext.SaveChangesAsync();
-        }
+        //public async Task AddGameToUser(Guid UserId, Guid GameId)
+        //{
+        //    dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
+        //    await dbContext.SaveChangesAsync();
+        //}
 
         public async Task<IEnumerable<GameDto>> GetUserGames(Guid UserId)
         {
@@ -150,7 +150,7 @@ namespace BLL.Services
 
         public async Task<bool> GameHasPropery(Guid GameId, Guid PropertyId)
         {
-            return dbContext.GameProperties.Where(x => x.GameId == GameId && x.PropertyId == PropertyId).Count() > 0;
+            return await dbContext.GameProperties.Where(x => x.GameId == GameId && x.PropertyId == PropertyId).CountAsync() > 0;
         }
 
         public async Task EditGameSysReqAsync(Guid GameId, SysReqDto MinSysReqDto, SysReqDto RecSysReqDto)

@@ -1,48 +1,6 @@
 @model JOKRStore.Web.ViewModels.GameIndexViewModel
 
-<link rel="stylesheet" type="text/css" href="~/css/flip.css">
 <link rel="stylesheet" href="~/css/details.css">
+<link rel="stylesheet" href="~/css/GamesIndex.css">
 
-<div class="container-fluid">
-<div class="row">
-<div class="col-sm-12">
-<div style="width: 400px; height: 200px; padding: 5px; padding-top: 20px; position: absolute;">
-    <div class="title_frame">
-        <div class="titlet_header">New games</div>
-
-        <div class="mosaic"> 
-            @foreach (var game in Model.new_release)
-            {
-                <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
-                    @*<div class="card">*@
-                    <div class="flip-box">
-                        <div class="flip-box-inner">
-                            @*<div class="poster">*@
-                            <div class="flip-box-front">
-                                <img class="flip-image" src="~/images/Games/@game.GameName/CoverArt.jpg">
-                            </div>
-                            @*<div class="details">*@
-                            <div class="flip-box-back">
-                                <div class="tags">
-                                    <span class="adventure">Adventure</span>
-                                    <span class="first-person">First person</span>
-                                </div>
-                                <div class="info">
-                                    <p>@game.Description</p>
-                                </div>
-                            </div> 
-                        </div>
-                        
-                        <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">@game.GameName</p>
-                        
-                    </div>
-
-                    
-                </a>
-            }
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
+<partial name="IndexGames" />

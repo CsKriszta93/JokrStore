@@ -27,12 +27,12 @@ namespace Model
         public int State { get; set; } //0: unpublished, 1: published, 2: pending approval, 3: denied, 4: deleted
         public int ReleaseState { get; set; } //0: normal, 1: early access, 2: beta
 
-        public List<Comment> Comments { get; set; }
-        public List<UserGames> UserGames { get; set; }
-        public List<Media> Medias { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<UserGames> UserGames { get; set; }
+        public ICollection<Media> Medias { get; set; }
 
         //[ForeignKey("GameId")]
-        public List<GameProperty> Genres { get; set; }
-        public List<Description> Description { get; set; } 
+        public ICollection<GameProperty> Genres { get; set; }
+        public ICollection<Description> Description { get; set; } 
     }
 }
