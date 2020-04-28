@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.DTO.UserDtos;
+using System;
 
 namespace BLL.DTO
 {

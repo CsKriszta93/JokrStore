@@ -1,7 +1,10 @@
+using BLL.DTO.UserDtos;
 using System;
 
-namespace BLL.DTO {
-    public class ConfigDto {
+namespace BLL.DTO
+{
+    public class ConfigDto
+    {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public UserDto User { get; set; }

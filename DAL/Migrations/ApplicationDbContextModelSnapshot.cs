@@ -15,45 +15,25 @@ namespace DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -66,13 +46,17 @@ namespace DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -83,13 +67,17 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderDisplayName");
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -98,28 +86,19 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId");
-
-                    b.Property<Guid>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -129,21 +108,29 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.CPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("architect");
+                    b.Property<string>("architect")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("cache");
+                    b.Property<long>("cache")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("cores");
+                    b.Property<long>("cores")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("freqency");
+                    b.Property<long>("freqency")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("manufacturer");
+                    b.Property<int>("manufacturer")
+                        .HasColumnType("int");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("release");
+                    b.Property<DateTime>("release")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -153,17 +140,23 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Comment", b =>
                 {
                     b.Property<Guid>("CommentId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CommentDate");
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Contain");
+                    b.Property<string>("Contain")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ForumTopicId");
+                    b.Property<Guid?>("ForumTopicId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GameId");
+                    b.Property<Guid?>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CommentId");
 
@@ -179,21 +172,29 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Config", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CPUId");
+                    b.Property<Guid>("CPUId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("GPUId");
+                    b.Property<Guid>("GPUId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("GPU_size");
+                    b.Property<int>("GPU_size")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("OSId");
+                    b.Property<Guid>("OSId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("RAM");
+                    b.Property<int>("RAM")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("others");
+                    b.Property<string>("others")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -212,13 +213,21 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Description", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Content");
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Language");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GameId");
 
                     b.ToTable("Description");
                 });
@@ -226,9 +235,11 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.ForumCategory", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -238,17 +249,23 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.ForumTopic", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ForumCategoryId");
+                    b.Property<Guid>("ForumCategoryId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("content");
+                    b.Property<string>("content")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("date");
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("title");
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -262,39 +279,56 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.GPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("architect");
+                    b.Property<string>("architect")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("bandwidth");
+                    b.Property<long>("bandwidth")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("buswidth");
+                    b.Property<long>("buswidth")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("core_frequency");
+                    b.Property<long>("core_frequency")
+                        .HasColumnType("bigint");
 
-                    b.Property<float>("directx");
+                    b.Property<float>("directx")
+                        .HasColumnType("real");
 
-                    b.Property<int>("manufacturer");
+                    b.Property<int>("manufacturer")
+                        .HasColumnType("int");
 
-                    b.Property<long>("memory_freqency");
+                    b.Property<long>("memory_freqency")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("memory_size");
+                    b.Property<long>("memory_size")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("opengl");
+                    b.Property<float>("opengl")
+                        .HasColumnType("real");
 
-                    b.Property<long>("pixel_fillrate");
+                    b.Property<long>("pixel_fillrate")
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("release");
+                    b.Property<DateTime>("release")
+                        .HasColumnType("datetime2");
 
-                    b.Property<float>("shader_model");
+                    b.Property<float>("shader_model")
+                        .HasColumnType("real");
 
-                    b.Property<long>("shaders");
+                    b.Property<long>("shaders")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("texture_fillrate");
+                    b.Property<long>("texture_fillrate")
+                        .HasColumnType("bigint");
 
-                    b.Property<float>("vulkan");
+                    b.Property<float>("vulkan")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -304,43 +338,55 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Game", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CoverArt");
+                    b.Property<string>("CoverArt")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DemoLink");
+                    b.Property<string>("DemoLink")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DescriptionId");
+                    b.Property<string>("DownloadLink")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DownloadLink");
+                    b.Property<string>("GameName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GameName");
+                    b.Property<Guid?>("MinSysReqId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("MinSysReqId");
+                    b.Property<int>("NumOfDownloads")
+                        .HasColumnType("int");
 
-                    b.Property<int>("NumOfDownloads");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Price");
+                    b.Property<DateTime>("Publish")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Publish");
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
 
-                    b.Property<double>("Rate");
+                    b.Property<Guid?>("RecSysReqId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("RecSysReqId");
+                    b.Property<DateTime>("Release")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Release");
+                    b.Property<int>("ReleaseState")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ReleaseState");
+                    b.Property<int>("State")
+                        .HasColumnType("int");
 
-                    b.Property<int>("State");
+                    b.Property<string>("SysReqNotes")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SysReqNotes");
-
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DescriptionId");
 
                     b.HasIndex("MinSysReqId");
 
@@ -353,11 +399,14 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.GameProperty", b =>
                 {
-                    b.Property<Guid>("GameId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PropertyId");
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GameId", "PropertyId");
 
@@ -369,13 +418,17 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Media", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("GameId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("contain");
+                    b.Property<string>("contain")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("type");
+                    b.Property<int>("type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -387,15 +440,20 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.OS", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("group");
+                    b.Property<int>("group")
+                        .HasColumnType("int");
 
-                    b.Property<int>("major_ver");
+                    b.Property<int>("major_ver")
+                        .HasColumnType("int");
 
-                    b.Property<int>("minor_ver");
+                    b.Property<int>("minor_ver")
+                        .HasColumnType("int");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -405,31 +463,68 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Property", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("type");
+                    b.Property<int>("type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Properties");
                 });
 
+            modelBuilder.Entity("Model.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
             modelBuilder.Entity("Model.SysReq", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<float>("directx");
+                    b.Property<float>("directx")
+                        .HasColumnType("real");
 
-                    b.Property<float>("opengl");
+                    b.Property<float>("opengl")
+                        .HasColumnType("real");
 
-                    b.Property<long>("ram");
+                    b.Property<long>("ram")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("storage");
+                    b.Property<long>("storage")
+                        .HasColumnType("bigint");
 
-                    b.Property<float>("vulkan");
+                    b.Property<float>("vulkan")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -439,11 +534,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.SysReqCPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CPUId");
+                    b.Property<Guid>("CPUId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SysReqId");
+                    b.Property<Guid>("SysReqId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -457,11 +555,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.SysReqGPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("GPUId");
+                    b.Property<Guid>("GPUId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SysReqId");
+                    b.Property<Guid>("SysReqId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -475,11 +576,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.SysReqOS", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OSId");
+                    b.Property<Guid>("OSId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SysReqId");
+                    b.Property<Guid>("SysReqId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -493,47 +597,66 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("BankAccount");
+                    b.Property<string>("BankAccount")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<bool>("IsAdmin");
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastLogin");
+                    b.Property<DateTime>("LastLogin")
+                        .HasColumnType("datetime2");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("Registration");
+                    b.Property<DateTime>("Registration")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -551,65 +674,68 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.UserGames", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("GameId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "GameId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserGames");
                 });
 
+            modelBuilder.Entity("Model.UserRole", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>")
+                    b.HasOne("Model.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Model.User")
+                    b.HasOne("Model.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Model.User")
+                    b.HasOne("Model.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Model.User")
+                    b.HasOne("Model.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Comment", b =>
@@ -623,9 +749,10 @@ namespace DAL.Migrations
                         .HasForeignKey("GameId");
 
                     b.HasOne("Model.User", "User")
-                        .WithMany("comments")
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Config", b =>
@@ -633,22 +760,35 @@ namespace DAL.Migrations
                     b.HasOne("Model.CPU", "CPU")
                         .WithMany()
                         .HasForeignKey("CPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.GPU", "GPU")
                         .WithMany()
                         .HasForeignKey("GPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.OS", "OS")
                         .WithMany()
                         .HasForeignKey("OSId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.User", "User")
                         .WithOne("Config")
                         .HasForeignKey("Model.Config", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.Description", b =>
+                {
+                    b.HasOne("Model.Game", "Game")
+                        .WithMany("Description")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.ForumTopic", b =>
@@ -656,20 +796,18 @@ namespace DAL.Migrations
                     b.HasOne("Model.ForumCategory", "ForumCategory")
                         .WithMany("topics")
                         .HasForeignKey("ForumCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Game", b =>
                 {
-                    b.HasOne("Model.Description", "Description")
-                        .WithMany()
-                        .HasForeignKey("DescriptionId");
-
                     b.HasOne("Model.SysReq", "MinSysReq")
                         .WithMany()
                         .HasForeignKey("MinSysReqId");
@@ -679,9 +817,10 @@ namespace DAL.Migrations
                         .HasForeignKey("RecSysReqId");
 
                     b.HasOne("Model.User", "User")
-                        .WithMany("Games")
+                        .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.GameProperty", b =>
@@ -689,12 +828,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.Game", "Game")
                         .WithMany("Genres")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.Property", "Property")
                         .WithMany("GameProperties")
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Media", b =>
@@ -702,7 +843,8 @@ namespace DAL.Migrations
                     b.HasOne("Model.Game", "game")
                         .WithMany("Medias")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.SysReqCPU", b =>
@@ -710,12 +852,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.CPU", "CPU")
                         .WithMany()
                         .HasForeignKey("CPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.SysReq", "SysReq")
                         .WithMany("SysReqCPUs")
                         .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.SysReqGPU", b =>
@@ -723,12 +867,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.GPU", "GPU")
                         .WithMany()
                         .HasForeignKey("GPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.SysReq", "SysReq")
                         .WithMany("SysReqGPUs")
                         .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.SysReqOS", b =>
@@ -736,12 +882,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.OS", "OS")
                         .WithMany()
                         .HasForeignKey("OSId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.SysReq", "SysReq")
                         .WithMany("SysReqOSes")
                         .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.UserGames", b =>
@@ -749,12 +897,29 @@ namespace DAL.Migrations
                     b.HasOne("Model.Game", "Game")
                         .WithMany("UserGames")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.User", "User")
                         .WithMany("UserGames")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.UserRole", b =>
+                {
+                    b.HasOne("Model.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Model.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

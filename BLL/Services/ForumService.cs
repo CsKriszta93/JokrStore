@@ -1,13 +1,12 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using BLL.DTO;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Model;
 
 
 namespace BLL.Services
@@ -48,20 +47,19 @@ namespace BLL.Services
             return mapper.Map<ForumTopicDto>(topic);
         }
 
-        public async Task AddNewTopicAsync(Guid UserId, Guid CategoryId, string title, string content)
+        public async Task AddNewTopicAsync(Guid userId, Guid categoryId, string title, string content)
         {
-                ForumTopicDto new_topic = new ForumTopicDto
-                {
-                    UserId = UserId,
-                    ForumCategoryId = CategoryId,
-                    title = title,
-                    content = content,
-                    date = DateTime.Now
+            ForumTopicDto new_topic = new ForumTopicDto
+            {
+                UserId = userId,
+                ForumCategoryId = categoryId,
+                Title = title,
+                Content = content,
+                Date = DateTime.Now
+            };
 
-                };
-
-                dbContext.ForumTopics.Add(mapper.Map<ForumTopic>(new_topic));
-                await dbContext.SaveChangesAsync();
+            dbContext.ForumTopics.Add(mapper.Map<ForumTopic>(new_topic));
+            await dbContext.SaveChangesAsync();
         }
     }
 }

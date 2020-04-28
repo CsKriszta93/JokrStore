@@ -80,18 +80,18 @@ label span:hover{
     filter: blur(1px);
 }
 
-.glitch_text:hover label::before,
-.glitch_text:hover label::after{
-  visibility: visible;
+    label span:hover label::before,
+    label span:hover label::after {
+        visibility: visible;
+    }
+label span:hover label::before {
+    color: rgba(255,0,188,.8);
+    animation: glitch .3s cubic-bezier(.25,.46,.45,.94) both infinite;
 }
-.glitch_text:hover label::before{
-  color: rgba(255,0,188,.8);
-  animation: glitch .3s cubic-bezier(.25,.46,.45,.94) both infinite;
-}
-.glitch_text:hover label::after{
-  color: rgba(0,255,255,.8);
-  animation: glitch .3s cubic-bezier(.25,.46,.45,.94) reverse both infinite;
-}
+    label span:hover label::after {
+        color: rgba(0,255,255,.8);
+        animation: glitch .3s cubic-bezier(.25,.46,.45,.94) reverse both infinite;
+    }
 @keyframes glitch {
   0%{
     transform: translate(0);
