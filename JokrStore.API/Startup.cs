@@ -46,7 +46,7 @@ namespace JokrStore.API
                 options.Password.RequiredLength = 4;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
             });
 
             builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
