@@ -40,16 +40,11 @@ namespace JokrStore.API.Controllers
         {
             var signedInUser = await authService.SignInAsync(userLoginDto);
 
-            if (signedInUser != null)
+            return Ok(new
             {
-                return Ok(new
-                {
-                    token = tokenHelper.GenerateJWTToken(signedInUser),
-                    user = signedInUser
-                });
-            }
-
-            return Unauthorized();
+                token = tokenHelper.GenerateJWTToken(signedInUser),
+                user = signedInUser
+            });
         }
     }
 }

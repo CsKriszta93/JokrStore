@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using BLL.DTO.UserDtos;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Model;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -17,7 +17,7 @@ namespace JokrStore.API.Helpers
             this.configuration = configuration;
         }
 
-        public string GenerateJWTToken(User user)
+        public string GenerateJWTToken(UserDto user)
         {
             var claims = new[]
 {

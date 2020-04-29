@@ -3,6 +3,8 @@ using BLL.DTO.UserDtos;
 using BLL.ServiceInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Model;
+using System;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace BLL.Services
@@ -23,7 +25,12 @@ namespace BLL.Services
         public async Task<UserDto> CreateUserAsync(UserRegisterDto userRegisterDto)
         {
             var userToCreate = mapper.Map<User>(userRegisterDto);
-            await userManager.CreateAsync(userToCreate, userRegisterDto.Password);
+            var result = await userManager.CreateAsync(userToCreate, userRegisterDto.Password);
+
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException("error during registration");
+            }
 
             return mapper.Map<UserDto>(userToCreate);
         }
@@ -31,7 +38,12 @@ namespace BLL.Services
         public async Task<UserDto> SignInAsync(UserLoginDto userLoginDto)
         {
             var user = await userManager.FindByNameAsync(userLoginDto.UserName);
-            await signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, false);
+            var result = await signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, false);
+
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException("error during sign in");
+            }
 
             return mapper.Map<UserDto>(user);
         }
