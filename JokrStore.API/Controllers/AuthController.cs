@@ -24,27 +24,35 @@ namespace JokrStore.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
-            var createdUser = await authService.CreateUserAsync(userRegisterDto);
+            var createdUserResult = await authService.GetCreateUserResultAsync(userRegisterDto);
 
-            if (createdUser.Id != null)
+            if (createdUserResult.Result.Succeeded)
             {
                 //TODO: egyelőre hiányzó endpoint, az mvc projektből áthozni apiba 
-                return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, createdUser);
+                return CreatedAtRoute(
+                    "GetUser",
+                    new { controller = "Users", id = createdUserResult.User.Id },
+                    createdUserResult.User);
             }
 
-            return BadRequest("an error accured while creating a new user");
+            return BadRequest(createdUserResult.Result.Errors);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
-            var signedInUser = await authService.SignInAsync(userLoginDto);
+            var signInResult = await authService.GetSignInResultAsync(userLoginDto);
 
-            return Ok(new
+            if (signInResult.Succeeded)
             {
-                token = tokenHelper.GenerateJWTToken(signedInUser),
-                user = signedInUser
-            });
+                return Ok(new
+                {
+                    token = tokenHelper.GenerateJWTToken(signInResult.User),
+                    user = signInResult.User
+                });
+            }
+
+            return Unauthorized();
         }
     }
 }

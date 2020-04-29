@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using BLL.DTO.AuthDtos;
 using BLL.DTO.UserDtos;
 using BLL.ServiceInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Model;
 using System;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace BLL.Services
@@ -22,30 +22,28 @@ namespace BLL.Services
             this.signInManager = signInManager;
         }
 
-        public async Task<UserDto> CreateUserAsync(UserRegisterDto userRegisterDto)
+        public async Task<LoginResultDto> GetCreateUserResultAsync(UserRegisterDto userRegisterDto)
         {
             var userToCreate = mapper.Map<User>(userRegisterDto);
             var result = await userManager.CreateAsync(userToCreate, userRegisterDto.Password);
 
-            if (!result.Succeeded)
+            return new LoginResultDto
             {
-                throw new ApplicationException("error during registration");
-            }
-
-            return mapper.Map<UserDto>(userToCreate);
+                Result = result,
+                User = mapper.Map<UserDto>(userToCreate)
+            };
         }
 
-        public async Task<UserDto> SignInAsync(UserLoginDto userLoginDto)
+        public async Task<SignInResultDto> GetSignInResultAsync(UserLoginDto userLoginDto)
         {
             var user = await userManager.FindByNameAsync(userLoginDto.UserName);
             var result = await signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, false);
 
-            if (!result.Succeeded)
+            return new SignInResultDto
             {
-                throw new ApplicationException("error during sign in");
-            }
-
-            return mapper.Map<UserDto>(user);
+                Succeeded = result.Succeeded,
+                User = mapper.Map<UserDto>(user)
+            };
         }
     }
 }
