@@ -1,5 +1,7 @@
 using AutoMapper;
 using BLL.Mappers;
+using BLL.ServiceInterfaces;
+using BLL.Services;
 using JokrStore.API.Helpers;
 using JOKRStore.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,6 +35,9 @@ namespace JokrStore.API
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<TokenHelper>();
+            services.AddScoped<IAuthService, AuthService>();
 
             IdentityBuilder builder = services.AddIdentityCore<User>(options =>
             {
@@ -83,7 +88,6 @@ namespace JokrStore.API
 
             services.AddCors();
             services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
-            services.AddScoped<TokenHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

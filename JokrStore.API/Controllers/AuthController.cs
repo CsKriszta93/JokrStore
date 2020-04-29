@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using BLL.DTO.UserDtos;
+﻿using BLL.DTO.UserDtos;
+using BLL.ServiceInterfaces;
 using JokrStore.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Model;
 using System.Threading.Tasks;
 
 namespace JokrStore.API.Controllers
@@ -15,50 +13,39 @@ namespace JokrStore.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly TokenHelper tokenHelper;
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
-        private readonly IMapper mapper;
+        private readonly IAuthService authService;
 
-        public AuthController(TokenHelper tokenHelper, IMapper mapper,
-            UserManager<User> userManager, SignInManager<User> signInManager)
+        public AuthController(TokenHelper tokenHelper, IAuthService authService)
         {
             this.tokenHelper = tokenHelper;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.mapper = mapper;
+            this.authService = authService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
-            //TODO - kerüljön inkább service-be, db model ne legyen a controllerben
-            var userToCreate = mapper.Map<User>(userRegisterDto);
-            var result = await userManager.CreateAsync(userToCreate, userRegisterDto.Password);
-            var userToReturn = mapper.Map<UserDto>(userToCreate);
+            var createdUser = await authService.CreateUserAsync(userRegisterDto);
 
-            if (result.Succeeded)
+            if (createdUser.Id != null)
             {
                 //TODO: egyelőre hiányzó endpoint, az mvc projektből áthozni apiba 
-                return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
+                return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, createdUser);
             }
 
-            return BadRequest(result.Errors);
+            return BadRequest("an error accured while creating a new user");
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
-            var user = await userManager.FindByNameAsync(userLoginDto.UserName);
-            var result = await signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, false);
+            var signedInUser = await authService.SignInAsync(userLoginDto);
 
-            if (result.Succeeded)
+            if (signedInUser != null)
             {
-                var appUser = mapper.Map<UserDto>(user);
-
                 return Ok(new
                 {
-                    token = tokenHelper.GenerateJWTToken(user),
-                    user = appUser
+                    token = tokenHelper.GenerateJWTToken(signedInUser),
+                    user = signedInUser
                 });
             }
 
