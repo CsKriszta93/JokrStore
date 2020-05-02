@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BLL.Helpers;
+using BLL.Extensions;
 using Model.Enums;
 
 namespace BLL.Mappers
