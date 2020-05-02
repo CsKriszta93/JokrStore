@@ -7,7 +7,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model : any = {};
+  model: any = {};
 
   constructor(private authService: AuthService) { }
 

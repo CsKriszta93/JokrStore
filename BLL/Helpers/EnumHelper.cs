@@ -12,7 +12,7 @@ namespace BLL.Helpers
             where TValue : struct, IConvertible
         {
             var enumDisplayNames = new List<string>();
-            var displayNames = typeof(TValue).GetType().GetCustomAttributes<DisplayAttribute>().Select(da => da.Name);
+            var displayNames = typeof(TValue).GetCustomAttributes<DisplayAttribute>().Select(da => da.Name);
 
             foreach (var name in displayNames)
             {
