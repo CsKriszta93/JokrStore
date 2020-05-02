@@ -1,22 +1,19 @@
 using AutoMapper;
+using BLL.Extensions;
 using BLL.Mappers;
 using BLL.ServiceInterfaces;
 using BLL.Services;
 using JokrStore.API.Helpers;
-using JOKRStore.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Model;
 using System.Text;
 
 namespace JokrStore.API
@@ -33,27 +30,11 @@ namespace JokrStore.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext(Configuration);
+            services.AddTestIdentityConfiguration();
 
             services.AddScoped<TokenHelper>();
             services.AddScoped<IAuthService, AuthService>();
-
-            IdentityBuilder builder = services.AddIdentityCore<User>(options =>
-            {
-                //TODO: only for development and testing purposes
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.SignIn.RequireConfirmedAccount = false;
-            });
-
-            builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
-            builder.AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.AddRoleValidator<RoleValidator<Role>>();
-            builder.AddRoleManager<RoleManager<Role>>();
-            builder.AddSignInManager<SignInManager<User>>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

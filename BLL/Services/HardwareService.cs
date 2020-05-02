@@ -1,14 +1,14 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using BLL.DTO;
+using BLL.Helpers;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Model;
+using Model.Enums;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -44,6 +44,21 @@ namespace BLL.Services
         {
             var Manufacts = await dbContext.Properties.Where(x => x.type == type).ToListAsync<Property>();
             return mapper.Map<IEnumerable<PropertyDto>>(Manufacts);
+        }
+
+        public IEnumerable<string> GetCPUManufacturersForSelectList()
+        {
+            return EnumHelper<CPUManufacturer>.GetEnumDisplayNameList<CPUManufacturer>();
+        }
+
+        public IEnumerable<string> GetGPUManufacturersForSelectList()
+        {
+            return EnumHelper<GPUManufacturer>.GetEnumDisplayNameList<GPUManufacturer>();
+        }
+
+        public IEnumerable<string> GetOSGroupForSelectList()
+        {
+            return EnumHelper<OSGroup>.GetEnumDisplayNameList<OSGroup>();
         }
     }
 }

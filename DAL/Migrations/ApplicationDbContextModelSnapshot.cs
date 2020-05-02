@@ -111,25 +111,25 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("architect")
+                    b.Property<string>("Architect")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("cache")
+                    b.Property<long>("Cache")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("cores")
+                    b.Property<long>("Cores")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("freqency")
+                    b.Property<long>("Freqency")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("manufacturer")
+                    b.Property<int>("Manufacturer")
                         .HasColumnType("int");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("release")
+                    b.Property<DateTime>("Release")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -181,20 +181,20 @@ namespace DAL.Migrations
                     b.Property<Guid>("GPUId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("GPU_size")
+                    b.Property<int>("GPUSize")
                         .HasColumnType("int");
 
                     b.Property<Guid>("OSId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Others")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RAM")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("others")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -282,52 +282,52 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("architect")
+                    b.Property<string>("Architect")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("bandwidth")
+                    b.Property<long>("Bandwidth")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("buswidth")
+                    b.Property<long>("Buswidth")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("core_frequency")
+                    b.Property<long>("CoreFrequency")
                         .HasColumnType("bigint");
 
-                    b.Property<float>("directx")
+                    b.Property<float>("DirectX")
                         .HasColumnType("real");
 
-                    b.Property<int>("manufacturer")
+                    b.Property<int>("Manufacturer")
                         .HasColumnType("int");
 
-                    b.Property<long>("memory_freqency")
+                    b.Property<long>("MemoryFreqency")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("memory_size")
+                    b.Property<long>("MemorySize")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("opengl")
+                    b.Property<float>("OpenGl")
                         .HasColumnType("real");
 
-                    b.Property<long>("pixel_fillrate")
+                    b.Property<long>("PixelFillRate")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("release")
+                    b.Property<DateTime>("Release")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("shader_model")
+                    b.Property<float>("ShaderModel")
                         .HasColumnType("real");
 
-                    b.Property<long>("shaders")
+                    b.Property<long>("Shaders")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("texture_fillrate")
+                    b.Property<long>("TextureFillRate")
                         .HasColumnType("bigint");
 
-                    b.Property<float>("vulkan")
+                    b.Property<float>("Vulkan")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -443,16 +443,16 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("group")
+                    b.Property<int>("Group")
                         .HasColumnType("int");
 
-                    b.Property<int>("major_ver")
+                    b.Property<int>("MajorVer")
                         .HasColumnType("int");
 
-                    b.Property<int>("minor_ver")
+                    b.Property<int>("MinorVer")
                         .HasColumnType("int");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -609,6 +609,9 @@ namespace DAL.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ConfigId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")

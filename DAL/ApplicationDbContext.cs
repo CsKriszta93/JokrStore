@@ -64,6 +64,16 @@ namespace JOKRStore.DAL
             .WithMany(g => g.Medias)
             .HasForeignKey(m => m.GameId);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Config)
+                .WithOne(c => c.User)
+                .HasForeignKey<Config>(c => c.UserId);
+
+            RestrictCascadeDelete(modelBuilder);
+        }
+
+        private void RestrictCascadeDelete(ModelBuilder modelBuilder)
+        {
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
             .SelectMany(t => t.GetForeignKeys())
             .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);

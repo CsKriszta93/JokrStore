@@ -44,9 +44,9 @@ namespace BLL.Services
                 conf.CPUId = ConfigDto.CPUId;
                 conf.RAM = ConfigDto.RAM;
                 conf.GPUId = ConfigDto.GPUId;
-                conf.GPU_size = ConfigDto.GPU_size;
+                conf.GPUSize = ConfigDto.GPU_size;
                 conf.OSId = ConfigDto.OSId;
-                conf.others = ConfigDto.others;
+                conf.Others = ConfigDto.others;
             }
             
             await dbContext.SaveChangesAsync();

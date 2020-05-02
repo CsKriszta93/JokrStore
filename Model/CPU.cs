@@ -1,3 +1,4 @@
+using Model.Enums;
 using System;
 
 namespace Model
@@ -5,12 +6,12 @@ namespace Model
     public class CPU
     {
         public Guid Id { get; set; }
-        public string name { get; set; }
-        public int manufacturer { get; set; }
-        public string architect { get; set; }
-        public DateTime release { get; set; }
-        public uint freqency { get; set; }
-        public uint cores { get; set; }
-        public uint cache { get; set; }
+        public string Name { get; set; }
+        public CPUManufacturer Manufacturer { get; set; }
+        public string Architect { get; set; }
+        public DateTime Release { get; set; }
+        public uint Freqency { get; set; }
+        public uint Cores { get; set; }
+        public uint Cache { get; set; }
     }
 }

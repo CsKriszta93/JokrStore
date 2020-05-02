@@ -1,4 +1,5 @@
 using BLL.DTO;
+using Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,5 +13,8 @@ namespace BLL.ServiceInterfaces
         Task<IEnumerable<OSDto>> GetOSesAsync();
         Task<IEnumerable<PropertyDto>> GetManufactDtosAsync(int type);
 
+        IEnumerable<string> GetCPUManufacturersForSelectList();
+        IEnumerable<string> GetGPUManufacturersForSelectList();
+        IEnumerable<string> GetOSGroupForSelectList();
     }
 }

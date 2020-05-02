@@ -1,8 +1,7 @@
+using BLL.Extensions;
 using DAL.Seed.TestSeed;
-using JOKRStore.DAL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,14 +21,17 @@ namespace JokrStore.API
 
                 try
                 {
+                    var context = services.GetDbContext();
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var roleManager = services.GetRequiredService<RoleManager<Role>>();
+
                     TestSeed.SeedIdentity(userManager, roleManager);
+                    TestSeed.SeedHardware(context);
                 }
                 catch (Exception e)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(e, "error accured during migration");
+                    logger.LogError(e, "error accured during seeding");
                 }
             }
 
