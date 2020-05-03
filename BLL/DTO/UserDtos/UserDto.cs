@@ -20,6 +20,6 @@ namespace BLL.DTO
         public List<CommentDto> Comments { get; set; }
         public List<UserGamesDto> UserGames { get; set; }
         public List<GameDto> Games { get; set; }
-        public ConfigDto Config { get; set; }
+        public List<ConfigDto> Configs { get; set; }
     }
 }

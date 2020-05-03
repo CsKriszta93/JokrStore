@@ -24,9 +24,9 @@ namespace BLL.Services
         {
             var user = await dbContext.Users
             .Include(x => x.UserGames).ThenInclude(x => x.Game)
-            .Include(x => x.Config).ThenInclude(x => x.CPU)
-            .Include(x => x.Config).ThenInclude(x => x.GPU)
-            .Include(x => x.Config).ThenInclude(x => x.OS)
+            .Include(x => x.Configs).ThenInclude(x => x.CPU)
+            .Include(x => x.Configs).ThenInclude(x => x.GPU)
+            .Include(x => x.Configs).ThenInclude(x => x.OS)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return mapper.Map<UserDto>(user);

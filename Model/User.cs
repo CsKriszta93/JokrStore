@@ -26,8 +26,7 @@ namespace Model
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
-        public Guid ConfigId { get; set; }
-        public Config Config { get; set; }
+        public ICollection<Config> Configs { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
         public virtual ICollection<UserGames> UserGames { get; set; }

@@ -4,13 +4,13 @@ using Model;
 
 namespace DAL.EntityConfigurations
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<User>
+    internal class UserConfiguration : IEntityTypeConfiguration<Config>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Config> builder)
         {
-            builder.HasOne(u => u.Config)
-                .WithOne(c => c.User)
-                .HasForeignKey<Config>(c => c.UserId);
+            builder.HasOne(c => c.User)
+                .WithMany(u => u.Configs)
+                .HasForeignKey(c => c.UserId);
         }
     }
 }

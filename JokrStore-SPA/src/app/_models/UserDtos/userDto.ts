@@ -12,5 +12,5 @@ export interface UserDto {
     comments: any[];
     userGames: any[];
     games: any[];
-    config: any;
+    configs: any[];
 }
