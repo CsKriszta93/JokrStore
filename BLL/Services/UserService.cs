@@ -1,6 +1,5 @@
 using AutoMapper;
 using BLL.DTO;
-using BLL.DTO.UserDtos;
 using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +47,7 @@ namespace BLL.Services
                 conf.OSId = ConfigDto.OSId;
                 conf.Others = ConfigDto.others;
             }
-            
+
             await dbContext.SaveChangesAsync();
         }
     }

@@ -1,7 +1,7 @@
-﻿using BLL.DTO.UserDtos;
+﻿using BLL.DTO;
 using Microsoft.AspNetCore.Identity;
 
-namespace BLL.DTO.AuthDtos
+namespace BLL.DTO
 {
     public class LoginResultDto
     {

@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTO;
-using BLL.DTO.UserDtos;
-using Microsoft.AspNetCore.Identity;
 using Model;
-using System;
 
 namespace BLL.Mappers
 {

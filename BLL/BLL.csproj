@@ -28,4 +28,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+  
+      <ItemGroup>
+    <!-- <PackageReference Include="MTT" Version="0.6.4-*" PrivateAssets="All" /> -->
+    <PackageReference Include="MTT" Version="0.6.5" />
+  </ItemGroup>
+
+  <Target Name="ConvertMain" BeforeTargets="PrepareForBuild">
+    <ConvertMain WorkingDirectory="DTO/" ConvertDirectory="..\JokrStore-SPA\src\app\_models/" />
+  </Target>
+  
 </Project>

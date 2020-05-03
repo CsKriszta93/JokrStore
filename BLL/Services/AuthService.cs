@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using BLL.DTO.AuthDtos;
-using BLL.DTO.UserDtos;
+using BLL.DTO;
 using BLL.ServiceInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Model;
-using System;
 using System.Threading.Tasks;
 
 namespace BLL.Services

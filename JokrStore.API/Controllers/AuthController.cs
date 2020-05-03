@@ -1,4 +1,4 @@
-﻿using BLL.DTO.UserDtos;
+﻿using BLL.DTO;
 using BLL.ServiceInterfaces;
 using JokrStore.API.Helpers;
 using Microsoft.AspNetCore.Authorization;

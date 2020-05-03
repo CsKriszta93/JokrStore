@@ -1,5 +1,4 @@
-﻿using BLL.DTO.AuthDtos;
-using BLL.DTO.UserDtos;
+﻿using BLL.DTO;
 using System.Threading.Tasks;
 
 namespace BLL.ServiceInterfaces

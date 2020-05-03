@@ -1,4 +1,4 @@
-﻿namespace BLL.DTO.UserDtos
+﻿namespace BLL.DTO
 {
     public class UserLoginDto
     {

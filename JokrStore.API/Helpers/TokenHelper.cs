@@ -1,4 +1,4 @@
-﻿using BLL.DTO.UserDtos;
+﻿using BLL.DTO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
