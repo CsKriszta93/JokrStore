@@ -204,8 +204,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("OSId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Configs");
                 });
@@ -610,9 +609,6 @@ namespace DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ConfigId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -781,8 +777,8 @@ namespace DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Model.User", "User")
-                        .WithOne("Config")
-                        .HasForeignKey("Model.Config", "UserId")
+                        .WithMany("Configs")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
