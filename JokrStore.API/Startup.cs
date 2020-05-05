@@ -35,6 +35,7 @@ namespace JokrStore.API
 
             services.AddScoped<TokenHelper>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IGameService, GameService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

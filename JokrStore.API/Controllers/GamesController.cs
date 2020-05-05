@@ -2,6 +2,7 @@ using BLL.ServiceInterfaces;
 using BLL.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Linq;
 using System.Security.Claims;
@@ -11,6 +12,9 @@ using Newtonsoft.Json;
 
 namespace JokrStore.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    [AllowAnonymous]
     public class GamesController : Controller
     {
         private readonly IGameService gameService;
@@ -22,6 +26,7 @@ namespace JokrStore.API.Controllers
             this._hostingEnvironment = hostingEnvironment;
         }
 
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var gameDtos = await gameService.GetGamesAsync();
@@ -32,12 +37,13 @@ namespace JokrStore.API.Controllers
             });
         }
 
+        [HttpGet("Games")]
         public async Task<IActionResult> Games()
         {
             return Ok(await gameService.GetGamesAsync());
         }
 
-        [HttpGet]
+        [HttpGet("GameDetails")]
         public async Task<IActionResult> Details(Guid id)
         {
             var gameDto = await gameService.GetGameByIdAsync(id);
@@ -62,7 +68,7 @@ namespace JokrStore.API.Controllers
             });
         }
 
-        public async Task<ActionResult> Download_demo(Guid Id)
+        /*public async Task<ActionResult> Download_demo(Guid Id)
         {
             try {
                 var gameDto = await gameService.GetGameByIdAsync(Id);
@@ -91,8 +97,9 @@ namespace JokrStore.API.Controllers
 
             return Content("Access denied");
             
-        }
+        }*/
 
+        [HttpGet("MyGames")]
         public async Task<IActionResult> UserGameList()
         {
             var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;

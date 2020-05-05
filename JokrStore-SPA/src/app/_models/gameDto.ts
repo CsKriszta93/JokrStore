@@ -1,11 +1,11 @@
 ﻿/* Auto Generated */
 
 import { UserDto } from "./UserDtos/userDto";
-import { DescriptionDto } from "./descriptionDto";
 import { SysReqDto } from "./sysReqDto";
 import { CommentDto } from "./commentDto";
 import { MediaDto } from "./mediaDto";
 import { GamePropertyDto } from "./gamePropertyDto";
+import { DescriptionDto } from "./descriptionDto";
 
 export interface GameDto {
     id: any;
@@ -13,8 +13,6 @@ export interface GameDto {
     userId: any;
     user: UserDto;
     coverArt: string;
-    descriptionId?: any;
-    description: DescriptionDto;
     rate: number;
     price: number;
     release: Date;
@@ -32,4 +30,5 @@ export interface GameDto {
     comments: CommentDto[];
     medias: MediaDto[];
     genres: GamePropertyDto[];
+    descriptions: DescriptionDto[];
 }

@@ -3,7 +3,7 @@
 export interface CPUDto {
     id: any;
     name: string;
-    manufacturer: number;
+    manufacturer: any;
     architect: string;
     release: Date;
     freqency: number;

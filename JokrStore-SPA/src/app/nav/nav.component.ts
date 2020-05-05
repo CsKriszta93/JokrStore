@@ -8,7 +8,10 @@ import { UserLoginDto } from '../_models/UserDtos/userLoginDto';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: any = {};
+  model: UserLoginDto = {
+    userName : "",
+    password : ""
+  };
 
   constructor(private authService: AuthService) { }
 

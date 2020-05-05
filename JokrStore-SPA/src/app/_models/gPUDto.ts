@@ -3,7 +3,7 @@
 export interface GPUDto {
     id: any;
     name: string;
-    manufacturer: number;
+    manufacturer: any;
     architect: string;
     release: Date;
     memorySize: number;
