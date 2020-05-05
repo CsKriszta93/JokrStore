@@ -11,7 +11,6 @@ namespace BLL.Mappers
             CreateMap<Game, GameDto>()
                 .ForMember(m => m.Id, opt => opt.MapFrom(d => d.Id))
                 .ForMember(m => m.DemoLink, opt => opt.MapFrom(d => d.DemoLink))
-                .ForMember(m => m.Description, opt => opt.MapFrom(d => d.Description))
                 .ForMember(m => m.DownloadLink, opt => opt.MapFrom(d => d.DownloadLink))
                 .ForMember(m => m.GameName, opt => opt.MapFrom(d => d.GameName))
                 .ForMember(m => m.NumOfDownloads, opt => opt.MapFrom(d => d.NumOfDownloads))
@@ -29,6 +28,8 @@ namespace BLL.Mappers
                 .ReverseMap();
 
             CreateMap<GameProperty, GamePropertyDto>();
+            CreateMap<UserGames, UserGamesDto>();
+            CreateMap<Description, DescriptionDto>();
         }        
     }
 }

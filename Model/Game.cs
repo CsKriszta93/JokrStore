@@ -33,6 +33,6 @@ namespace Model
 
         //[ForeignKey("GameId")]
         public ICollection<GameProperty> Genres { get; set; }
-        public ICollection<Description> Description { get; set; } 
+        public ICollection<Description> Descriptions { get; set; } 
     }
 }

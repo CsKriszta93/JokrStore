@@ -1,4 +1,5 @@
 using System;
+using Model.Enums;
 
 namespace BLL.DTO
 {
@@ -6,7 +7,7 @@ namespace BLL.DTO
     {
         public Guid Id { get; set; }
         public string name { get; set; }
-        public int manufacturer { get; set; }
+        public CPUManufacturer manufacturer { get; set; }
         public string architect { get; set; }
         public DateTime release { get; set; }
         public uint freqency { get; set; }

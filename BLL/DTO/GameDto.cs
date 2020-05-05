@@ -10,8 +10,6 @@ namespace BLL.DTO
         public Guid UserId { get; set; }
         public UserDto User { get; set; }
         public string CoverArt { get; set; }
-        public Guid? DescriptionId { get; set; }
-        public DescriptionDto Description { get; set; } 
         public double Rate { get; set; }
         public decimal Price { get; set; }
         public DateTime Release { get; set; }
@@ -31,5 +29,6 @@ namespace BLL.DTO
         public ICollection<CommentDto> Comments { get; set; }
         public ICollection<MediaDto> Medias { get; set; }
         public ICollection<GamePropertyDto> Genres { get; set; }
+        public ICollection<DescriptionDto> Descriptions { get; set; } 
     }
 }

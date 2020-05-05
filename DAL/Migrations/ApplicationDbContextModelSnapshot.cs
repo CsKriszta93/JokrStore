@@ -786,7 +786,7 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Description", b =>
                 {
                     b.HasOne("Model.Game", "Game")
-                        .WithMany("Description")
+                        .WithMany("Descriptions")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
