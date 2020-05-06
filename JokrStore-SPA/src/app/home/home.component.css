@@ -1,0 +1,47 @@
+.titlet_header {
+    font-size: 15px;
+    background: #56dbdb;
+    color: white;
+    padding : 5px;
+    font-weight : bold;
+}
+
+.title_frame {
+    background: #282729;
+    color: white;
+    border: 1px solid #56dbdb;
+    margin: 5px;
+    margin-top: 20px;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .image_container {
+    position: relative;
+    width: 220px;
+  }
+  
+  .image {
+    opacity: 1;
+    display: block;
+    width: 100px;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  .image_container:hover .image {
+    opacity: 0.3;
+  }
+  
+  .image_container:hover .middle {
+    opacity: 1;
+  }
