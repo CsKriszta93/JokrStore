@@ -27,6 +27,7 @@ namespace JokrStore.API
 
                     TestSeed.SeedIdentity(userManager, roleManager);
                     TestSeed.SeedHardware(context);
+                    TestSeed.SeedGames(context);
                 }
                 catch (Exception e)
                 {

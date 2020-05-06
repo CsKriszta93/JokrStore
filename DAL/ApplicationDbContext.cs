@@ -54,5 +54,10 @@ namespace JOKRStore.DAL
         public DbSet<Property> Properties { get; set; }
         public DbSet<GameProperty> GameProperties { get; set; }
         public DbSet<Media> Medias { get; set; }
+        public DbSet<SysReq> SysReq { get; set; }
+        public DbSet<SysReqCPU> SysReqCPU { get; set; }
+        public DbSet<SysReqGPU> SysReqGPU { get; set; }
+        public DbSet<SysReqOS> SysReqOS { get; set; }
+
     }
 }
