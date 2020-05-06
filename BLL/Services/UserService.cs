@@ -43,7 +43,7 @@ namespace BLL.Services
                 conf.CPUId = ConfigDto.CPUId;
                 conf.RAM = ConfigDto.RAM;
                 conf.GPUId = ConfigDto.GPUId;
-                conf.GPUSize = ConfigDto.GPU_size;
+                conf.GPUSize = ConfigDto.GPUSize;
                 conf.OSId = ConfigDto.OSId;
                 conf.Others = ConfigDto.others;
             }

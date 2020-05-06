@@ -4,8 +4,8 @@ export interface SysReqDto {
     id: any;
     ram: number;
     storage: number;
-    directx: number;
-    opengl: number;
+    directX: number;
+    openGL: number;
     vulkan: number;
     sysReqCPUs: any[];
     sysReqGPUs: any[];

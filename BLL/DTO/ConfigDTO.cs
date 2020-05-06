@@ -12,7 +12,7 @@ namespace BLL.DTO
         public int RAM { get; set; }
         public Guid GPUId { get; set; }
         public GPUDto GPU { get; set; }
-        public int GPU_size { get; set; }
+        public int GPUSize { get; set; }
         public Guid OSId { get; set; }
         public OSDto OS { get; set; }
         public string others { get; set; }

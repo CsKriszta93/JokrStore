@@ -14,7 +14,7 @@ export interface ConfigDTO {
     ram: number;
     gPUId: any;
     gpu: GPUDto;
-    gPU_size: number;
+    gPUSize: number;
     oSId: any;
     os: OSDto;
     others: string;

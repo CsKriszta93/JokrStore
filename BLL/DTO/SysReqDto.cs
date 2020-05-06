@@ -6,11 +6,11 @@ namespace BLL.DTO
     public class SysReqDto
     {
         public Guid Id { get; set; }
-        public uint ram { get; set; }
-        public uint storage { get; set; }
-        public float directx { get; set; }
-        public float opengl { get; set; }
-        public float vulkan { get; set; }
+        public uint Ram { get; set; }
+        public uint Storage { get; set; }
+        public float DirectX { get; set; }
+        public float OpenGL { get; set; }
+        public float Vulkan { get; set; }
 
         public List<SysReqCPUDto> SysReqCPUs { get; set; }
         public List<SysReqGPUDto> SysReqGPUs { get; set; }
