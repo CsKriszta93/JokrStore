@@ -6,7 +6,7 @@ namespace BLL.DTO
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDtoLite User { get; set; }
         public Guid CPUId { get; set; }
         public CPUDto CPU { get; set; }
         public int RAM { get; set; }

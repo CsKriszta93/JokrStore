@@ -24,11 +24,21 @@ namespace BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<GameDto>> GetGamesAsync()
+        public async Task<IEnumerable<GameDtoLite>> GetGamesAsync()
         {
             var games = await dbContext
                 .Games.OrderBy(x => x.GameName)
-                .ProjectTo<GameDto>(mapper.ConfigurationProvider)
+                .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return games;
+        }
+
+        public async Task<IEnumerable<GameDtoLite>> GetGamesByStateAsync(int state)
+        {
+            var games = await dbContext
+                .Games.Where(x => x.State == state).OrderBy(x => x.Release).Take(6)
+                .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return games;

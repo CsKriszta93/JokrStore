@@ -10,7 +10,7 @@ namespace BLL.DTO
         public string Content { get; set; }
         public DateTime Date { get; set; }
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDtoLite User { get; set; }
         public Guid ForumCategoryId { get; set; }
         public ForumCategoryDto ForumCategory { get; set; }
         public List<CommentDto> Comments { get; set; }

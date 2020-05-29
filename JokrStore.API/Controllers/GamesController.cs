@@ -1,14 +1,15 @@
-using BLL.ServiceInterfaces;
-using BLL.DTO;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using BLL.ServiceInterfaces;
+using BLL.DTO;
+
 
 namespace JokrStore.API.Controllers
 {
@@ -29,11 +30,9 @@ namespace JokrStore.API.Controllers
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            var gameDtos = await gameService.GetGamesAsync();
-
             return Ok(new {
-                new_releases = gameDtos.Where(x => x.State == 0).OrderBy(x => x.Release).Take(6),
-                new_tests = gameDtos.Where(x => x.State == 1).OrderBy(x => x.Release).Take(6)
+                new_releases = await gameService.GetGamesByStateAsync(0),
+                new_tests = await gameService.GetGamesByStateAsync(1)
             });
         }
 

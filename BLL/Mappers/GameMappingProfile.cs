@@ -27,6 +27,11 @@ namespace BLL.Mappers
                 .ForMember(m => m.SysReqNotes, opt => opt.MapFrom(d => d.SysReqNotes))
                 .ReverseMap();
 
+            CreateMap<Game, GameDtoLite>()
+                .ForMember(m => m.Id, opt => opt.MapFrom(d => d.Id))
+                .ForMember(m => m.GameName, opt => opt.MapFrom(d => d.GameName))
+                .ForMember(m => m.CoverArt, opt => opt.MapFrom(d => d.CoverArt));
+
             CreateMap<GameProperty, GamePropertyDto>();
             CreateMap<UserGames, UserGamesDto>();
             CreateMap<Description, DescriptionDto>();

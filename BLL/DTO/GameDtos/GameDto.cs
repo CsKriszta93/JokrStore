@@ -8,7 +8,7 @@ namespace BLL.DTO
         public Guid Id { get; set; }
         public string GameName { get; set; }
         public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public UserDtoLite User { get; set; }
         public string CoverArt { get; set; }
         public double Rate { get; set; }
         public decimal Price { get; set; }
