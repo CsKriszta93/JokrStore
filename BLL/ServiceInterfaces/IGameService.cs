@@ -1,5 +1,7 @@
 ﻿using BLL.DTO;
+using BLL.Helpers;
 using Microsoft.AspNetCore.Http;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +10,8 @@ namespace BLL.ServiceInterfaces
 {
     public interface IGameService
     {
-        Task<IEnumerable<GameDtoLite>> GetGamesAsync();
+        Task<IEnumerable<GameDtoLite>> GetGamesAsync(GameParams gameFilters);
+        Task<int> GetGamesCountAsync();
         Task<IEnumerable<GameDtoLite>> GetGamesByStateAsync(int state);
         Task<GameDto> GetGameByIdAsync(Guid id);
         Task DeleteGameAsync(Guid id);

@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using BLL.ServiceInterfaces;
 using BLL.DTO;
-
+using BLL.Helpers;
 
 namespace JokrStore.API.Controllers
 {
@@ -20,11 +21,13 @@ namespace JokrStore.API.Controllers
     {
         private readonly IGameService gameService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly UserManager<Model.User> userManager;
 
-        public GamesController(IGameService gameService, IHostingEnvironment hostingEnvironment)
+        public GamesController(IGameService gameService, IHostingEnvironment hostingEnvironment, UserManager<Model.User> userManager)
         {
             this.gameService = gameService;
             this._hostingEnvironment = hostingEnvironment;
+            this.userManager = userManager;
         }
 
         [HttpGet("Index")]
@@ -37,9 +40,16 @@ namespace JokrStore.API.Controllers
         }
 
         [HttpGet("Games")]
-        public async Task<IActionResult> Games()
+        public async Task<IActionResult> Games([FromQuery]GameParams gameFilers)
         {
-            return Ok(await gameService.GetGamesAsync());
+            int TotalCount = await gameService.GetGamesCountAsync();
+            int TotalPages = (int)Math.Ceiling(TotalCount / (double)gameFilers.PageSize);
+
+            Response.AddPagination(gameFilers.CurrentPage, gameFilers.PageSize,
+                TotalCount, TotalPages);
+            return Ok(new {
+                games = await gameService.GetGamesAsync(gameFilers)
+            });
         }
 
         [HttpGet("GameDetails")]
@@ -101,7 +111,7 @@ namespace JokrStore.API.Controllers
         [HttpGet("MyGames")]
         public async Task<IActionResult> UserGameList()
         {
-            var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
+            string UserId = userManager.GetUserId(User);
             return Ok(await gameService.GetUserGames(Guid.Parse(UserId)));
         }
 

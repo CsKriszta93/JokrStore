@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Model;
+using BLL.Helpers;
 
 namespace BLL.Services
 {
@@ -24,14 +25,22 @@ namespace BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<GameDtoLite>> GetGamesAsync()
+        public async Task<IEnumerable<GameDtoLite>> GetGamesAsync(GameParams gameFilters)
         {
             var games = await dbContext
-                .Games.OrderBy(x => x.GameName)
+                .Games
+                .OrderBy(x => x.GameName)
+                .Skip((gameFilters.CurrentPage -1) * gameFilters.PageSize)
+                .Take(gameFilters.PageSize)
                 .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return games;
+        }
+
+        public async Task<int> GetGamesCountAsync()
+        {
+            return await dbContext.Games.CountAsync();
         }
 
         public async Task<IEnumerable<GameDtoLite>> GetGamesByStateAsync(int state)
