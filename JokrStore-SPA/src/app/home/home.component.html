@@ -1,41 +1,43 @@
-<div class="container-fluid">
-  <div class="col-sm-8">
-      <div style="padding: 5px; padding-top: 20px;">
-          <div class="title_frame">
-              <div class="titlet_header">New released games</div>
+<div class="container">
+    <div style="padding: 10px;">
+        <div class="col-sm-8">
+      
+            <div class="title_frame title_frame_first">
+                <h2><b>New released games</b></h2>
   
-              <div class="container-fluid">
-                <div *ngFor="let game of newReleaseGames" class="col-sm-8">
-                <a asp-controller="Games" asp-action="Details" asp-route-id="game.Id">
-                    <div class="image_container">
-                        <img [src]="game.coverArt" alt="{{game.gameName}}" class="image" >
-                        <div class="middle">
-                            <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.gameName}}</p>
-                        </div> 
+                <div class="container mosaic">
+                    <div *ngFor="let game of newReleaseGames">
+
+                        <a asp-controller="Games" asp-action="Details" asp-route-id="game.Id">
+                            <div class="image_container">
+                                <img [src]="game.coverArt" alt="{{game.gameName}}" class="image" >
+                                <div class="middle">
+                                    <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.gameName}}</p>
+                                </div>
+                            </div>
+                        </a>
+
                     </div>
-                </a>
                 </div>
-              </div>
-          </div>
-      </div>
-    </div>
+
+            </div>
+        </div>
   
-    <div class="col-sm-8">
-      <div style="padding: 5px; padding-top: 20px;">
-          <div class="title_frame">
-              <div class="titlet_header">New testable games</div>
+        <div class="col-sm-8">
+            <div class="title_frame title_frame_second">
+                <h2><b>New testable games</b></h2>
   
-              <div class="container-fluid">
-                  <div *ngFor="let game of newTestableGames" class="col-sm-2">
-                    <div class="image_container">
-                        <img src="#" alt="game.GameName" class="image" >
-                        <div class="middle">
-                            <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.GameName}}</p>
-                        </div> 
-                    </div>
+                <div class="container mosaic">
+                    <div *ngFor="let game of newTestableGames" class="col-sm-2">
+                        <div class="image_container">
+                            <img src="#" alt="game.GameName" class="image" >
+                            <div class="middle">
+                                <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.GameName}}</p>
+                            </div> 
+                        </div>
                   </div>
-              </div>
-          </div>
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

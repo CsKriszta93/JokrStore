@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { UserLoginDto } from '../_models/UserDtos/userLoginDto';
 
@@ -8,6 +8,7 @@ import { UserLoginDto } from '../_models/UserDtos/userLoginDto';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  @Input() stateFromApp : number;
   model: UserLoginDto = {
     userName : "",
     password : ""
@@ -34,6 +35,11 @@ export class NavComponent implements OnInit {
   isLoggedIn() {
     const token = localStorage.getItem('token');
     return !!token;
+  }
+
+  gameList() {
+    this.stateFromApp = 1;
+    console.log('state switched');
   }
 
 }

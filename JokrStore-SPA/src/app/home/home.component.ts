@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameDto } from '../_models/gameDto';
+import { GameDto } from '../_models/GameDtos/gameDto';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

@@ -5,16 +5,20 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
+import { GameListComponent } from './gameList/gameList.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
-      HomeComponent
+      HomeComponent,
+      GameListComponent
    ],
    imports: [
       BrowserModule,
@@ -22,7 +26,9 @@ import { HomeComponent } from './home/home.component';
       FormsModule,
       HttpClientModule,
       BsDropdownModule.forRoot(),
-      NgbModule
+      NgbModule,
+      AppRoutingModule,
+      NgxPaginationModule
    ],
    providers: [],
    bootstrap: [
