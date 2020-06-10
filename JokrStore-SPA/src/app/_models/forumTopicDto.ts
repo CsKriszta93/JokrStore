@@ -1,6 +1,6 @@
 ﻿/* Auto Generated */
 
-import { UserDto } from "./UserDtos/userDto";
+import { UserDtoLite } from "./UserDtos/userDtoLite";
 import { ForumCategoryDto } from "./forumCategoryDto";
 
 export interface ForumTopicDto {
@@ -9,7 +9,7 @@ export interface ForumTopicDto {
     content: string;
     date: Date;
     userId: any;
-    user: UserDto;
+    user: UserDtoLite;
     forumCategoryId: any;
     forumCategory: ForumCategoryDto;
     comments: any[];

@@ -6,11 +6,11 @@ import { HomeComponent } from '../home/home.component';
 
 const routes: Routes = [
   {
-    path: 'home-component',
+    path: 'home',
     component: HomeComponent
   },
   {
-    path: 'gameList-component',
+    path: 'games',
     component: GameListComponent
   }
 ];

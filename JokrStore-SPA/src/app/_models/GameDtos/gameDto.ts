@@ -1,17 +1,17 @@
 ﻿/* Auto Generated */
 
-import { UserDto } from "./UserDtos/userDto";
-import { SysReqDto } from "./sysReqDto";
-import { CommentDto } from "./commentDto";
-import { MediaDto } from "./mediaDto";
-import { GamePropertyDto } from "./gamePropertyDto";
-import { DescriptionDto } from "./descriptionDto";
+import { UserDtoLite } from "./../UserDtos/userDtoLite";
+import { SysReqDto } from "./../sysReqDto";
+import { CommentDto } from "./../commentDto";
+import { MediaDto } from "./../mediaDto";
+import { GamePropertyDto } from "./../gamePropertyDto";
+import { DescriptionDto } from "./../descriptionDto";
 
 export interface GameDto {
     id: any;
     gameName: string;
     userId: any;
-    user: UserDto;
+    user: UserDtoLite;
     coverArt: string;
     rate: number;
     price: number;

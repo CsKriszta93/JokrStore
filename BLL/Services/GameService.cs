@@ -29,7 +29,6 @@ namespace BLL.Services
         {
             var games = await dbContext
                 .Games
-                .OrderBy(x => x.GameName)
                 .Skip((gameFilters.CurrentPage -1) * gameFilters.PageSize)
                 .Take(gameFilters.PageSize)
                 .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)

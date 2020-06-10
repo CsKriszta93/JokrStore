@@ -1,6 +1,6 @@
 ﻿/* Auto Generated */
 
-import { GameDto } from "./gameDto";
+import { GameDto } from "./GameDtos/gameDto";
 import { PropertyDto } from "./propertyDto";
 
 export interface GamePropertyDto {

@@ -17,15 +17,15 @@ export class GameService {
 
   getGameList(page?, itemsPerPage?): Observable<PaginatedResult<GameDtoLite[]>> {
     const paginatedResult: PaginatedResult<GameDtoLite[]> = new PaginatedResult<GameDtoLite[]>();
-    
+
     let params = new HttpParams();
 
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
-    
-    return this.http.get<GameDtoLite[]>(this.baseUrl + 'games', { observe: 'response', params})
+
+    return this.http.get<GameDtoLite[]>(this.baseUrl + 'Games', { observe: 'response', params })
       .pipe(
         map(response => {
           paginatedResult.result = response.body;

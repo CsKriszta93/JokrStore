@@ -1,7 +1,7 @@
 ﻿/* Auto Generated */
 
 import { UserDto } from "./UserDtos/userDto";
-import { GameDto } from "./gameDto";
+import { GameDto } from "./GameDtos/gameDto";
 
 export interface UserGamesDto {
     id: any;
