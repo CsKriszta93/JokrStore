@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class GameService {
 
-  baseUrl = 'http://localhost:5000/api/games/';
+  baseUrl = 'http://localhost:5000/api/Games/';
 
   constructor(private http: HttpClient) { }
 
@@ -21,15 +21,15 @@ export class GameService {
     let params = new HttpParams();
 
     if (page != null && itemsPerPage != null) {
-      params = params.append('pageNumber', page);
-      params = params.append('pageSize', itemsPerPage);
+      params = params.append('CurrentPage', page);
+      params = params.append('PageSize', itemsPerPage);
     }
 
     return this.http.get<GameDtoLite[]>(this.baseUrl + 'Games', { observe: 'response', params })
       .pipe(
         map(response => {
-          paginatedResult.result = response.body;
-          if (response.headers.get('Pagination') != null) {
+          paginatedResult.result = response.body["games"];
+          if (response.headers.get('pagination') != null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
           }
           return paginatedResult;

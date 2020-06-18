@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -28,7 +28,7 @@ import { GameListComponent } from './gameList/gameList.component';
       BsDropdownModule.forRoot(),
       NgbModule,
       AppRoutingModule,
-      NgxPaginationModule
+      PaginationModule.forRoot()
    ],
    providers: [],
    bootstrap: [

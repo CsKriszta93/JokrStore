@@ -11,14 +11,19 @@ import { PaginatedResult } from '../_services/Pagination';
 })
 export class GameListComponent implements OnInit {
   games: PaginatedResult<GameDtoLite[]>;
-  pageNumber = 1;
+  currentPage = 1;
   pageSize = 2;
 
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
-    this.gameService.getGameList(this.pageNumber, this.pageSize)
+    this.gameService.getGameList(this.currentPage, this.pageSize)
       .subscribe(result => this.games = result);
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event.page;
+    console.log(this.currentPage);
   }
 
 }

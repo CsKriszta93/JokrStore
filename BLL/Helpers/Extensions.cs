@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace BLL.Helpers
 {
@@ -14,7 +15,10 @@ namespace BLL.Helpers
             int currentPage, int itemsPerPage, int totalItems, int totalPages) {
             
             var paginationHeader = new PaginationHeader(currentPage, itemsPerPage, totalItems, totalPages);
-            response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader));
+            var camelCaseFormatter = new JsonSerializerSettings();
+            camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            response.Headers.Add("Pagination",
+                JsonConvert.SerializeObject(paginationHeader, camelCaseFormatter));
             response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
     }
