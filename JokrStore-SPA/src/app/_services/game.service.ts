@@ -29,7 +29,7 @@ export class GameService {
       .pipe(
         map(response => {
           paginatedResult.result = response.body["games"];
-          if (response.headers.get('pagination') != null) {
+          if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
           }
           return paginatedResult;

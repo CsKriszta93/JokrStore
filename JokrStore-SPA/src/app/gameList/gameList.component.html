@@ -4,7 +4,7 @@
             <h2><b>Game list</b></h2>
             <div class="title_frame title_frame_first">
                 <div class="container mosaic">
-                    <div *ngFor="let game of games.result">
+                    <div *ngFor="let game of games">
                         <div class="image_container">
                             <img [src]="game.coverArt" alt="{{game.gameName}}" class="image" >
                             <div class="middle">
@@ -16,9 +16,9 @@
             </div>
             <div class="d-flex justify-context-center">
                 <pagination [boundaryLinks]="true"
-                                [totalItems]="games.pagination.totalItems">
-                                [itemsPerPage]="games.pagination.itemsPerPage"
-                                [(ngModel)]="games.pagination.currentPage"
+                                [totalItems]="pagination.totalItems"
+                                [itemsPerPage]="pagination.itemsPerPage"
+                                [(ngModel)]="pagination.currentPage"
                                 (pageChanged)="pageChanged($event)"
                                 previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
                 
