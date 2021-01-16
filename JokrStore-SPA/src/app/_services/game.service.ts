@@ -5,13 +5,15 @@ import { Observable } from 'rxjs';
 import { GameDtoLite } from '../_models/GameDtos/gameDtoLite';
 import { PaginatedResult } from './Pagination';
 import { map } from 'rxjs/operators';
+import { ApiPaths } from '../api-paths';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  baseUrl = 'http://localhost:5000/api/Games/';
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +27,7 @@ export class GameService {
       params = params.append('PageSize', itemsPerPage);
     }
 
-    return this.http.get<GameDtoLite[]>(this.baseUrl + 'Games', { observe: 'response', params })
+    return this.http.get<GameDtoLite[]>(this.baseUrl + ApiPaths.Games, { observe: 'response', params })
       .pipe(
         map(response => {
           paginatedResult.result = response.body["games"];
@@ -38,7 +40,7 @@ export class GameService {
   }
 
   getGame(id: any): Observable<GameDto> {
-    return this.http.get<GameDto>(this.baseUrl + 'games/' + id);
+    return this.http.get<GameDto>(`${this.baseUrl}${ApiPaths.Games}/${id}`);
   }
 
 }

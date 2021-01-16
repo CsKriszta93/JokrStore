@@ -15,10 +15,12 @@ export class GameComponent implements OnInit {
   game: GameDto;
   myDevelopment: boolean;
   id: any;
-  
-  constructor(private route: ActivatedRoute,
-              private authService: AuthService,
-              private gameService: GameService) { }
+
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private gameService: GameService
+  ) { }
 
   ngOnInit() {
     this.route.params
@@ -29,13 +31,9 @@ export class GameComponent implements OnInit {
       );
 
     this.gameService.getGame(this.id)
-      .subscribe((x: GameDto) =>  {
-          this.game = x;
-          console.log(this.game);
-        }
-      );
-
-    console.log(this.game);
+      .subscribe((x: any) => {
+        this.game = x.game;
+      });
   }
 
   public isLoggedIn() {
@@ -47,15 +45,15 @@ export class GameComponent implements OnInit {
 
   }
 
-  public buyGame(id : any) {
+  public buyGame(id: any) {
 
   }
 
-  public downloadGame(id : any) {
+  public downloadGame(id: any) {
 
   }
 
-  public downloadDemo(id : any) {
+  public downloadDemo(id: any) {
 
   }
 

@@ -14,66 +14,56 @@ using BLL.Helpers;
 
 namespace JokrStore.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/games")]
     [ApiController]
     [AllowAnonymous]
     public class GamesController : Controller
     {
         private readonly IGameService gameService;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment hostingEnvironment;
         private readonly UserManager<Model.User> userManager;
 
         public GamesController(IGameService gameService, IHostingEnvironment hostingEnvironment, UserManager<Model.User> userManager)
         {
             this.gameService = gameService;
-            this._hostingEnvironment = hostingEnvironment;
             this.userManager = userManager;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> Index()
-        {
-            return Ok(new {
-                new_releases = await gameService.GetGamesByStateAsync(0),
-                new_tests = await gameService.GetGamesByStateAsync(1)
-            });
-        }
-
-        [HttpGet("Games")]
+        [HttpGet]
         public async Task<IActionResult> Games([FromQuery]GameParams gameFilers)
         {
-            int TotalCount = await gameService.GetGamesCountAsync();
-            int TotalPages = (int)Math.Ceiling(TotalCount / (double)gameFilers.PageSize);
+            int totalCount = await gameService.GetGamesCountAsync();
+            int totalPages = (int)Math.Ceiling(totalCount / (double)gameFilers.PageSize);
 
-            Response.AddPagination(gameFilers.CurrentPage, gameFilers.PageSize,
-                TotalCount, TotalPages);
-            return Ok(new {
-                games = await gameService.GetGamesAsync(gameFilers)
-            });
+            Response.AddPagination(gameFilers.CurrentPage, gameFilers.PageSize, totalCount, totalPages);
+
+            return Ok(new { games = await gameService.GetGamesAsync(gameFilers) });
         }
 
-        [HttpGet("games/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Details([FromRoute] Guid id)
         {
-            var gameDto = await gameService.GetGameByIdAsync(id);
-            bool _isOwned;
-            bool _isMyDevelopment;
+            GameDto gameDto = await gameService.GetGameByIdAsync(id);
+            bool isOwned;
+            bool isMyDevelopment;
 
-            try {
+            try 
+            {
                 var UserId = Guid.Parse(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value);
-                _isOwned = gameService.IsOwnedGame(UserId, id);
-                _isMyDevelopment = gameDto.UserId == UserId;
+                isOwned = gameService.IsOwnedGame(UserId, id);
+                isMyDevelopment = gameDto.UserId == UserId;
             }
             catch (Exception e)
             {
-                 _isOwned = false;
-                 _isMyDevelopment = false;
+                 isOwned = false;
+                 isMyDevelopment = false;
             }
             
             return Ok(new {
-                games = gameDto,
-                isOwned = _isOwned,
-                isMyDevelopment = _isMyDevelopment
+                game = gameDto,
+                isOwned = isOwned,
+                isMyDevelopment = isMyDevelopment
             });
         }
 
@@ -108,7 +98,7 @@ namespace JokrStore.API.Controllers
             
         }*/
 
-        [HttpGet("MyGames")]
+        [HttpGet("my-games")]
         public async Task<IActionResult> UserGameList()
         {
             string UserId = userManager.GetUserId(User);

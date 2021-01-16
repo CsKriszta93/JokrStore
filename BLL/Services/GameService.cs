@@ -25,10 +25,18 @@ namespace BLL.Services
             this.mapper = mapper;
         }
 
+        public async Task<HomeGamesDto> GetHomeGamesAsync()
+        {
+            return new HomeGamesDto
+            {
+                NewReleases = await GetGamesByStateAsync(0),
+                NewTests = await GetGamesByStateAsync(1)
+            };
+        }
+
         public async Task<IEnumerable<GameDtoLite>> GetGamesAsync(GameParams gameFilters)
         {
-            var games = await dbContext
-                .Games
+            var games = await dbContext.Games
                 .Skip((gameFilters.CurrentPage -1) * gameFilters.PageSize)
                 .Take(gameFilters.PageSize)
                 .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
@@ -44,8 +52,10 @@ namespace BLL.Services
 
         public async Task<IEnumerable<GameDtoLite>> GetGamesByStateAsync(int state)
         {
-            var games = await dbContext
-                .Games.Where(x => x.State == state).OrderBy(x => x.Release).Take(6)
+            var games = await dbContext.Games
+                .Where(x => x.State == state)
+                .OrderBy(x => x.Release)
+                .Take(6)
                 .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
                 .ToListAsync();
 

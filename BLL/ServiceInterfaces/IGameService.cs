@@ -24,5 +24,7 @@ namespace BLL.ServiceInterfaces
         Task EditGameAsync(Guid UserId, GameDto new_game, IEnumerable<PropertyDto> new_genres, List<IFormFile> Medias, List<IFormFile> CoverArt, string rootdir);
         Task EditGameSysReqAsync(Guid GameId, SysReqDto MinSysReqDto, SysReqDto RecSysReqDto);
         Task<bool> GameHasPropery(Guid GameId, Guid PropertyId);
+
+        Task<HomeGamesDto> GetHomeGamesAsync();
     }
 }
