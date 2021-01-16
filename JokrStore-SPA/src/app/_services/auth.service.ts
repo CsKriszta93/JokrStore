@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(model: any) {
+  public login(model: any) {
     return this.http.post(this.baseUrl + 'login', model).pipe(
       map((response: any) => {
         const user = response;
@@ -20,5 +20,15 @@ export class AuthService {
         }
       })
     );
+  }
+
+  public logout() {
+    localStorage.removeItem('token');
+    console.log('log out');
+  }
+
+  public isLoggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 }

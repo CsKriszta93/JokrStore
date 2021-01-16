@@ -52,8 +52,8 @@ namespace JokrStore.API.Controllers
             });
         }
 
-        [HttpGet("GameDetails")]
-        public async Task<IActionResult> Details(Guid id)
+        [HttpGet("games/{id}")]
+        public async Task<IActionResult> Details([FromRoute] Guid id)
         {
             var gameDto = await gameService.GetGameByIdAsync(id);
             bool _isOwned;

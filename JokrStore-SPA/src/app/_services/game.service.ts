@@ -37,7 +37,7 @@ export class GameService {
       );
   }
 
-  getGame(id: number): Observable<GameDto> {
+  getGame(id: any): Observable<GameDto> {
     return this.http.get<GameDto>(this.baseUrl + 'games/' + id);
   }
 

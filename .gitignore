@@ -261,7 +261,7 @@ __pycache__/
 *.pyc
 
 # Game images
-JOKRStore/wwwroot/images/
+JokrStore-SPA/src/assets/
 
 # Entity framework migrations
 DAL/Migrations/

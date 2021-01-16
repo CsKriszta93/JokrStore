@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { GameListComponent } from './gameList/gameList.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
-   declarations: [
+   declarations: [	
       AppComponent,
       NavComponent,
       HomeComponent,
-      GameListComponent
+      GameListComponent,
+      GameComponent
    ],
    imports: [
       BrowserModule,

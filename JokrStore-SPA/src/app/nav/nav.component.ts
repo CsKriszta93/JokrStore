@@ -28,13 +28,11 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    console.log('log out');
+    this.authService.logout();
   }
 
   isLoggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.isLoggedIn();
   }
 
   gameList() {
