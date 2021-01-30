@@ -1,9 +1,9 @@
 <div *ngIf="game">
     <h1>{{game.gameName}}</h1>
     <hr>
-    <table>
-        <tr>
-            <td>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
                 <div class="text_box box-width-240">
                     <p><img class="cover_art" [src]="game.coverArt" alt={{game.gameName}}>
                     </p>
@@ -44,111 +44,40 @@
 
                     <a *ngIf="myDevelopment">Edit basics</a>
                 </div>
+            </div>
 
-
+            <div class="col-md-9">
                 <p class="header-big">Description</p>
 
                 <div *ngIf="game.descriptions.length">
                     <p>{{game.descriptions[0].content}}</p>
                 </div>
+            </div>
+        </div>
 
-                <div class="container">
-                    <div class="row row-no-gutters">
-                        <div class="col-sm-9">
-                            <p class="header-big">System requirements</p>
-                            <div *ngIf="game.descriptions">
-                                <a (onclick)="editSysReq()">Edit system requirements</a>
-                            </div>
+        <div class="row row-no-gutters">
+            <div class="col-sm-12">
+                <p class="header-big">System requirements</p>
+                <div *ngIf="game.descriptions">
+                    <a (onclick)="editSysReq()">Edit system requirements</a>
+                </div>
 
-                            <div class="container">
-                                <div class="row">
-                                    <div *ngIf="game.minSysReq" class="col-sm-4">
-                                        <p><b><i>Minimum system requirements:</i></b>
-                                        <p>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-sm-1">
-                                                    <p><b>CPU:</b> </p>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <ul>
-                                                        <div *ngFor="let cpu of game.minSysReq.sysReqCPUs;">
-                                                            <li>{{cpu.cpu.name}} {{cpu.cpu.frequency}} Mhz</li>
-                                                        </div>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-1">
-                                                    <p><b>RAM:</b></p>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div>{{game.minSysReq.ram}} MB</div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-1">
-                                                    <p><b>GPU:</b></p>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <ul>
-                                                        <div *ngFor="let gpu of game.minSysReq.sysReqGPUs;">
-                                                            <li>{{gpu.gpu.name}}</li>
-                                                        </div>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-1">
-                                                    <p><b>OS:</b></p>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <ul>
-                                                        <div *ngFor="let os of game.minSysReq.sysReqOSes;">
-                                                            <li>{{os.os.name}} or newer</li>
-                                                        </div>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div *ngIf="game.minSysReq.directX > 0 || game.minSysReq.openGL > 0 || game.minSysReq.vulkan > 0"
-                                                class="row">
-                                                <div class="col-sm-1">
-                                                    <p><b>Graphics API:</b></p>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <ul>
-                                                        <li *ngIf="game.minSysReq.directX > 0">DirectX
-                                                            {{game.minSysReq.directX}}</li>
-                                                        <li *ngIf="game.minSysReq.openGL > 0">OpenGL
-                                                            {{game.minSysReq.openGL}}</li>
-                                                        <li *ngIf="game.minSysReq.vulkan">Vulkan
-                                                            {{game.minSysReq.vulkan}}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-1">
-                                                    <p><b>Storage:</b></p>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div>{{game.minSysReq.storage}} MB</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div *ngIf="game.minSysReq" class="col-md-6 col-lg-5">
+                            <p><b><i>Minimum system requirements:</i></b></p>
+                            <app-sysReq [sysReqData]="game.minSysReq"></app-sysReq>
+                        </div>
+                        <div *ngIf="game.recSysReq" class="col-md-6 col-lg-5">
+                            <p><b><i>Recommented system requirements:</i></b></p>
+                            <app-sysReq [sysReqData]="game.recSysReq"></app-sysReq>
                         </div>
                     </div>
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
                 <p class="header-big">Galery:</p>
                 <div class="text_box">
                     <table>
@@ -173,10 +102,10 @@
                     <a class="w3-display-left" onclick="plusDivs(-1)" onkeypress="plusDivs_key(event, -1)">&#10094;</a>
                     <a class="w3-display-right" onclick="plusDivs(1)">&#10095;</a>
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="title_frame">
                     <div class="titlet_header">
                         Comments
@@ -205,24 +134,24 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <form id="commentForm">
-                                <div *ngIf="isLoggedIn(); else noLogin" class="form-group">
+                            <div *ngIf="isLoggedIn(); else noLogin" class="form-group">
+                                <form #commentForm="ngForm" (ngSubmit)="submitComment(commentForm.value)" autocomplete="off">
                                     <label for="comment">Add new comment:</label>
-                                    <textarea class="form-control" rows="3" id="CommentArea" name="contain"
-                                        placeholder="Write your comment here" class="form-control"></textarea>
-                                    <input type="hidden" id="GameId" name="gameId" value=@Model.Id /><br>
-                                    <button id="submit" class="button button-cian">Submit</button>
-                                </div>
-                                <ng-template #noLogin>
-                                    <label for="comment">You must log in to write comments.</label>
-                                </ng-template>
-                            </form>
+                                    <textarea class="form-control" rows="3" name="contain"
+                                        placeholder="Write your comment here"></textarea>
+                                    <button type="submit" class="button button-cian">Submit</button>
+                                </form>
+                            </div>
+                            
+                            <ng-template #noLogin>
+                                <label for="comment">You must log in to write comments.</label>
+                            </ng-template>
                         </div>
                     </div>
                 </div>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

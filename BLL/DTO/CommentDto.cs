@@ -7,7 +7,7 @@ namespace BLL.DTO
         public Guid CommenterId { get; set; }
         public UserDtoLite User { get; set; }
 
-        public DateTime CommentDate { get; set; }
+        public string CommentDate { get; set; }
 
         public string Contain { get; set; }
 

@@ -13,6 +13,7 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { GameListComponent } from './gameList/gameList.component';
 import { GameComponent } from './game/game.component';
+import { SysReqComponent } from './sysReq/sysReq.component';
 
 @NgModule({
    declarations: [	
@@ -20,7 +21,8 @@ import { GameComponent } from './game/game.component';
       NavComponent,
       HomeComponent,
       GameListComponent,
-      GameComponent
+      GameComponent,
+      SysReqComponent
    ],
    imports: [
       BrowserModule,

@@ -12,11 +12,11 @@ namespace BLL.DTO
         public string CoverArt { get; set; }
         public double Rate { get; set; }
         public decimal Price { get; set; }
-        public DateTime Release { get; set; }
+        public string Release { get; set; }
         public string DownloadLink { get; set; }
         public string DemoLink { get; set; }
         public int NumOfDownloads { get; set; }
-        public DateTime Publish { get; set; }
+        public string Publish { get; set; }
         public int State { get; set; }
         public int ReleaseState { get; set; }
 

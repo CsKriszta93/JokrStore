@@ -2,8 +2,10 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GameDto } from '../_models/GameDtos/gameDto';
+import { CommentDto } from '../_models/commentDto';
 import { AuthService } from '../_services/auth.service';
 import { GameService } from '../_services/game.service';
+import { CommentService } from '../_services/comment.service';
 
 @Component({
   selector: 'app-game',
@@ -19,7 +21,8 @@ export class GameComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private gameService: GameService
+    private gameService: GameService,
+    private commentService: CommentService
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,12 @@ export class GameComponent implements OnInit {
 
   public downloadDemo(id: any) {
 
+  }
+
+  public submitComment(comment: CommentDto) {
+    console.log(comment.contain);
+    comment.gameId = this.game.id;
+    this.commentService.postComment(comment);
   }
 
 }

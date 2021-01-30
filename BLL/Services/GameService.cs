@@ -155,7 +155,7 @@ namespace BLL.Services
 
             game.GameName = new_game.GameName;
             game.Price = new_game.Price;
-            game.Release = new_game.Release;
+            game.Release = DateTime.Parse(new_game.Release + " 0:00");
 
             var genres_to_delete = await dbContext.GameProperties.Where(x => x.GameId == new_game.Id && x.Property.type == 0).ToListAsync();
             dbContext.GameProperties.RemoveRange(genres_to_delete);

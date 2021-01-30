@@ -5,7 +5,7 @@ import { UserDtoLite } from "./UserDtos/userDtoLite";
 export interface CommentDto {
     commenterId: any;
     user: UserDtoLite;
-    commentDate: Date;
+    commentDate: string;
     contain: string;
     gameId: any;
 }

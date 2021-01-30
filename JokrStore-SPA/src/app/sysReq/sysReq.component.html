@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-2">
+          <p><b>CPU:</b> </p>
+      </div>
+      <div class="col-sm-10">
+          <ul>
+              <div *ngFor="let cpu of sysReqData.sysReqCPUs;">
+                  <li>{{cpu.cpu.name}} {{cpu.cpu.frequency}} Mhz</li>
+              </div>
+          </ul>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-2">
+          <p><b>RAM:</b></p>
+      </div>
+      <div class="col-sm-10">
+          <p>{{sysReqData.ram}} MB</p>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-2">
+          <p><b>GPU:</b></p>
+      </div>
+      <div class="col-sm-10">
+          <ul>
+              <div *ngFor="let gpu of sysReqData.sysReqGPUs;">
+                  <li>{{gpu.gpu.name}}</li>
+              </div>
+          </ul>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-2">
+          <p><b>OS:</b></p>
+      </div>
+      <div class="col-sm-10">
+          <ul>
+              <div *ngFor="let os of sysReqData.sysReqOSes;">
+                  <li>{{os.os.name}} or newer</li>
+              </div>
+          </ul>
+      </div>
+  </div>
+
+  <div *ngIf="sysReqData.directX > 0 || sysReqData.openGL > 0 || sysReqData.vulkan > 0"
+      class="row">
+      <div class="col-sm-2">
+          <p><b>Graphics API:</b></p>
+      </div>
+      <div class="col-sm-10">
+          <ul>
+              <li *ngIf="sysReqData.directX > 0">DirectX
+                  {{sysReqData.directX}}</li>
+              <li *ngIf="sysReqData.openGL > 0">OpenGL
+                  {{sysReqData.openGL}}</li>
+              <li *ngIf="sysReqData.vulkan">Vulkan
+                  {{sysReqData.vulkan}}</li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-2">
+          <p><b>Storage:</b></p>
+      </div>
+      <div class="col-sm-10">
+          <p>{{sysReqData.storage}} MB</p>
+      </div>
+  </div>
+</div>

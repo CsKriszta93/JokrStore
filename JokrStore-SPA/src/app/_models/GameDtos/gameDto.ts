@@ -15,11 +15,11 @@ export interface GameDto {
     coverArt: string;
     rate: number;
     price: number;
-    release: Date;
+    release: string;
     downloadLink: string;
     demoLink: string;
     numOfDownloads: number;
-    publish: Date;
+    publish: string;
     state: number;
     releaseState: number;
     minSysReqId?: any;
