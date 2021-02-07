@@ -1,6 +1,7 @@
 using AutoMapper;
 using BLL.DTO;
 using BLL.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -9,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace JOKRStore.Web.Controllers
 {
+    [Route("api/comments")]
+    [ApiController]
+    [AllowAnonymous]
     public class CommentsController : Controller
     {
         private readonly ICommentService commentService;
@@ -20,8 +24,7 @@ namespace JOKRStore.Web.Controllers
             this.mapper = mapper;
         }
 
-        [HttpPost("comment")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> PostComment(CommentDto comment)
         {
             var UserId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
@@ -31,7 +34,7 @@ namespace JOKRStore.Web.Controllers
             }
 
 
-            comment.CommenterId = Guid.Parse(UserId);
+            comment.Commenter = Guid.Parse(UserId);
             comment.CommentDate = DateTime.Now.ToString("yyyy.MM.dd. hh:mm");
 
             await commentService.AddComment(comment);

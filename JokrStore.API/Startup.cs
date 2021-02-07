@@ -44,6 +44,7 @@ namespace JokrStore.API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHardwareService, HardwareService>();
             services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -51,7 +52,7 @@ namespace JokrStore.API
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
                         .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                     ValidateIssuer = false,
                     ValidateAudience = false
@@ -129,6 +130,7 @@ namespace JokrStore.API
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

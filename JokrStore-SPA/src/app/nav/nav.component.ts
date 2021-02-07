@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { UserLoginDto } from '../_models/UserDtos/userLoginDto';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -14,7 +16,8 @@ export class NavComponent implements OnInit {
     password : ""
   };
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router,
+      private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -24,15 +27,13 @@ export class NavComponent implements OnInit {
       console.log('Logged in successfully');
     }, error => {
       console.log('failed to login');
+      this.toastr.error('Failed to log in');
     });
   }
 
   logout() {
     this.authService.logout();
-  }
-
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
+    this.router.navigateByUrl('/home');
   }
 
   gameList() {

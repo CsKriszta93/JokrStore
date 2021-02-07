@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
+import { UserDto } from '../_models/UserDtos/userDto';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,8 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   baseUrl = 'http://localhost:5000/api/auth/';
+  private currentUserSource = new ReplaySubject<UserDto>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -16,19 +20,19 @@ export class AuthService {
       map((response: any) => {
         const user = response;
         if (user) {
-          localStorage.setItem('token', user);
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
         }
       })
     );
   }
 
   public logout() {
-    localStorage.removeItem('token');
-    console.log('log out');
+    localStorage.removeItem('user');
+    this.currentUserSource.next(null);
   }
 
-  public isLoggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+  public setCurrentUser(user: UserDto) {
+    this.currentUserSource.next(user);
   }
 }

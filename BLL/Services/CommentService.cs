@@ -21,14 +21,12 @@ namespace BLL.Services
 
         public async Task AddComment(CommentDto commentDto)
         {
-            if (commentDto != null)
-            {
-                var comment = mapper.Map<Comment>(commentDto);
-                dbContext.Comments.Add(comment);
-                await dbContext.SaveChangesAsync();
-            }
+            if (commentDto == null)
+                throw new ArgumentNullException("commentDto is null");
 
-            throw new ArgumentNullException("commentDto is null");
+            var comment = mapper.Map<Comment>(commentDto);
+            dbContext.Comments.Add(comment);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

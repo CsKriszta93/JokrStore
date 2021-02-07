@@ -17,10 +17,17 @@ export class GameComponent implements OnInit {
   game: GameDto;
   myDevelopment: boolean;
   id: any;
+  comment: CommentDto = {
+    commenter: null,
+    contain: "",
+    commentDate: "",
+    gameId: "",
+    user: null
+  };
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService,
+    public authService: AuthService,
     private gameService: GameService,
     private commentService: CommentService
   ) { }
@@ -39,11 +46,6 @@ export class GameComponent implements OnInit {
       });
   }
 
-  public isLoggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
-  }
-
   public editSysReq() {
 
   }
@@ -60,10 +62,12 @@ export class GameComponent implements OnInit {
 
   }
 
-  public submitComment(comment: CommentDto) {
-    console.log(comment.contain);
-    comment.gameId = this.game.id;
-    this.commentService.postComment(comment);
+  public submitComment() {
+    this.comment.gameId = this.game.id;
+    console.log(this.comment.contain);
+    this.commentService.postComment(this.comment).subscribe(x => {
+      console.log(x);
+    });
   }
 
 }

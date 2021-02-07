@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { GameListComponent } from './gameList/gameList.component';
 import { GameComponent } from './game/game.component';
 import { SysReqComponent } from './sysReq/sysReq.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
    declarations: [	
@@ -32,7 +33,10 @@ import { SysReqComponent } from './sysReq/sysReq.component';
       BsDropdownModule.forRoot(),
       NgbModule,
       AppRoutingModule,
-      PaginationModule.forRoot()
+      PaginationModule.forRoot(),
+      ToastrModule.forRoot({
+         positionClass: 'toast-bottom-right'
+      })
    ],
    providers: [],
    bootstrap: [

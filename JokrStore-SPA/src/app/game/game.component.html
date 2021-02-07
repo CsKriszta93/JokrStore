@@ -134,11 +134,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <div *ngIf="isLoggedIn(); else noLogin" class="form-group">
-                                <form #commentForm="ngForm" (ngSubmit)="submitComment(commentForm.value)" autocomplete="off">
+                            <div *ngIf="authService.currentUser$ | async; else noLogin" class="form-group">
+                                <form #commentForm="ngForm" (ngSubmit)="submitComment()" autocomplete="off">
                                     <label for="comment">Add new comment:</label>
                                     <textarea class="form-control" rows="3" name="contain"
-                                        placeholder="Write your comment here"></textarea>
+                                        placeholder="Write your comment here" [(ngModel)]="comment.contain"></textarea>
                                     <button type="submit" class="button button-cian">Submit</button>
                                 </form>
                             </div>

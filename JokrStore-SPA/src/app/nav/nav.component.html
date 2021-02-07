@@ -9,8 +9,8 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
 
-        <li class="nav-item active">
-          <a routerLink="/games" routerLinkActive="active" class="nav-link">Games</a>
+        <li class="nav-item" routerLinkActive='active'>
+          <a routerLink="/games"class="nav-link">Games</a>
         </li>
 
         <li class="nav-item">
@@ -18,7 +18,7 @@
         </li>
       </ul>
 
-      <div *ngIf="isLoggedIn()" class="dropdown show mr-4" dropdown>
+      <div *ngIf="authService.currentUser$ | async" class="dropdown show mr-4" dropdown>
         <a class="dropdown-toggle text-light" dropdownToggle>My account</a>
         <div class="dropdown-menu mr-8" *dropdownMenu>
           <a class="dropdown-item" href="#">My games</a>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <form *ngIf="!isLoggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+      <form *ngIf="!(authService.currentUser$ | async)" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
         <input class="form-control mr-sm-2" type="text" placeholder="UserName" name="username" required
           [(ngModel)]="model.userName">
         <input class="form-control mr-sm-2" type="text" placeholder="Password" name="password" required
