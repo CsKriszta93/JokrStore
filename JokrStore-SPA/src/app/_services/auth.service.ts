@@ -27,6 +27,17 @@ export class AuthService {
     );
   }
 
+  public register(model: any) {
+    return this.http.post(this.baseUrl + 'register', model).pipe(
+      map((user: any) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    )
+  }
+
   public logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameListComponent } from '../gameList/gameList.component';
 import { GameComponent } from '../game/game.component';
 import { HomeComponent } from '../home/home.component';
+import { RegisterComponent } from '../register/register.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'game/:id',
     component: GameComponent
+  },
+  {
+    path: "register",
+    component: RegisterComponent
   }
 ];
 

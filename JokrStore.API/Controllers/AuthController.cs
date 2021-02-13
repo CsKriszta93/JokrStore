@@ -29,10 +29,11 @@ namespace JokrStore.API.Controllers
             if (createdUserResult.Result.Succeeded)
             {
                 //TODO: egyelőre hiányzó endpoint, az mvc projektből áthozni apiba 
-                return CreatedAtRoute(
+                /*return CreatedAtRoute(
                     "GetUser",
                     new { controller = "Users", id = createdUserResult.User.Id },
-                    createdUserResult.User);
+                    createdUserResult.User);*/
+                return Ok(createdUserResult.User);
             }
 
             return BadRequest(createdUserResult.Result.Errors);

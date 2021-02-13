@@ -15,15 +15,17 @@ import { GameListComponent } from './gameList/gameList.component';
 import { GameComponent } from './game/game.component';
 import { SysReqComponent } from './sysReq/sysReq.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-   declarations: [	
+   declarations: [		
       AppComponent,
       NavComponent,
       HomeComponent,
       GameListComponent,
       GameComponent,
-      SysReqComponent
+      SysReqComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule,

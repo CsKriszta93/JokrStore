@@ -17,6 +17,7 @@ namespace BLL.Mappers
 
             CreateMap<User, UserRegisterDto>()
                 .ForMember(m => m.UserName, opt => opt.MapFrom(d => d.UserName))
+                .ForMember(m => m.Email, opt => opt.MapFrom(d => d.Email))
                 .ForMember(m => m.Password, opt => opt.Ignore())
                 .ReverseMap();
 

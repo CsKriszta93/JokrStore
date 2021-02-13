@@ -3,6 +3,7 @@ using BLL.DTO;
 using BLL.ServiceInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Model;
+using System;
 using System.Threading.Tasks;
 
 namespace BLL.Services
@@ -23,6 +24,7 @@ namespace BLL.Services
         public async Task<LoginResultDto> GetCreateUserResultAsync(UserRegisterDto userRegisterDto)
         {
             var userToCreate = mapper.Map<User>(userRegisterDto);
+            userToCreate.Registration = DateTime.Now;
             var result = await userManager.CreateAsync(userToCreate, userRegisterDto.Password);
 
             return new LoginResultDto
@@ -36,6 +38,12 @@ namespace BLL.Services
         {
             var user = await userManager.FindByNameAsync(userLoginDto.UserName);
             var result = await signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, false);
+
+            if (result.Succeeded)
+            {
+                user.LastLogin = DateTime.Now;
+                await signInManager.UserManager.UpdateAsync(user);
+            }
 
             return new SignInResultDto
             {
