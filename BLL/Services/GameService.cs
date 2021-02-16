@@ -98,11 +98,13 @@ namespace BLL.Services
             await dbContext.SaveChangesAsync();
         }
 
-        //public async Task AddGameToUser(Guid UserId, Guid GameId)
-        //{
-        //    dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
-        //    await dbContext.SaveChangesAsync();
-        //}
+        public async Task AddGameToUser(Guid UserId, Guid GameId)
+        {
+            dbContext.UserGames.Add(new UserGames{
+                UserId = UserId,
+                GameId = GameId});
+            await dbContext.SaveChangesAsync();
+        }
 
         public async Task<IEnumerable<GameDto>> GetUserGames(Guid UserId)
         {

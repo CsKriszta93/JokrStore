@@ -5,6 +5,7 @@ import { GameListComponent } from '../gameList/gameList.component';
 import { GameComponent } from '../game/game.component';
 import { HomeComponent } from '../home/home.component';
 import { RegisterComponent } from '../register/register.component';
+import { CartComponent } from '../cart/cart.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: "register",
     component: RegisterComponent
+  },
+  {
+    path: "cart",
+    component: CartComponent
   }
 ];
 

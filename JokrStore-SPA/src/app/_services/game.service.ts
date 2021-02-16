@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { GameDto } from '../_models/GameDtos/gameDto';
 import { Observable } from 'rxjs';
 import { GameDtoLite } from '../_models/GameDtos/gameDtoLite';
@@ -7,6 +7,7 @@ import { PaginatedResult } from './Pagination';
 import { map } from 'rxjs/operators';
 import { ApiPaths } from '../api-paths';
 import { environment } from 'src/environments/environment';
+import { CartGameDto } from '../_models/GameDtos/cartGameDto';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,17 @@ export class GameService {
 
   getGame(id: any): Observable<GameDto> {
     return this.http.get<GameDto>(`${this.baseUrl}${ApiPaths.Games}/${id}`);
+  }
+
+  buyGames() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
+      })
+    }
+    let cart : Array<CartGameDto>;
+    cart = JSON.parse(localStorage.getItem('cart'));
+    return this.http.post(this.baseUrl + 'cart', cart, httpOptions);
   }
 
 }

@@ -16,7 +16,7 @@ namespace BLL.ServiceInterfaces
         Task<GameDto> GetGameByIdAsync(Guid id);
         Task DeleteGameAsync(Guid id);
         Task DeleteMediaAsync(Guid id);
-        //Task AddGameToUser(Guid UserId, Guid GameId);
+        Task AddGameToUser(Guid UserId, Guid GameId);
         Task<IEnumerable<GameDto>> GetUserGames(Guid UserId);
         Task<IEnumerable<PropertyDto>> GetPropertyDtosAsync(int type);
         bool IsOwnedGame(Guid UserId, Guid GameId);

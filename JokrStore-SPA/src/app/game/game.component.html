@@ -24,14 +24,14 @@
                         </ul>
                     </div>
 
-                    <p *ngIf="game.demoLink"><a class="button button-green" (onclick)="downloadDemo(game.id)"></a></p>
+                    <p *ngIf="game.demoLink"><a class="button button-green" (click)="downloadDemo()"></a></p>
 
                     <div *ngIf="game.price === 0; then showDownloadBtn else showBuyBtn"></div>
                     <ng-template #showDownloadBtn>
-                        <p><a class="button button-green" (onClick)="downloadGame(game.id)">Download</a></p>
+                        <p><a class="button button-green" (click)="downloadGame()">Download</a></p>
                     </ng-template>
                     <ng-template #showBuyBtn>
-                        <p><a class="button button-blue" (onClick)="buyGame(game.id)">Buy</a></p>
+                        <p><a class="button button-blue" (click)="buyGame()">Buy</a></p>
                     </ng-template>
 
                     <div *ngIf="game.price === 0; then showFreeTitle else showPrice"></div>
