@@ -45,14 +45,9 @@ export class GameService {
   }
 
   buyGames() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
-      })
-    }
     let cart : Array<CartGameDto>;
     cart = JSON.parse(localStorage.getItem('cart'));
-    return this.http.post(this.baseUrl + 'cart', cart, httpOptions);
+    return this.http.post(this.baseUrl + 'cart', cart);
   }
 
 }

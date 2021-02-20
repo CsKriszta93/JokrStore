@@ -15,13 +15,7 @@ export class CommentService {
   constructor(private http: HttpClient) { }
   
   postComment(comment: CommentDto) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
-      })
-    }
-
-    return this.http.post(this.baseUrl + 'comments', comment, httpOptions);
+    return this.http.post(this.baseUrl + 'comments', comment);
   }
 
 }
