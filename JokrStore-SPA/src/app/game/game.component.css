@@ -1,31 +1,30 @@
-.titlet_header {
-    font-size: 15px;
-    background: #56dbdb;
-    color: white;
-    padding : 5px;
-    font-weight : bold;
+h1 {
+    text-align: center;
+    color: rgb(130, 194, 191);
+    margin: 10px;
 }
 
-.title_frame {
+.title_header {
     background: #282729;
-    color: white;
-    border: 1px solid #56dbdb;
-    margin: 5px;
-    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.comment_frame {
+    margin: 10px;
 }
 
 .comment_header {
     background: #403E41;
-    padding: 5px;
+    padding: 5px 0;
+    margin-top: 10px;
     font-weight: bold;
 }
 
-.comment_frame {
-    background: #282729;
-    margin: 5px;
-}
-
 .comment_body {
+    background: #282729;
     padding: 20px;
 }
 
@@ -35,12 +34,9 @@
 
 .text_box {
     padding: 10px;
-    
-    background: #454545;
-    border: 2px solid #56dbdb;
+    background: rgb(89, 89, 107);
     margin: 10px;
     margin-bottom: 30px;
-    float: left;
 }
 
 .box-width-240 {
@@ -65,4 +61,10 @@ img {
     height : 260px;
     max-width: 100%;
     max-height: 100%;
+    
+}
+
+.cover_art_container {
+    display: flex;
+    justify-content: center;
 }

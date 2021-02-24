@@ -33,13 +33,12 @@ namespace JOKRStore.Web.Controllers
                 return Content("error");
             }
 
-
             comment.Commenter = Guid.Parse(UserId);
-            comment.CommentDate = DateTime.Now.ToString("yyyy.MM.dd. hh:mm");
+            comment.CommentDate = DateTime.Now.ToString("yyyy.MM.dd. HH:mm");
 
             await commentService.AddComment(comment);
 
-           return Ok("Success");
+           return NoContent();
         }
     }
 }

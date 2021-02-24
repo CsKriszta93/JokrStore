@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
    declarations: [			
@@ -41,7 +42,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
       PaginationModule.forRoot(),
       ToastrModule.forRoot({
          positionClass: 'toast-bottom-right'
-      })
+      }),
+      TabsModule.forRoot()
    ],
    providers: [
       {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

@@ -49,10 +49,7 @@ export class GameComponent implements OnInit {
         }
       );
 
-    this.gameService.getGame(this.id)
-      .subscribe((x: any) => {
-        this.game = x.game;
-      });
+    this.loadGame();
   }
 
   public editSysReq() {
@@ -80,10 +77,23 @@ export class GameComponent implements OnInit {
 
   public submitComment() {
     this.comment.gameId = this.game.id;
-    console.log(this.comment.contain);
-    this.commentService.postComment(this.comment).subscribe(x => {
-      console.log(x);
+    this.commentService.postComment(this.comment).subscribe(() => {
+      this.loadGame();
     });
+  }
+
+  loadGame() {
+    this.gameService.getGame(this.id)
+      .subscribe((x: any) => {
+        this.game = x.game;
+        this.game.comments.sort((a, b) => {
+          if (a.commentDate > b.commentDate)
+            return -1;
+          else if (a.commentDate < b.commentDate)
+            return 1;
+          return 0;
+        });
+      });
   }
 
 }
