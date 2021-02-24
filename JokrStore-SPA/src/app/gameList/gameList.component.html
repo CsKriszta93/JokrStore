@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="col-sm-8">
+        <div style="padding: 10px; padding-top: 20px;">
+            <h2><b>Game list</b></h2>
+            <div class="title_frame title_frame_first">
+                <div class="container mosaic">
+                    <div *ngFor="let game of games">
+                        <div routerLink="/game/{{game.id}}" routerLinkActive="active" class="image_container">
+                            <img [src]="game.coverArt" alt="{{game.gameName}}" class="image" >
+                            <div class="middle">
+                                <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.gameName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-context-center">
+                <pagination [boundaryLinks]="true"
+                                [totalItems]="pagination.totalItems"
+                                [itemsPerPage]="pagination.itemsPerPage"
+                                [(ngModel)]="pagination.currentPage"
+                                (pageChanged)="pageChanged($event)"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                
+                </pagination>
+            </div>
+        </div>
+    </div>
+</div>

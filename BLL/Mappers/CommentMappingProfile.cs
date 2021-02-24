@@ -9,11 +9,10 @@ namespace BLL.Mappers
         public CommentMappingProfile()
         {
             CreateMap<Comment, CommentDto>()
-                .ForMember(b => b.UserId, opt => opt.MapFrom(c => c.UserId))
+                .ForMember(b => b.Commenter, opt => opt.MapFrom(c => c.Commenter))
                 .ForMember(b => b.Contain, opt => opt.MapFrom(c => c.Contain))
-                .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate))
+                .ForMember(b => b.CommentDate, opt => opt.MapFrom(c => c.CommentDate.ToString("yyyy-MM-dd HH:mm")))
                 .ForMember(b => b.GameId, opt => opt.MapFrom(c => c.GameId))
-                .ForMember(b => b.ForumTopicId, opt => opt.MapFrom(c => c.ForumTopicId))
                 .ReverseMap();
         }
     }

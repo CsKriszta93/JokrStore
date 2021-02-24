@@ -1,25 +1,26 @@
 using System;
+using Model.Enums;
 
 namespace BLL.DTO
 {
     public class GPUDto
     {
         public Guid Id { get; set; }
-        public string name { get; set; }
-        public int manufacturer { get; set; }
-        public string architect { get; set; }
-        public DateTime release { get; set; }
-        public uint memory_size { get; set; }
-        public float shader_model { get; set; }
-        public float directx { get; set; }
-        public float opengl { get; set; }
-        public float vulkan { get; set; }
-        public uint memory_freqency { get; set; }
-        public uint core_frequency { get; set; }
-        public uint shaders { get; set; }
-        public uint buswidth { get; set; }
-        public uint bandwidth { get; set; }
-        public uint pixel_fillrate { get; set; }
-        public uint texture_fillrate { get; set; }
+        public string Name { get; set; }
+        public GPUManufacturer Manufacturer { get; set; }
+        public string Architect { get; set; }
+        public DateTime Release { get; set; }
+        public uint MemorySize { get; set; }
+        public float ShaderModel { get; set; }
+        public float DirectX { get; set; }
+        public float OpenGl { get; set; }
+        public float Vulkan { get; set; }
+        public uint MemoryFreqency { get; set; }
+        public uint CoreFrequency { get; set; }
+        public uint Shaders { get; set; }
+        public uint Buswidth { get; set; }
+        public uint Bandwidth { get; set; }
+        public uint PixelFillrate { get; set; }
+        public uint TextureFillrate { get; set; }
     }
 }

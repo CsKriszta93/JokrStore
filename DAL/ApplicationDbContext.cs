@@ -1,40 +1,46 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DAL.EntityConfigurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Model;
 using System;
+using System.Linq;
 
 namespace JOKRStore.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid,
+        IdentityUserClaim<Guid>, UserRole, IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
-         {
-             base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-             modelBuilder.Entity<GameProperty>()
-             .HasKey(x => new {x.GameId, x.PropertyId} );
+            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new GamePropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new UserGamesConfiguration());
+            modelBuilder.ApplyConfiguration(new MediaConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
-             modelBuilder.Entity<GameProperty>()
-             .HasOne(gp => gp.Game)
-             .WithMany(g => g.Genres)
-             .HasForeignKey(gp => gp.GameId);
+            RestrictCascadeDelete(modelBuilder);
+        }
 
-             modelBuilder.Entity<GameProperty>()
-             .HasOne(gp => gp.Property)
-             .WithMany(p => p.GameProperties)
-             .HasForeignKey(gp => gp.PropertyId);
+        private void RestrictCascadeDelete(ModelBuilder modelBuilder)
+        {
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+            .SelectMany(t => t.GetForeignKeys())
+            .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
-             modelBuilder.Entity<Media>()
-             .HasOne(m => m.game)
-             .WithMany(g => g.Medias)
-             .HasForeignKey(m => m.GameId);
-         }
+            foreach (var fk in cascadeFKs)
+            {
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -48,5 +54,10 @@ namespace JOKRStore.DAL
         public DbSet<Property> Properties { get; set; }
         public DbSet<GameProperty> GameProperties { get; set; }
         public DbSet<Media> Medias { get; set; }
+        public DbSet<SysReq> SysReq { get; set; }
+        public DbSet<SysReqCPU> SysReqCPU { get; set; }
+        public DbSet<SysReqGPU> SysReqGPU { get; set; }
+        public DbSet<SysReqOS> SysReqOS { get; set; }
+
     }
 }

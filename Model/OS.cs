@@ -1,3 +1,4 @@
+using Model.Enums;
 using System;
 
 namespace Model
@@ -5,9 +6,9 @@ namespace Model
     public class OS
     {
         public Guid Id { get; set; }
-        public string name { get; set; }
-        public int group { get; set; }
-        public int major_ver { get; set; }
-        public int minor_ver { get; set; }
+        public string Name { get; set; }
+        public OSGroup Group { get; set; }
+        public int MajorVer { get; set; }
+        public int MinorVer { get; set; }
     }
 }

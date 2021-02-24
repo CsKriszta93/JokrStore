@@ -4,7 +4,6 @@ using BLL.ServiceInterfaces;
 using JOKRStore.DAL;
 using Model;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BLL.Services
@@ -22,24 +21,12 @@ namespace BLL.Services
 
         public async Task AddComment(CommentDto commentDto)
         {
-            try
-            {
-                if (commentDto != null)
-                {
-                    var comment = mapper.Map<Comment>(commentDto);
-                    System.Diagnostics.Debug.WriteLine("Game id in service: " +comment.GameId.ToString());
-                    dbContext.Comments.Add(comment); 
-                    await dbContext.SaveChangesAsync();
-                }
-
+            if (commentDto == null)
                 throw new ArgumentNullException("commentDto is null");
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("An error has occour: " + e.ToString());
-            }
 
-           
+            var comment = mapper.Map<Comment>(commentDto);
+            dbContext.Comments.Add(comment);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

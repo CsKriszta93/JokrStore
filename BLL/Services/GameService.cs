@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Model;
+using BLL.Helpers;
 
 namespace BLL.Services
 {
@@ -24,11 +25,38 @@ namespace BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<GameDto>> GetGamesAsync()
+        public async Task<HomeGamesDto> GetHomeGamesAsync()
         {
-            var games = await dbContext
-                .Games.OrderBy(x => x.GameName)
-                .ProjectTo<GameDto>(mapper.ConfigurationProvider)
+            return new HomeGamesDto
+            {
+                NewReleases = await GetGamesByStateAsync(0),
+                NewTests = await GetGamesByStateAsync(1)
+            };
+        }
+
+        public async Task<IEnumerable<GameDtoLite>> GetGamesAsync(GameParams gameFilters)
+        {
+            var games = await dbContext.Games
+                .Skip((gameFilters.CurrentPage -1) * gameFilters.PageSize)
+                .Take(gameFilters.PageSize)
+                .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return games;
+        }
+
+        public async Task<int> GetGamesCountAsync()
+        {
+            return await dbContext.Games.CountAsync();
+        }
+
+        public async Task<IEnumerable<GameDtoLite>> GetGamesByStateAsync(int state)
+        {
+            var games = await dbContext.Games
+                .Where(x => x.State == state)
+                .OrderBy(x => x.Release)
+                .Take(6)
+                .ProjectTo<GameDtoLite>(mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return games;
@@ -72,7 +100,9 @@ namespace BLL.Services
 
         public async Task AddGameToUser(Guid UserId, Guid GameId)
         {
-            dbContext.UserGames.Add(new Model.UserGames(UserId, GameId));
+            dbContext.UserGames.Add(new UserGames{
+                UserId = UserId,
+                GameId = GameId});
             await dbContext.SaveChangesAsync();
         }
 
@@ -127,7 +157,7 @@ namespace BLL.Services
 
             game.GameName = new_game.GameName;
             game.Price = new_game.Price;
-            game.Release = new_game.Release;
+            game.Release = DateTime.Parse(new_game.Release + " 0:00");
 
             var genres_to_delete = await dbContext.GameProperties.Where(x => x.GameId == new_game.Id && x.Property.type == 0).ToListAsync();
             dbContext.GameProperties.RemoveRange(genres_to_delete);
@@ -150,7 +180,19 @@ namespace BLL.Services
 
         public async Task<bool> GameHasPropery(Guid GameId, Guid PropertyId)
         {
-            return dbContext.GameProperties.Where(x => x.GameId == GameId && x.PropertyId == PropertyId).Count() > 0;
+            return await dbContext.GameProperties.Where(x => x.GameId == GameId && x.PropertyId == PropertyId).CountAsync() > 0;
+        }
+
+        public async Task EditGameSysReqAsync(Guid GameId, SysReqDto MinSysReqDto, SysReqDto RecSysReqDto)
+        {
+            var Game = await dbContext.Games
+            .Include(x => x.MinSysReq)
+            .FirstOrDefaultAsync(x => x.Id == GameId);
+
+            Game.MinSysReq = mapper.Map<SysReq>(MinSysReqDto);
+            Game.RecSysReq = mapper.Map<SysReq>(RecSysReqDto);
+
+            await dbContext.SaveChangesAsync();
         }
 
         private async Task SaveMediasAsync(Game game, List<IFormFile> Medias, List<IFormFile> CoverArt, string rootdir)

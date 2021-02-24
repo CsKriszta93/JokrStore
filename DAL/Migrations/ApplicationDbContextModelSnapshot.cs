@@ -3,8 +3,8 @@ using System;
 using JOKRStore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DAL.Migrations
 {
@@ -15,45 +15,25 @@ namespace DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -66,13 +46,17 @@ namespace DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -83,13 +67,17 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("text");
 
-                    b.Property<string>("ProviderDisplayName");
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -98,28 +86,19 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId");
-
-                    b.Property<Guid>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("text");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -129,21 +108,29 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.CPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("architect");
+                    b.Property<string>("Architect")
+                        .HasColumnType("text");
 
-                    b.Property<long>("cache");
+                    b.Property<long>("Cache")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("cores");
+                    b.Property<long>("Cores")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("freqency");
+                    b.Property<long>("Freqency")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("manufacturer");
+                    b.Property<int>("Manufacturer")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-                    b.Property<DateTime>("release");
+                    b.Property<DateTime>("Release")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -153,25 +140,31 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Comment", b =>
                 {
                     b.Property<Guid>("CommentId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CommentDate");
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Contain");
+                    b.Property<Guid>("Commenter")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ForumTopicId");
+                    b.Property<string>("Contain")
+                        .HasColumnType("text");
 
-                    b.Property<Guid?>("GameId");
+                    b.Property<Guid?>("ForumTopicId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("CommentId");
+
+                    b.HasIndex("Commenter");
 
                     b.HasIndex("ForumTopicId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -179,21 +172,29 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Config", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("CPUId");
+                    b.Property<Guid>("CPUId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("GPUId");
+                    b.Property<Guid>("GPUId")
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("GPU_size");
+                    b.Property<int>("GPUSize")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("OSId");
+                    b.Property<Guid>("OSId")
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("RAM");
+                    b.Property<string>("Others")
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("RAM")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("others");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -203,18 +204,41 @@ namespace DAL.Migrations
 
                     b.HasIndex("OSId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Configs");
+                });
+
+            modelBuilder.Entity("Model.Description", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Description");
                 });
 
             modelBuilder.Entity("Model.ForumCategory", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -224,17 +248,23 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.ForumTopic", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("ForumCategoryId");
+                    b.Property<Guid>("ForumCategoryId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("content");
+                    b.Property<string>("content")
+                        .HasColumnType("text");
 
-                    b.Property<DateTime>("date");
+                    b.Property<DateTime>("date")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("title");
+                    b.Property<string>("title")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -248,39 +278,56 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.GPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("architect");
+                    b.Property<string>("Architect")
+                        .HasColumnType("text");
 
-                    b.Property<long>("bandwidth");
+                    b.Property<long>("Bandwidth")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("buswidth");
+                    b.Property<long>("Buswidth")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("core_frequency");
+                    b.Property<long>("CoreFrequency")
+                        .HasColumnType("bigint");
 
-                    b.Property<float>("directx");
+                    b.Property<float>("DirectX")
+                        .HasColumnType("real");
 
-                    b.Property<int>("manufacturer");
+                    b.Property<int>("Manufacturer")
+                        .HasColumnType("integer");
 
-                    b.Property<long>("memory_freqency");
+                    b.Property<long>("MemoryFreqency")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("memory_size");
+                    b.Property<long>("MemorySize")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-                    b.Property<float>("opengl");
+                    b.Property<float>("OpenGl")
+                        .HasColumnType("real");
 
-                    b.Property<long>("pixel_fillrate");
+                    b.Property<long>("PixelFillRate")
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("release");
+                    b.Property<DateTime>("Release")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<float>("shader_model");
+                    b.Property<float>("ShaderModel")
+                        .HasColumnType("real");
 
-                    b.Property<long>("shaders");
+                    b.Property<long>("Shaders")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("texture_fillrate");
+                    b.Property<long>("TextureFillRate")
+                        .HasColumnType("bigint");
 
-                    b.Property<float>("vulkan");
+                    b.Property<float>("Vulkan")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -290,33 +337,53 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Game", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("CoverArt");
+                    b.Property<string>("CoverArt")
+                        .HasColumnType("text");
 
-                    b.Property<string>("DemoLink");
+                    b.Property<string>("DemoLink")
+                        .HasColumnType("text");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("DownloadLink")
+                        .HasColumnType("text");
 
-                    b.Property<string>("DownloadLink");
+                    b.Property<string>("GameName")
+                        .HasColumnType("text");
 
-                    b.Property<string>("GameName");
+                    b.Property<Guid?>("MinSysReqId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid?>("MinSysReqId");
+                    b.Property<int>("NumOfDownloads")
+                        .HasColumnType("integer");
 
-                    b.Property<int>("NumOfDownloads");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
 
-                    b.Property<decimal>("Price");
+                    b.Property<DateTime>("Publish")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<double>("Rate");
+                    b.Property<double>("Rate")
+                        .HasColumnType("double precision");
 
-                    b.Property<Guid?>("RecSysReqId");
+                    b.Property<Guid?>("RecSysReqId")
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Release");
+                    b.Property<DateTime>("Release")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("SysReqNotes");
+                    b.Property<int>("ReleaseState")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("State")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SysReqNotes")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -331,11 +398,14 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.GameProperty", b =>
                 {
-                    b.Property<Guid>("GameId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("PropertyId");
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
 
                     b.HasKey("GameId", "PropertyId");
 
@@ -347,13 +417,17 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Media", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("GameId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("contain");
+                    b.Property<string>("contain")
+                        .HasColumnType("text");
 
-                    b.Property<int>("type");
+                    b.Property<int>("type")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -365,15 +439,20 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.OS", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("group");
+                    b.Property<int>("Group")
+                        .HasColumnType("integer");
 
-                    b.Property<int>("major_ver");
+                    b.Property<int>("MajorVer")
+                        .HasColumnType("integer");
 
-                    b.Property<int>("minor_ver");
+                    b.Property<int>("MinorVer")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -383,31 +462,67 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.Property", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .HasColumnType("text");
 
-                    b.Property<int>("type");
+                    b.Property<int>("type")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.ToTable("Properties");
                 });
 
+            modelBuilder.Entity("Model.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("character varying(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("character varying(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+                });
+
             modelBuilder.Entity("Model.SysReq", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<float>("directx");
+                    b.Property<float>("DirectX")
+                        .HasColumnType("real");
 
-                    b.Property<float>("opengl");
+                    b.Property<float>("OpenGL")
+                        .HasColumnType("real");
 
-                    b.Property<long>("ram");
+                    b.Property<long>("Ram")
+                        .HasColumnType("bigint");
 
-                    b.Property<long>("storage");
+                    b.Property<long>("Storage")
+                        .HasColumnType("bigint");
 
-                    b.Property<float>("vulkan");
+                    b.Property<float>("Vulkan")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -417,11 +532,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.SysReqCPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("CPUId");
+                    b.Property<Guid>("CPUId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("SysReqId");
+                    b.Property<Guid>("SysReqId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -435,11 +553,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.SysReqGPU", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("GPUId");
+                    b.Property<Guid>("GPUId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("SysReqId");
+                    b.Property<Guid>("SysReqId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -453,11 +574,14 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.SysReqOS", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("OSId");
+                    b.Property<Guid>("OSId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("SysReqId");
+                    b.Property<Guid>("SysReqId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -471,47 +595,66 @@ namespace DAL.Migrations
             modelBuilder.Entity("Model.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("BankAccount");
+                    b.Property<string>("BankAccount")
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
+                        .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
 
-                    b.Property<bool>("IsAdmin");
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastLogin");
+                    b.Property<DateTime>("LastLogin")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
+                        .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
 
-                    b.Property<DateTime>("Registration");
+                    b.Property<DateTime>("Registration")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("character varying(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -521,89 +664,94 @@ namespace DAL.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Model.UserGames", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("GameId");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "GameId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserGames");
                 });
 
+            modelBuilder.Entity("Model.UserRole", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>")
+                    b.HasOne("Model.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Model.User")
+                    b.HasOne("Model.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Model.User")
+                    b.HasOne("Model.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Model.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Model.User")
+                    b.HasOne("Model.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Comment", b =>
                 {
-                    b.HasOne("Model.ForumTopic", "ForumTopic")
+                    b.HasOne("Model.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("Commenter")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Model.ForumTopic", null)
                         .WithMany("Comments")
                         .HasForeignKey("ForumTopicId");
 
                     b.HasOne("Model.Game", "Game")
                         .WithMany("Comments")
-                        .HasForeignKey("GameId");
-
-                    b.HasOne("Model.User", "User")
-                        .WithMany("comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Config", b =>
@@ -611,22 +759,35 @@ namespace DAL.Migrations
                     b.HasOne("Model.CPU", "CPU")
                         .WithMany()
                         .HasForeignKey("CPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.GPU", "GPU")
                         .WithMany()
                         .HasForeignKey("GPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.OS", "OS")
                         .WithMany()
                         .HasForeignKey("OSId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.User", "User")
-                        .WithOne("Config")
-                        .HasForeignKey("Model.Config", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Configs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.Description", b =>
+                {
+                    b.HasOne("Model.Game", "Game")
+                        .WithMany("Descriptions")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.ForumTopic", b =>
@@ -634,12 +795,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.ForumCategory", "ForumCategory")
                         .WithMany("topics")
                         .HasForeignKey("ForumCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Game", b =>
@@ -653,9 +816,10 @@ namespace DAL.Migrations
                         .HasForeignKey("RecSysReqId");
 
                     b.HasOne("Model.User", "User")
-                        .WithMany("Games")
+                        .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.GameProperty", b =>
@@ -663,12 +827,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.Game", "Game")
                         .WithMany("Genres")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.Property", "Property")
                         .WithMany("GameProperties")
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.Media", b =>
@@ -676,7 +842,8 @@ namespace DAL.Migrations
                     b.HasOne("Model.Game", "game")
                         .WithMany("Medias")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.SysReqCPU", b =>
@@ -684,12 +851,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.CPU", "CPU")
                         .WithMany()
                         .HasForeignKey("CPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.SysReq", "SysReq")
                         .WithMany("SysReqCPUs")
                         .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.SysReqGPU", b =>
@@ -697,12 +866,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.GPU", "GPU")
                         .WithMany()
                         .HasForeignKey("GPUId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.SysReq", "SysReq")
                         .WithMany("SysReqGPUs")
                         .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.SysReqOS", b =>
@@ -710,12 +881,14 @@ namespace DAL.Migrations
                     b.HasOne("Model.OS", "OS")
                         .WithMany()
                         .HasForeignKey("OSId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.SysReq", "SysReq")
                         .WithMany("SysReqOSes")
                         .HasForeignKey("SysReqId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.UserGames", b =>
@@ -723,12 +896,29 @@ namespace DAL.Migrations
                     b.HasOne("Model.Game", "Game")
                         .WithMany("UserGames")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Model.User", "User")
                         .WithMany("UserGames")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.UserRole", b =>
+                {
+                    b.HasOne("Model.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Model.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

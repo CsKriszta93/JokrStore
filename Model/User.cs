@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -16,11 +12,11 @@ namespace Model
         //public string Email { get; set; }
         //public string Facebook { get; set; }
 
-        public User()
-            :base()
-        {
-            Id = Guid.NewGuid();
-        }
+        //public User()
+        //    :base()
+        //{
+        //    Id = Guid.NewGuid();
+        //}
 
         public DateTime Registration { get; set; }
         public string BankAccount { get; set; }
@@ -30,10 +26,12 @@ namespace Model
         /// <summary>
         /// idegen kulcs a Configuraton táblához
         /// </summary>
-        public Config Config  { get; set; }
+        public ICollection<Config> Configs { get; set; }
 
-        public List<Comment> comments { get; set; }
-        public List<UserGames> UserGames { get; set; }
-        public List<Game> Games { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<UserGames> UserGames { get; set; }
+        //public List<Game> Games { get; set; }
+
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

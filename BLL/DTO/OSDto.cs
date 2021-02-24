@@ -1,4 +1,5 @@
 using System;
+using Model.Enums;
 
 namespace BLL.DTO
 {
@@ -6,7 +7,7 @@ namespace BLL.DTO
     {
         public Guid Id { get; set; }
         public string name { get; set; }
-        public int group { get; set; }
+        public OSGroup group { get; set; }
         public int major_ver { get; set; }
         public int minor_ver { get; set; }
     }

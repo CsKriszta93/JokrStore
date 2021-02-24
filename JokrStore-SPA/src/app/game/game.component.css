@@ -1,0 +1,70 @@
+h1 {
+    text-align: center;
+    color: rgb(130, 194, 191);
+    margin: 10px;
+}
+
+.title_header {
+    background: #282729;
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.comment_frame {
+    margin: 10px;
+}
+
+.comment_header {
+    background: #403E41;
+    padding: 5px 0;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.comment_body {
+    background: #282729;
+    padding: 20px;
+}
+
+.coment_date {
+    text-align : right;
+}
+
+.text_box {
+    padding: 10px;
+    background: rgb(89, 89, 107);
+    margin: 10px;
+    margin-bottom: 30px;
+}
+
+.box-width-240 {
+    width: 260px;
+}
+
+.box-width-max {
+    width: 100%;
+}
+
+.header-big {
+    font-size: 28px;
+    color: #56dbdb;
+    text-decoration: underline;
+}
+
+img {
+    margin: 5px;
+}
+
+.cover_art {
+    height : 260px;
+    max-width: 100%;
+    max-height: 100%;
+    
+}
+
+.cover_art_container {
+    display: flex;
+    justify-content: center;
+}

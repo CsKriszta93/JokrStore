@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
+    <a routerLink="/home" routerLinkActive="active" class="navbar-brand">Jokr</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item" routerLinkActive='active'>
+          <a routerLink="/games"class="nav-link">Games</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link">Forum</a>
+        </li>
+      </ul>
+
+      <div *ngIf="authService.currentUser$ | async" class="dropdown show mr-4" dropdown>
+        <a class="dropdown-toggle text-light link" dropdownToggle>My account</a>
+        <div class="dropdown-menu mr-8" *dropdownMenu>
+          <a class="dropdown-item" href="#">My games</a>
+          <a class="dropdown-item" href="#">My profile</a>
+          <a class="dropdown-item" href="#">Messages</a>
+          <a class="dropdown-item" href="#">Published games</a>
+          <a class="dropdown-item" href="#">Publish new game</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+
+      <form *ngIf="!(authService.currentUser$ | async)" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" placeholder="UserName" name="username" required
+          [(ngModel)]="model.userName">
+        <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required
+          [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button"
+          routerLink="/register">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</nav>

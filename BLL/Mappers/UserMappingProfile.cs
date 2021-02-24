@@ -14,6 +14,16 @@ namespace BLL.Mappers
                 .ForMember(m => m.Registration, opt => opt.MapFrom(d => d.Registration))
                 .ForMember(m => m.LastLogin, opt => opt.MapFrom(d => d.LastLogin))
                 .ForMember(m => m.IsAdmin, opt => opt.MapFrom(d => d.IsAdmin));
+
+            CreateMap<User, UserRegisterDto>()
+                .ForMember(m => m.UserName, opt => opt.MapFrom(d => d.UserName))
+                .ForMember(m => m.Email, opt => opt.MapFrom(d => d.Email))
+                .ForMember(m => m.Password, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<User, UserDtoLite>()
+                .ForMember(m => m.Id, opt => opt.MapFrom(d => d.Id))
+                .ForMember(m => m.UserName, opt => opt.MapFrom(d => d.UserName));
         }
     }
 }

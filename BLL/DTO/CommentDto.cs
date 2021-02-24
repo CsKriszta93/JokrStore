@@ -4,17 +4,14 @@ namespace BLL.DTO
 {
     public class CommentDto
     {
-        public DateTime CommentDate { get; set; }
+        public Guid? CommentId { get; set; }
+        public UserDtoLite User { get; set; }
+        public Guid? Commenter { get; set; }
+
+        public string CommentDate { get; set; }
 
         public string Contain { get; set; }
 
-        public Guid? GameId { get; set; }
-        public GameDto Game { get; set; }
-
-        public Guid? ForumTopicId { get; set; }
-        public ForumTopicDto ForumTopic { get; set; }
-
-        public Guid UserId { get; set; }
-        public UserDto User { get; set; }
+        public Guid GameId { get; set; }
     }
 }

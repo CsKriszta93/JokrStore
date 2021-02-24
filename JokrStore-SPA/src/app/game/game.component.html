@@ -1,0 +1,156 @@
+<div *ngIf="game">
+    <h1>{{game.gameName}}</h1>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+                <div class="text_box box-width-240">
+                    <div class="cover_art_container">
+                        <img class="cover_art" [src]="game.coverArt" alt={{game.gameName}}>
+                    </div>
+                    <p>
+                        <b>Release date: </b>{{game.release}}
+                    </p>
+                    <p>
+                        <b>Rate: </b>{{game.rate}}
+                    </p>
+                    <p>
+                        <b>Developer: </b>{{game.user.userName}}
+                    </p>
+
+                    <div>
+                        <b>Genres: </b>
+                        <ul>
+                            <li *ngFor="let genre of game.genres">{{genre.property.name}}</li>
+                        </ul>
+                    </div>
+
+                    <div class="align-center" *ngIf="game.demoLink"><a class="button button-green center" (click)="downloadDemo()">Download demo</a></div>
+
+                    <div *ngIf="game.price === 0; then showDownloadBtn else showBuyBtn"></div>
+                    <ng-template #showDownloadBtn>
+                        <div class="align-center"><a class="button button-green" (click)="downloadGame()">Download</a></div>
+                    </ng-template>
+                    <ng-template #showBuyBtn>
+                        <div class="align-center"><a class="button button-blue" (click)="buyGame()">Buy</a></div>
+                    </ng-template>
+
+                    <div *ngIf="game.price === 0; then showFreeTitle else showPrice"></div>
+                    <ng-template #showFreeTitle>
+                        <p>FREE</p>
+                    </ng-template>
+                    <ng-template #showPrice>
+                        <p class="align-center">{{game.price}} Ft</p>
+                    </ng-template>
+
+                    <a *ngIf="myDevelopment">Edit basics</a>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-9">
+                <tabset class="game-tabset">
+                    <tab heading='Description'>
+                        <div *ngIf="game.descriptions.length">
+                            <p>{{game.descriptions[0].content}}</p>
+                        </div>
+                    </tab>
+                    <tab heading="System req.">
+                        <div *ngIf="game.descriptions">
+                            <a (onclick)="editSysReq()">Edit system requirements</a>
+                        </div>
+        
+                        <div class="container">
+                            <div class="row">
+                                <div *ngIf="game.minSysReq" class="col-md-6 col-lg-5">
+                                    <p><b><i>Minimum system requirements:</i></b></p>
+                                    <app-sysReq [sysReqData]="game.minSysReq"></app-sysReq>
+                                </div>
+                                <div *ngIf="game.recSysReq" class="col-md-6 col-lg-5">
+                                    <p><b><i>Recommented system requirements:</i></b></p>
+                                    <app-sysReq [sysReqData]="game.recSysReq"></app-sysReq>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Galery">
+                        <p>Galery section here</p>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="title_header" for="comment">Add new comment</p>  
+                <div *ngIf="authService.currentUser$ | async; else noLogin" class="form-group comment_frame">
+                    <form #commentForm="ngForm" (ngSubmit)="submitComment()" autocomplete="off">
+                        <textarea class="form-control" rows="3" name="contain"
+                            placeholder="Write your comment here" [(ngModel)]="comment.contain"></textarea>
+                        <button type="submit" class="button button-cian">Submit</button>
+                    </form>
+                </div>
+                
+                <ng-template #noLogin>
+                    <p style="text-align: center; margin: 10px" for="comment"><b>You must log in to write comments.</b></p>
+                </ng-template>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="title_header">Comments</div>
+                <div class="comment_frame"
+                    *ngIf="game.comments.length > 0; else noComments">
+                    <div *ngFor="let comment of game.comments">
+                        <div class="container">
+                            <div class="row comment_header">
+                                <div class="col-sm-6">
+                                    <p class="link" routerLink="/userDetail">{{comment.user.userName}}</p>
+                                </div>
+                                <div class="col-sm-6 coment_date">{{comment.commentDate}}</div>
+                            </div>
+                            <div class="row comment_body">
+                                <div class="col-sm-12">{{comment.contain}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #noComments>
+                    <p style="text-align: center; margin: 10px"><b>There aren't comments yet at this game.</b></p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var slideIndex = 0;
+    var i;
+    var x = document.getElementsByClassName("slide-image");
+    function plusDivs(n) {
+        slideIndex += n;
+        if (slideIndex >= x.length) { slideIndex = 0 }
+        if (slideIndex < 0) { slideIndex = x.length - 1 }
+        showDiv(slideIndex);
+
+    }
+    function showDiv(n) {
+        document.getElementById("modal01").style.display = "block";
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex = n;
+        x[slideIndex].style.display = "block";
+    }
+    function Close() {
+        document.getElementById("modal01").style.display = "none";
+    }
+
+    function plusDivs_key(e, n) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode == '13') {
+            plusDivs(1);
+        }
+    }
+
+</script>
