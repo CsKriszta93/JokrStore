@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
     this.gameService.buyGames().subscribe(response => {
       console.log(response);
       localStorage.removeItem('cart');
-      this.router.navigateByUrl('/games');
+      this.show('buy_successfull', 'page_pay_mode');
     }, error => {
       console.log(error);
     })

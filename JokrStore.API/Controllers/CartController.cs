@@ -33,7 +33,7 @@ namespace JOKRStore.Web.Controllers
             foreach (var game in games)
                 await gameService.AddGameToUser(Guid.Parse(UserId), game.Id);
 
-            return Ok("Games are bought successfull");
+            return Ok();
         }
     }
 }

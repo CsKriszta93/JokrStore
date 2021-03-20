@@ -1,13 +1,12 @@
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router} from '@angular/router';
 import { GameDto } from '../_models/GameDtos/gameDto';
 import { CommentDto } from '../_models/commentDto';
 import { AuthService } from '../_services/auth.service';
 import { GameService } from '../_services/game.service';
 import { CommentService } from '../_services/comment.service';
 import { CartGameDto } from '../_models/GameDtos/cartGameDto';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -57,7 +56,6 @@ export class GameComponent implements OnInit {
   }
 
   public buyGame() {
-    console.log("asd");
     let cart: Array<CartGameDto> = JSON.parse(localStorage.getItem('cart'));
     if (!cart)
       cart = [];

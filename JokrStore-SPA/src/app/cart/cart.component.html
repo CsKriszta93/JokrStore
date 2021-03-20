@@ -1,6 +1,5 @@
-<h3>Cart</h3>
-
 <div id="page_cart">
+    <h3>Cart</h3>
     <table class="table">
         <thead>
             <tr>
@@ -27,8 +26,14 @@
 </div>
 
 <div id="page_pay_mode">
+    <h3>Payment mode</h3>
     <input type="radio" name="paymode" value="credit_card"> Credit card<br>
     <input type="radio" name="paymode" value="paypal"> Paypal<br>
     <a class="button button-cian" (click)="Buy()">Go to pay</a>
     <a class="button button-cian" (click)="show('page_cart', 'page_pay_mode')">Back</a>
+</div>
+
+<div id="buy_successfull">
+    <h1>Paymant successfull. Thank you for the buying.</h1>
+    <a routerLink="/my-games">Go to my games page</a>
 </div>

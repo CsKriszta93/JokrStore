@@ -12,7 +12,7 @@ export class GameListComponent implements OnInit {
   games: GameDtoLite[];
   pagination : Pagination = {
     currentPage : 1,
-    itemsPerPage : 2,
+    itemsPerPage : 10,
     totalItems : 0,
     totalPages : 0
   };

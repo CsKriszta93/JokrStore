@@ -21,11 +21,7 @@
       <div *ngIf="authService.currentUser$ | async" class="dropdown show mr-4" dropdown>
         <a class="dropdown-toggle text-light link" dropdownToggle>My account</a>
         <div class="dropdown-menu mr-8" *dropdownMenu>
-          <a class="dropdown-item" href="#">My games</a>
-          <a class="dropdown-item" href="#">My profile</a>
-          <a class="dropdown-item" href="#">Messages</a>
-          <a class="dropdown-item" href="#">Published games</a>
-          <a class="dropdown-item" href="#">Publish new game</a>
+          <a class="dropdown-item" routerLink="/user/{{authService.getCurrentUser().id}}">My profile</a>
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </div>

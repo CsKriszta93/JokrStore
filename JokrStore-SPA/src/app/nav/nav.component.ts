@@ -16,8 +16,11 @@ export class NavComponent implements OnInit {
     password : ""
   };
 
-  constructor(public authService: AuthService, private router: Router,
-      private toastr: ToastrService) { }
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
   }

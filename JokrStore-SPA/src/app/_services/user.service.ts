@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   
   getUserDetails(id: any): Observable<UserDto> {
-    return this.http.get<UserDto>(`${this.baseUrl}users/users/${id}`);
+    return this.http.get<UserDto>(`${this.baseUrl}users/${id}`);
   }
 
 }
