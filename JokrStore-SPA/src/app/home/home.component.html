@@ -1,33 +1,36 @@
-<div class="container">
-    <div style="padding: 10px;">
-        <div class="col-sm-8">
-      
-            <div class="title_frame title_frame_first">
-                <h2><b>New released games</b></h2>
-  
-                <div class="container mosaic">
+<div id="homePage" style="padding: 10px;">
+    <div id="slide1" class="mySlides">
+        <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+            dolor.</div>
+    </div>
+    <div class="title_frame title_frame_first">
+        <h2><b>New released games</b></h2>
+
+        <div class="container mosaic">
+            <div *ngIf="newReleaseGames && newReleaseGames.length > 0; then showNewReleases else showNoNewReleases"></div>
+                <ng-template #showNewReleases>
                     <div *ngFor="let game of newReleaseGames">
-
-                        <a asp-controller="Games" asp-action="Details" asp-route-id="game.Id">
-                            <div class="image_container">
-                                <img [src]="game.coverArt" alt="{{game.gameName}}" class="image" >
-                                <div class="middle">
-                                    <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.gameName}}</p>
-                                </div>
+                        <div routerLink="/game/{{game.id}}" routerLinkActive="active" class="image_container">
+                            <img [src]="game.coverArt" alt="{{game.gameName}}" class="image" >
+                            <div class="middle">
+                                <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.gameName}}</p>
                             </div>
-                        </a>
-
+                        </div>
                     </div>
-                </div>
-
-            </div>
+                </ng-template>
+                <ng-template #showNoNewReleases>
+                    <p>No game has released yet.</p>
+                </ng-template>
+            
         </div>
-  
-        <div class="col-sm-8">
-            <div class="title_frame title_frame_second">
-                <h2><b>New testable games</b></h2>
-  
-                <div class="container mosaic">
+    </div>
+
+    <div class="title_frame title_frame_second">
+        <h2><b>New testable games</b></h2>
+
+        <div class="container mosaic">
+            <div *ngIf="newTestableGames && newTestableGames.length > 0; then showNewTests else showNoNewTests"></div>
+                <ng-template #showNewTests>
                     <div *ngFor="let game of newTestableGames" class="col-sm-2">
                         <div class="image_container">
                             <img src="#" alt="game.GameName" class="image" >
@@ -35,9 +38,12 @@
                                 <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.GameName}}</p>
                             </div> 
                         </div>
-                  </div>
-                </div>
-            </div>
+                    </div>
+                </ng-template>
+                <ng-template #showNoNewTests>
+                    <p>There is no new testable games now.</p>
+                </ng-template>
+            
         </div>
     </div>
 </div>

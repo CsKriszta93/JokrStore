@@ -20,18 +20,16 @@ namespace JokrStore.API.Controllers
     public class GamesController : Controller
     {
         private readonly IGameService gameService;
-        private readonly IHostingEnvironment hostingEnvironment;
         private readonly UserManager<Model.User> userManager;
 
-        public GamesController(IGameService gameService, IHostingEnvironment hostingEnvironment, UserManager<Model.User> userManager)
+        public GamesController(IGameService gameService, UserManager<Model.User> userManager)
         {
             this.gameService = gameService;
             this.userManager = userManager;
-            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Games([FromQuery]GameParams gameFilers)
+        public async Task<IActionResult> Games([FromQuery] GameParams gameFilers)
         {
             int totalCount = await gameService.GetGamesCountAsync();
             int totalPages = (int)Math.Ceiling(totalCount / (double)gameFilers.PageSize);
@@ -48,7 +46,7 @@ namespace JokrStore.API.Controllers
             bool isOwned;
             bool isMyDevelopment;
 
-            try 
+            try
             {
                 var UserId = Guid.Parse(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value);
                 isOwned = gameService.IsOwnedGame(UserId, id);
@@ -56,11 +54,12 @@ namespace JokrStore.API.Controllers
             }
             catch (Exception e)
             {
-                 isOwned = false;
-                 isMyDevelopment = false;
+                isOwned = false;
+                isMyDevelopment = false;
             }
-            
-            return Ok(new {
+
+            return Ok(new
+            {
                 game = gameDto,
                 isOwned = isOwned,
                 isMyDevelopment = isMyDevelopment

@@ -17,7 +17,9 @@ export class GameComponent implements OnInit {
 
   game: GameDto;
   myDevelopment: boolean;
+  owned: boolean;
   id: any;
+
   comment: CommentDto = {
     commenter: null,
     contain: "",
@@ -84,6 +86,8 @@ export class GameComponent implements OnInit {
     this.gameService.getGame(this.id)
       .subscribe((x: any) => {
         this.game = x.game;
+        this.myDevelopment = x.isMyDevelopment;
+        this.owned = x.isOwned;
         this.game.comments.sort((a, b) => {
           if (a.commentDate > b.commentDate)
             return -1;

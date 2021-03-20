@@ -23,6 +23,9 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let token = this.authService.getCurrentToken();
+    if (token && this.tokenExpired(token))
+      this.authService.logout();
   }
 
   login() {
@@ -42,6 +45,11 @@ export class NavComponent implements OnInit {
   gameList() {
     this.stateFromApp = 1;
     console.log('state switched');
+  }
+
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 
 }

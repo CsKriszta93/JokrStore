@@ -50,4 +50,11 @@ export class AuthService {
   public getCurrentUser() {
     return JSON.parse(localStorage.getItem('user')).user;
   }
+
+  public getCurrentToken() {
+    let user = localStorage.getItem('user');
+
+    if (user)
+      return JSON.parse(user).token ?? null;
+  }
 }

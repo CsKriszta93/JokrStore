@@ -1,4 +1,5 @@
 ﻿using BLL.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -6,6 +7,7 @@ namespace JokrStore.API.Controllers
 {
     [Route("api/home")]
     [ApiController]
+    [AllowAnonymous]
     public class HomeController : ControllerBase
     {
         private readonly IGameService gameService;

@@ -3,7 +3,7 @@
     <hr>
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-5 col-lg-4 col-xl-3">
                 <div class="text_box box-width-240">
                     <div class="cover_art_container">
                         <img class="cover_art" [src]="game.coverArt" alt={{game.gameName}}>
@@ -27,27 +27,22 @@
 
                     <div class="align-center" *ngIf="game.demoLink"><a class="button button-green center" (click)="downloadDemo()">Download demo</a></div>
 
-                    <div *ngIf="game.price === 0; then showDownloadBtn else showBuyBtn"></div>
+                    <div *ngIf="game.price === 0 || myDevelopment || owned; then showDownloadBtn else showBuyBtn"></div>
                     <ng-template #showDownloadBtn>
                         <div class="align-center"><a class="button button-green" (click)="downloadGame()">Download</a></div>
                     </ng-template>
                     <ng-template #showBuyBtn>
                         <div class="align-center"><a class="button button-blue" (click)="buyGame()">Buy</a></div>
-                    </ng-template>
-
-                    <div *ngIf="game.price === 0; then showFreeTitle else showPrice"></div>
-                    <ng-template #showFreeTitle>
-                        <p>FREE</p>
-                    </ng-template>
-                    <ng-template #showPrice>
                         <p class="align-center">{{game.price}} Ft</p>
                     </ng-template>
 
-                    <a *ngIf="myDevelopment">Edit basics</a>
+                    <div *ngIf="game.price === 0">
+                        <p>FREE</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-9">
+            <div class="col-sm-12 col-md-7 col-lg-8 col-xl-9">
                 <tabset class="game-tabset">
                     <tab heading='Description'>
                         <div *ngIf="game.descriptions.length">
