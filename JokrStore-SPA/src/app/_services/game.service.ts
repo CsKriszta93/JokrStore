@@ -44,6 +44,10 @@ export class GameService {
     return this.http.get<GameDto>(`${this.baseUrl}${ApiPaths.Games}/${id}`);
   }
 
+  getUserGames(id: any): Observable<GameDto> {
+    return this.http.get<GameDto>(`${this.baseUrl}${ApiPaths.Games}/my-games/${id}`);
+  }
+
   buyGames() {
     let cart : Array<CartGameDto>;
     cart = JSON.parse(localStorage.getItem('cart'));

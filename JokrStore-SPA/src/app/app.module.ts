@@ -19,9 +19,10 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { UserDetailsComponent } from './userDetails/userDetails.component';
 
 @NgModule({
-   declarations: [			
+   declarations: [				
       AppComponent,
       NavComponent,
       HomeComponent,
@@ -29,7 +30,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
       GameComponent,
       SysReqComponent,
       RegisterComponent,
-      CartComponent
+      CartComponent,
+      UserDetailsComponent
    ],
    imports: [
       BrowserModule,

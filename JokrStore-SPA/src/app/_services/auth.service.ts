@@ -46,4 +46,8 @@ export class AuthService {
   public setCurrentUser(user: UserDto) {
     this.currentUserSource.next(user);
   }
+
+  public getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user')).user;
+  }
 }

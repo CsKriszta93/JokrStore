@@ -1,0 +1,56 @@
+<div id=userDetails>
+  <h4><b>{{user.userName}}</b></h4>
+  <hr>
+  <table class="table">
+    <tr>
+      <td><b>Register date:</b></td><td>{{user.registration}}</td>
+    </tr>
+    <tr>
+      <td><b>Last Login:</b></td><td>{{user.lastLogin}}</td>
+    </tr>
+  </table>
+  
+  <p><b>Computer configuration:</b></p>
+  <div *ngIf="user.configs.length > 0; then showConfig else showNoConfig"></div>
+  <ng-template #showConfig>
+    <table class="table">
+      <div *ngFor="let config of user.configs">
+        <tr>
+          <td><b>Processor:</b></td><td>{{config.CPU.name}}</td>
+        </tr>
+        <tr>
+          <td><b>Memory:</b> {{config.RAM}} MB </td>
+        </tr>
+        <tr>
+          <td><b>Video card:</b> {{config.GPU.name}}</td>
+        </tr>
+        <tr>
+          <td><b>Operating system:</b> {{config.OS.name}}</td>
+        </tr>
+    </div>
+    </table>
+    
+    
+  </ng-template>
+  <ng-template #showNoConfig>
+    <p><b>There is not config added.</b></p>
+  </ng-template>
+  
+  <p><b>{{user.userName}}'s games</b></p>
+  <div class="title_frame title_frame_first container mosaic">
+    <div *ngIf="user.userGames.length > 0; then showGames else showNoGames"></div>
+    <ng-template #showGames>
+      <div *ngFor="let game of user.userGames">
+          <div routerLink="/game/{{game.game.id}}" routerLinkActive="active" class="image_container">
+            <img [src]="game.game.coverArt" alt="{{game.game.gameName}}" class="image" >
+            <div class="middle">
+                <p style="font-size: 20px; color:white; text-align: center; line-break: normal; overflow:visible;">{{game.game.gameName}}</p>
+            </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #showNoGames>
+      <p><b>There is no games yet.</b></p>
+    </ng-template>
+  </div>  
+</div>

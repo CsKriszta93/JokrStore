@@ -1,0 +1,13 @@
+#userDetails {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.table {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(89, 89, 107);
+}

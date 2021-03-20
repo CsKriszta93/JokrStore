@@ -10,7 +10,7 @@ using BLL.ServiceInterfaces;
 
 namespace JOKRStore.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     [AllowAnonymous]
     public class UsersController : Controller
@@ -24,7 +24,7 @@ namespace JOKRStore.Web.Controllers
             this.hardwareService = hardwareService;
         }
 
-        [HttpGet("Users/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> UserDetails(Guid id)
         {
             var _user = await userService.GetUserByIdAsync(id);
