@@ -2,6 +2,7 @@
 using Model;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace DAL.Seed.TestSeed
 {
@@ -18,8 +19,24 @@ namespace DAL.Seed.TestSeed
 
         private static List<User> Users => new List<User>
         {
-            new User { UserName = "joakim.szabo", EmailConfirmed = true },
-            new User { UserName = "kriszta.csere", EmailConfirmed = true }
+            new User {
+                UserName = "joakim.szabo",
+                EmailConfirmed = true,
+                Registration = DateTime.Now,
+                LastLogin = DateTime.Now
+            },
+            new User {
+                UserName = "kriszta.csere",
+                EmailConfirmed = true,
+                Registration = DateTime.Now,
+                LastLogin = DateTime.Now
+            },
+            new User {
+                UserName = "test.user",
+                EmailConfirmed = true,
+                Registration = DateTime.Now,
+                LastLogin = DateTime.Now
+            }
         };
 
         public static void SeedIdentity(UserManager<User> userManager, RoleManager<Role> roleManager)

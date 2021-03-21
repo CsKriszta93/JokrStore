@@ -24,6 +24,7 @@
         <a class="dropdown-toggle text-light link" dropdownToggle>My account</a>
         <div class="dropdown-menu mr-8" *dropdownMenu>
           <a class="dropdown-item" routerLink="/user/{{authService.getCurrentUser().id}}">My profile</a>
+          <a class="dropdown-item" routerLink="/cart">My cart</a>
           <a class="dropdown-item link" (click)="logout()">Logout</a>
         </div>
       </div>

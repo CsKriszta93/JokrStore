@@ -33,7 +33,11 @@ namespace JokrStore.API.Controllers
                     "GetUser",
                     new { controller = "Users", id = createdUserResult.User.Id },
                     createdUserResult.User);*/
-                return Ok(createdUserResult.User);
+                return Ok(new
+                {
+                    token = tokenHelper.GenerateJWTToken(createdUserResult.User),
+                    user = createdUserResult.User
+                });
             }
 
             return BadRequest(createdUserResult.Result.Errors);

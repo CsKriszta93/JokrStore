@@ -9,10 +9,10 @@ namespace BLL.DTO
         public string Email { get; set; }
         public string Facebook { get; set; }*/
         public Guid Id { get; set; }
-        public DateTime Registration { get; set; }
+        public string Registration { get; set; }
         public string BankAccount { get; set; }
         public bool IsAdmin { get; set; }
-        public DateTime LastLogin { get; set; }
+        public string LastLogin { get; set; }
         public string UserName { get; set; }
         /// <summary>
         /// idegen kulcs a Configuraton táblához

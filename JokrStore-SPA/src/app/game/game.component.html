@@ -45,7 +45,7 @@
             <div class="col-sm-12 col-md-7 col-lg-8 col-xl-9">
                 <tabset class="game-tabset">
                     <tab heading='Description'>
-                        <div *ngIf="game.descriptions.length">
+                        <div *ngIf="game.descriptions.length > 0">
                             <p>{{game.descriptions[0].content}}</p>
                         </div>
                     </tab>
@@ -117,35 +117,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    var slideIndex = 0;
-    var i;
-    var x = document.getElementsByClassName("slide-image");
-    function plusDivs(n) {
-        slideIndex += n;
-        if (slideIndex >= x.length) { slideIndex = 0 }
-        if (slideIndex < 0) { slideIndex = x.length - 1 }
-        showDiv(slideIndex);
-
-    }
-    function showDiv(n) {
-        document.getElementById("modal01").style.display = "block";
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        slideIndex = n;
-        x[slideIndex].style.display = "block";
-    }
-    function Close() {
-        document.getElementById("modal01").style.display = "none";
-    }
-
-    function plusDivs_key(e, n) {
-        var keycode = (e.keyCode ? e.keyCode : e.which);
-        if (keycode == '13') {
-            plusDivs(1);
-        }
-    }
-
-</script>

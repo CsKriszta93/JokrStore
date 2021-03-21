@@ -11,8 +11,8 @@ namespace BLL.Mappers
             CreateMap<User, UserDto>()
                 .ForMember(m => m.Id, opt => opt.MapFrom(d => d.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(d => d.UserName))
-                .ForMember(m => m.Registration, opt => opt.MapFrom(d => d.Registration))
-                .ForMember(m => m.LastLogin, opt => opt.MapFrom(d => d.LastLogin))
+                .ForMember(m => m.Registration, opt => opt.MapFrom(d => d.Registration.ToString("yyyy-MM-dd HH:mm")))
+                .ForMember(m => m.LastLogin, opt => opt.MapFrom(d => d.LastLogin.ToString("yyyy-MM-dd HH:mm")))
                 .ForMember(m => m.IsAdmin, opt => opt.MapFrom(d => d.IsAdmin));
 
             CreateMap<User, UserRegisterDto>()

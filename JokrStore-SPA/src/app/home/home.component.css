@@ -5,16 +5,34 @@
     padding: 20px;
 }
 
-#slide1 {
-    background-image: url("/assets/images/home/0.jpeg");
-    height: 300px;
-}
-
-.mySlides > div {
+.slide-text {
     display: table-cell;
-    color: black;
     text-align: center;
     vertical-align: middle;
     height: 300px;
-    font-size: 30px;
+    font-size: 22px;
+}
+
+#slide1-img {
+    background-image: url("/assets/images/home/0.jpeg");
+    background-position: middle;
+    background-size: cover;
+    height: 300px;
+}
+
+#slide2-img {
+    background-image: url("/assets/images/home/1.jpeg");
+    background-position: middle;
+    background-size: cover;
+    height: 300px;
+}
+
+#slide3-img {
+    background-image: url("/assets/images/home/3.jpeg");
+    background-position: middle;
+    background-size: cover;
+    height: 300px;
+}
+.home-image {
+    width: 500px;
 }

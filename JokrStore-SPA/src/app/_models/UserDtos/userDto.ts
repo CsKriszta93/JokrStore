@@ -4,10 +4,10 @@ export interface UserDto {
     email: string;
     facebook: string;
     id: any;
-    registration: Date;
+    registration: string;
     bankAccount: string;
     isAdmin: boolean;
-    lastLogin: Date;
+    lastLogin: string;
     userName: string;
     comments: any[];
     userGames: any[];

@@ -131,6 +131,30 @@ namespace DAL.Seed.TestSeed
                     Release = TEST_RELEASE_DATA,
                     Manufacturer = Model.Enums.CPUManufacturer.Intel,
                     Name = "Core 2 Duo E4500"
+                },
+
+                new CPU
+                {
+                    Id = Guid.Parse("2e36c84d-1706-425b-96bc-ef41fc9d2b07"),
+                    Architect = "386",
+                    Cache = 0,
+                    Cores = 1,
+                    Freqency = 50,
+                    Release = TEST_RELEASE_DATA,
+                    Manufacturer = Model.Enums.CPUManufacturer.Intel,
+                    Name = "386"
+                },
+
+                new CPU
+                {
+                    Id = Guid.Parse("e94d04b3-897a-4ec7-bbcd-9ec3188cd67d"),
+                    Architect = "Klamath",
+                    Cache = 0,
+                    Cores = 1,
+                    Freqency = 233,
+                    Release = TEST_RELEASE_DATA,
+                    Manufacturer = Model.Enums.CPUManufacturer.Intel,
+                    Name = "Pentium II"
                 }
             };
 
@@ -205,7 +229,7 @@ namespace DAL.Seed.TestSeed
                     Manufacturer = Model.Enums.GPUManufacturer.AMD
                 },
 
-                 new GPU
+                new GPU
                 {
                     Id = Guid.Parse("5e7bb8c5-c7c7-41cb-a647-cb16c421d95f"),
                     Name = "Radeon X1650",
@@ -224,7 +248,29 @@ namespace DAL.Seed.TestSeed
                     PixelFillRate = 2000,
                     TextureFillRate = 2000,
                     Manufacturer = Model.Enums.GPUManufacturer.AMD
+                },
+
+                new GPU
+                {
+                    Id = Guid.Parse("b651f59a-a0b7-4abf-9707-2062f4f980ab"),
+                    Name = "STG 2000",
+                    Architect = "NV1",
+                    Release = TEST_RELEASE_DATA,
+                    MemorySize = 2,
+                    ShaderModel = 0,
+                    DirectX = 3,
+                    OpenGl = 1.1f,
+                    Vulkan = 0,
+                    MemoryFreqency = 75,
+                    CoreFrequency = 12,
+                    Shaders = 0,
+                    Buswidth = 64,
+                    Bandwidth = 1,
+                    PixelFillRate = 1,
+                    TextureFillRate = 1,
+                    Manufacturer = Model.Enums.GPUManufacturer.Nvidia
                 }
+
             };
 
             context.GPUs.AddRange(gpuList);
@@ -282,6 +328,24 @@ namespace DAL.Seed.TestSeed
 
                 new OS
                 {
+                    Id = Guid.Parse("e8be205b-ebe6-45a8-96ea-ab49b351f8c4"),
+                    Name = "Windows 98",
+                    Group = Model.Enums.OSGroup.Windows,
+                    MajorVer = 4,
+                    MinorVer = 1
+                },
+
+                new OS
+                {
+                    Id = Guid.Parse("9d5bc6e6-8f52-40fd-8245-d8765c000a9c"),
+                    Name = "Windows 95",
+                    Group = Model.Enums.OSGroup.Windows,
+                    MajorVer = 4,
+                    MinorVer = 0
+                },
+
+                new OS
+                {
                     Id = Guid.Parse("17555874-e618-4f14-b297-9d30487b73ca"),
                     Name = "Windows 7",
                     Group = Model.Enums.OSGroup.Windows,
@@ -297,6 +361,33 @@ namespace DAL.Seed.TestSeed
                     MajorVer = 6,
                     MinorVer = 0
                 },
+
+                new OS
+                {
+                    Id = Guid.Parse("9f8b7269-98db-4910-981f-e816595e19b7"),
+                    Name = "16.04 Xenial",
+                    Group = Model.Enums.OSGroup.Ubuntu,
+                    MajorVer = 16,
+                    MinorVer = 4
+                },
+
+                new OS
+                {
+                    Id = Guid.Parse("8c061c13-58b2-4a4c-88dd-e2a9039649b6"),
+                    Name = "18.04 Bionic",
+                    Group = Model.Enums.OSGroup.Ubuntu,
+                    MajorVer = 18,
+                    MinorVer = 4
+                },
+
+                new OS
+                {
+                    Id = Guid.Parse("adc67f00-4514-4ef6-b3e2-bd605a9f6197"),
+                    Name = "20.04 Focal",
+                    Group = Model.Enums.OSGroup.Ubuntu,
+                    MajorVer = 20,
+                    MinorVer = 4
+                }
             };
 
             context.OSes.AddRange(osList);
@@ -308,6 +399,7 @@ namespace DAL.Seed.TestSeed
         {
             var krisztaUserId = context.Users.Single(u => u.UserName == "kriszta.csere").Id;
             var joakimUserId = context.Users.Single(u => u.UserName == "joakim.szabo").Id;
+            var testUserId = context.Users.Single(u => u.UserName == "test.user").Id;
 
             List<Config> configList = new List<Config>
             {
@@ -323,18 +415,6 @@ namespace DAL.Seed.TestSeed
                     UserId = krisztaUserId
                 },
 
-                //new Config
-                //{
-                //    Id = Guid.Parse("3df51d01-5c3d-41bb-a73d-08d73ba7e4f0"),
-                //    CPUId = Guid.Parse("1c1f421e-37d0-4a8e-9f48-244398c1e013"),
-                //    RAM = 2048,
-                //    GPUId = Guid.Parse("5e7bb8c5-c7c7-41cb-a647-cb16c421d95f"),
-                //    GPUSize = 0,
-                //    OSId = Guid.Parse("17555874-e618-4f14-b297-9d30487b73ca"),
-                //    Others = "",
-                //    UserId = krisztaUserId
-                //},
-
                 new Config
                 {
                     Id = Guid.Parse("498f1118-2b0f-46b6-2f5c-08d73c5ba0b7"),
@@ -347,29 +427,17 @@ namespace DAL.Seed.TestSeed
                     UserId = joakimUserId
                 },
 
-                //new Config
-                //{
-                //    Id = Guid.Parse("186e479a-4012-4bf0-faf8-08d73d29a72d"),
-                //    CPUId = Guid.Parse("1c1f421e-37d0-4a8e-9f48-244398c1e013"),
-                //    RAM = 2048,
-                //    GPUId = Guid.Parse("86e10eec-6a55-4050-b547-85a2496cd185"),
-                //    GPUSize = 0,
-                //    OSId = Guid.Parse("17555874-e618-4f14-b297-9d30487b73ca"),
-                //    Others = "",
-                //    UserId = joakimUserId
-                //},
-
-                // new Config
-                //{
-                //    Id = Guid.Parse("2a3efce9-e8e4-432f-9478-0951d250f3f2"),
-                //    CPUId = Guid.Parse("1c1f421e-37d0-4a8e-9f48-244398c1e013"),
-                //    RAM = 2048,
-                //    GPUId = Guid.Parse("82259d49-2362-41b7-894f-85400d8b61f4"),
-                //    GPUSize = 0,
-                //    OSId = Guid.Parse("b511fd17-c9e1-4106-accc-f448f19067d9"),
-                //    Others = "",
-                //    UserId = joakimUserId
-                //},
+                 new Config
+                {
+                    Id = Guid.Parse("2a3efce9-e8e4-432f-9478-0951d250f3f2"),
+                    CPUId = Guid.Parse("1c1f421e-37d0-4a8e-9f48-244398c1e013"),
+                    RAM = 2048,
+                    GPUId = Guid.Parse("82259d49-2362-41b7-894f-85400d8b61f4"),
+                    GPUSize = 256,
+                    OSId = Guid.Parse("b511fd17-c9e1-4106-accc-f448f19067d9"),
+                    Others = "",
+                    UserId = testUserId
+                },
             };
 
             context.Configs.AddRange(configList);

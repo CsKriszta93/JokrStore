@@ -19,6 +19,7 @@ body {
     cursor: pointer;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+    border-radius: 5px;
 }
 
 .form-control, .form-control:focus  {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartGameDto } from '../_models/GameDtos/cartGameDto';
+import { AuthService } from '../_services/auth.service';
 import { GameService } from '../_services/game.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { GameService } from '../_services/game.service';
 export class CartComponent implements OnInit {
 
   constructor(
+    public authService: AuthService,
     private gameService: GameService,
     private router: Router
     ) { }
@@ -22,9 +24,10 @@ export class CartComponent implements OnInit {
     this.cart = JSON.parse(localStorage.getItem('cart'));
     this.show('page_cart', 'page_pay_mode');
     this.priceSum = 0;
-    this.cart.forEach(element => {
-      this.priceSum += element.price;
-    });
+    if (this.cart)
+      this.cart.forEach(element => {
+        this.priceSum += element.price;
+      });
   }
 
   show(shown, hidden) {
@@ -39,7 +42,6 @@ export class CartComponent implements OnInit {
 
   public Buy() {
     this.gameService.buyGames().subscribe(response => {
-      console.log(response);
       localStorage.removeItem('cart');
       this.show('buy_successfull', 'page_pay_mode');
     }, error => {

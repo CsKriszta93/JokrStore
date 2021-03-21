@@ -13,27 +13,29 @@
   <p><b>Computer configuration:</b></p>
   <div *ngIf="user.configs.length > 0; then showConfig else showNoConfig"></div>
   <ng-template #showConfig>
-    <table class="table">
-      <div *ngFor="let config of user.configs">
+    <div *ngFor="let config of user.configs">
+      <table class="table">
         <tr>
-          <td><b>Processor:</b></td><td>{{config.CPU.name}}</td>
+          <td><b>Processor:</b></td><td>{{config.cpu.name}}</td>
         </tr>
         <tr>
-          <td><b>Memory:</b> {{config.RAM}} MB </td>
+          <td><b>Memory:</b></td><td>{{config.ram}} MB </td>
         </tr>
         <tr>
-          <td><b>Video card:</b> {{config.GPU.name}}</td>
+          <td><b>Video card:</b></td><td>{{config.gpu.name}}</td>
         </tr>
         <tr>
-          <td><b>Operating system:</b> {{config.OS.name}}</td>
+          <td><b>Operating system:</b></td><td>{{config.os.name}}</td>
         </tr>
+      </table>
     </div>
-    </table>
     
     
   </ng-template>
   <ng-template #showNoConfig>
-    <p><b>There is not config added.</b></p>
+    <div class="title_frame title_frame_first">
+      <p><b>There is not config added.</b></p>
+    </div>
   </ng-template>
   
   <p><b>{{user.userName}}'s games</b></p>

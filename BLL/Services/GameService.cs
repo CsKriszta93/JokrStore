@@ -66,6 +66,7 @@ namespace BLL.Services
         {
             var game = await dbContext.Games
                 .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x => x.Descriptions)
                 .Include(x => x.Medias)
                 .Include(x => x.MinSysReq).ThenInclude(x => x.SysReqCPUs).ThenInclude(x => x.CPU)
                 .Include(x => x.MinSysReq).ThenInclude(x => x.SysReqGPUs).ThenInclude(x => x.GPU)

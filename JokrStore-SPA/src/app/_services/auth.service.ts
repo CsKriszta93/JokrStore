@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
 import { UserDto } from '../_models/UserDtos/userDto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  baseUrl = 'http://localhost:5000/api/auth/';
+  baseUrl = environment.baseUrl + 'auth/';
   private currentUserSource = new ReplaySubject<UserDto>(1);
   currentUser$ = this.currentUserSource.asObservable();
 

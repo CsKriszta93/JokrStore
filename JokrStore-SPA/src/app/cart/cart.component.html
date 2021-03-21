@@ -10,7 +10,7 @@
                 <th>Price</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="cart">
           <tr *ngFor="let element of cart let i = index">
             <td><a class="button button-gray" (click)="Remove(element.id)">Remove</a></td>
             <td>{{i+1}}.</td>
@@ -35,5 +35,5 @@
 
 <div id="buy_successfull">
     <h1>Paymant successfull. Thank you for the buying.</h1>
-    <a routerLink="/my-games">Go to my games page</a>
+    <a routerLink="/user/{{authService.getCurrentUser().id}}">Go to my games</a>
 </div>

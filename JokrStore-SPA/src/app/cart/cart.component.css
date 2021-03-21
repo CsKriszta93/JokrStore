@@ -5,3 +5,19 @@
 #buy_successfull {
     display: none;
 }
+
+#page_cart,
+#page_pay_mode,
+#buy_successfull
+{
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+#page_cart {
+    text-align: center;
+    align-content: center;
+    padding: 20px;
+}

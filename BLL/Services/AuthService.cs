@@ -25,6 +25,8 @@ namespace BLL.Services
         {
             var userToCreate = mapper.Map<User>(userRegisterDto);
             userToCreate.Registration = DateTime.Now;
+            userToCreate.LastLogin = DateTime.Now;
+
             var result = await userManager.CreateAsync(userToCreate, userRegisterDto.Password);
 
             return new LoginResultDto
