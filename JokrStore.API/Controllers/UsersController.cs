@@ -13,7 +13,7 @@ namespace JOKRStore.Web.Controllers
     [Route("api/users")]
     [ApiController]
     [AllowAnonymous]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
         private readonly IHardwareService hardwareService;

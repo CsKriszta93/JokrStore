@@ -13,7 +13,7 @@ namespace JOKRStore.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
-    public class ForumController : Controller
+    public class ForumController : ControllerBase
     {
         private readonly IForumService forumService;
         public ForumController(IForumService forumService)
@@ -36,7 +36,7 @@ namespace JOKRStore.API.Controllers
         [HttpGet("Topics/{id}")]
         public async Task<ActionResult> ForumTopicContent(Guid Id)
         {
-            return View(await forumService.GetForumTopicByIdAsync(Id));
+            return Ok(await forumService.GetForumTopicByIdAsync(Id));
         }
 
         [HttpPost]

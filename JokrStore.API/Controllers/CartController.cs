@@ -14,7 +14,7 @@ namespace JOKRStore.Web.Controllers
 {
     [Route("api/cart")]
     [ApiController]
-    public class CartController : Controller
+    public class CartController : ControllerBase
     {
         private readonly IGameService gameService;
         private readonly IUserService userService;

@@ -13,7 +13,7 @@ namespace JOKRStore.Web.Controllers
     [Route("api/comments")]
     [ApiController]
     [AllowAnonymous]
-    public class CommentsController : Controller
+    public class CommentsController : ControllerBase
     {
         private readonly ICommentService commentService;
         private readonly IMapper mapper;

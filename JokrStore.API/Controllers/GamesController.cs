@@ -17,7 +17,7 @@ namespace JokrStore.API.Controllers
     [Route("api/games")]
     [ApiController]
     [AllowAnonymous]
-    public class GamesController : Controller
+    public class GamesController : ControllerBase
     {
         private readonly IGameService gameService;
         private readonly UserManager<Model.User> userManager;
