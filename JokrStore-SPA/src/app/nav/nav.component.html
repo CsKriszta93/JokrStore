@@ -4,11 +4,11 @@
       <img id="logo" src="assets/images/logo.png">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav mr-auto">
 
         <li class="nav-item" routerLinkActive='active'>
@@ -29,15 +29,21 @@
         </div>
       </div>
 
-      <form *ngIf="!(authService.currentUser$ | async)" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
-        <input class="form-control mr-sm-2" type="text" placeholder="UserName" name="username" required
-          [(ngModel)]="model.userName">
-        <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required
-          [(ngModel)]="model.password">
-        <button [disabled]="!loginForm.valid" class="btn btn-outline-success my-2 my-sm-2" type="submit">Login</button>
-        <button class="btn btn-outline-success my-2 my-sm-2" type="button"
+      <div *ngIf="!(authService.currentUser$ | async)" class="dropdown show mr-4" #dropdown="bs-dropdown" dropdown [autoClose]="false">
+        <a class="dropdown-toggle text-light link" dropdownToggle>Login</a>
+        <div class="dropdown-menu mr-8" *dropdownMenu>
+          <form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+            <input class="form-control mr-sm-2" type="text" placeholder="UserName" name="username" required
+              [(ngModel)]="model.userName">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required
+              [(ngModel)]="model.password">
+            <button [disabled]="!loginForm.valid" class="btn btn-outline-success my-2 my-sm-2" type="submit">Login</button>
+            <button class="btn btn-outline-success my-2 my-sm-2" (click)="dropdown.isOpen = false">Cancel</button>
+          </form>
+        </div>
+      </div>
+      <button class="btn btn-outline-success my-2 my-sm-2" type="button"
           routerLink="/register">Sign Up</button>
-      </form>
     </div>
   </div>
 </nav>

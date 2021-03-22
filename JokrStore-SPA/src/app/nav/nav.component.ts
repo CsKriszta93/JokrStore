@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  isCollapsed: boolean = true;
   @Input() stateFromApp : number;
   model: UserLoginDto = {
     userName : "",
